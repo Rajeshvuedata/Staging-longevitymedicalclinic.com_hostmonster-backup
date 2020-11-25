@@ -1,0 +1,44 @@
+<?php
+
+
+  $collection = Mage::getModel("events/event")->getCollection();
+
+  
+ foreach($collection as $final_model)
+{ 
+
+	//echo "<pre>"; print_r($final_model);
+  $current_time= strtotime(date('Y-m-d H:i:s',strtotime('-8 hour')));
+  $event_start_time= strtotime(date($final_model->_origData['event_start_date'].' '.$final_model->_origData['event_start_time']));
+  $event_end_time=strtotime(date($final_model->_origData['event_end_date'].' '.$final_model->_origData['event_end_time']));
+if($current_time>=$event_start_time)
+{
+	
+	if($current_time<$event_end_time)
+	{
+		
+	
+		echo '<div class="col-md-4 col-sm-4 col-sms-12">';
+		echo '<h4>'.$final_model->_origData['city'].'</h4>';
+		echo '<p>'.date("l",strtotime($final_model->_origData['event_date'])).' '.date("M jS", strtotime($final_model->_origData['event_date'])).' - '.date("h:i a",strtotime($final_model->_origData['event_time'])).'<br />'.$final_model->_origData['location'].'<br/>'.$final_model->_origData['street'].'<br/>'.$final_model->_origData['city'].' ,&nbsp;&nbsp; '.$final_model->_origData['state'].' &nbsp;&nbsp;'.$final_model->_origData['zipcode'].'</p>';
+		echo '</div>';
+	
+		/*echo '<div style="border: 1px solid #ccc;padding: 10px;margin: 10px 0px;">';	
+		echo "Event Title:<b>".$final_model->_origData['title']."</b><br>";
+		echo "Event Start at:<b>".$final_model->_origData['event_date']."</b> - ";
+		echo $final_model->_origData['event_time']."<br>";
+		echo "Location:<b>".$final_model->_origData['location']."</b><br>";
+		
+		//echo "Description:<b>".$final_model->_origData['description']."</b><br>";
+		//echo "Map to Reach:".$final_model->_origData['google_map']."<br>";
+		echo "</div>";	*/
+		
+	}
+}
+
+
+ }   
+
+
+  
+?>

@@ -1,0 +1,50 @@
+<?php
+
+
+  $collection = Mage::getModel("events/event")->getCollection();
+  $event_data = $collection->getData();
+	
+  function date_compare($a, $b)
+{
+    $t1 = strtotime($a['event_date']);
+    $t2 = strtotime($b['event_date']);
+    return $t1 - $t2;
+}    
+ usort($event_data, 'date_compare');
+//echo "<pre>testing"; print_r($event_data);  
+
+
+ foreach($event_data as $final_model)
+{ 	
+
+	//echo "<pre>final model .. "; print_r($final_model);
+  $current_time= strtotime(date('Y-m-d H:i:s',strtotime('-8 hour')));
+  $event_start_time= strtotime(date($final_model['event_start_date'].' '.$final_model['event_start_time']));
+  $event_end_time=strtotime(date($final_model['event_end_date'].' '.$final_model['event_end_time']));
+if($current_time>=$event_start_time)
+{
+	
+	if($current_time<$event_end_time)
+	{
+		
+	
+
+
+
+echo '<div class="event-addres-new">';
+    echo '<h4>'.$final_model['city'].'</h4>';
+	echo '<ul>';
+	  echo '<li><span><i class="fa fa-calendar" aria-hidden="true"></i></span><span>'.date("l",strtotime($final_model['event_date'])).' '.date("M jS", strtotime($final_model['event_date'])).' - '.date("h:i a",strtotime($final_model['event_time'])).'</span></li>';
+          echo ' <li><span><i class="fa fa-map-marker" aria-hidden="true"></i></span><span>'.$final_model['location'].'<br/>'.$final_model['street'].'<br/>'.$final_model['city'].' ,&nbsp;&nbsp; '.$final_model['state'].' &nbsp;&nbsp;'.$final_model['zipcode'].'</span></li>  </ul>';
+echo '</div>';
+	
+		
+	}
+}
+
+
+ }   
+
+
+  
+?>

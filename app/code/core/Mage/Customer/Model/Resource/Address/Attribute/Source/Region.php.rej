@@ -1,0 +1,11 @@
+--- app/code/core/Mage/Customer/Model/Resource/Address/Attribute/Source/Region.php
++++ app/code/core/Mage/Customer/Model/Resource/Address/Attribute/Source/Region.php
+@@ -39,7 +39,7 @@
+      *
+      * @return array
+      */
+-    public function getAllOptions($withEmpty = true, $defaultValues = false)
++    public function getAllOptions()
+     {
+         if (!$this->_options) {
+             $this->_options = Mage::getResourceModel('directory/region_collection')->load()->toOptionArray();

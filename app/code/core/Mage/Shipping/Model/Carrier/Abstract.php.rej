@@ -1,0 +1,11 @@
+--- app/code/core/Mage/Shipping/Model/Carrier/Abstract.php
++++ app/code/core/Mage/Shipping/Model/Carrier/Abstract.php
+@@ -417,7 +417,7 @@
+      */
+     public function getFinalPriceWithHandlingFee($cost)
+     {
+-        $handlingFee = (float)$this->getConfigData('handling_fee');
++        $handlingFee = $this->getConfigData('handling_fee');
+         $handlingType = $this->getConfigData('handling_type');
+         if (!$handlingType) {
+             $handlingType = self::HANDLING_TYPE_FIXED;

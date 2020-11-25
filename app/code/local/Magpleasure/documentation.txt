@@ -1,0 +1,4 @@
+Customisation for hiding podcasts posts on main blog page:-
+
+1. /app/code/local/Magpleasure/Blog/Model/Mysql4/Post/Collection.php, new method filterpodcasts() added at line no. 110 to 124.
+2. /app/code/local/Magpleasure/Blog/Block/Content/List.php, if else Condition added _checkCategory 157 to 164.

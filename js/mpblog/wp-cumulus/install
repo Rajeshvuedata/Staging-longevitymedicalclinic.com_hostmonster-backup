@@ -1,0 +1,7 @@
+Instructions to install MP-CULUMUS
+==================================
+
+1. Go to http://wordpress.org/extend/plugins/wp-cumulus/installation/
+2. Find the link "Download Version X.XX" and download MT-Culumus package.
+   Or just download the package using a direct link http://www.magpleasure.com/media/wp-cumulus/wp-cumulus.zip
+3. Unpack files "swfobject.js" and "tagcloud.swf" into this folder

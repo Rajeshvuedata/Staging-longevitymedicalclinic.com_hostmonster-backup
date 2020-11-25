@@ -1,0 +1,78 @@
+<?php
+$enabled_slide = Mage::getStoreConfig('blog/slide/enabled');
+$width_slide = Mage::getStoreConfig('blog/slide/width');
+$numbercolumn_slide = Mage::getStoreConfig('blog/slide/numbercolumn');
+$numberrow = Mage::getStoreConfig('blog/slide/numberrow');
+$speed_slide = Mage::getStoreConfig('blog/slide/speed');
+$auto_slide = Mage::getStoreConfig('blog/slide/auto');
+$show_image = Mage::getStoreConfig('blog/slide/showimage');
+$image_width = Mage::getStoreConfig('blog/slide/widthimage');
+$image_height = Mage::getStoreConfig('blog/slide/heightimage');
+$show_title = Mage::getStoreConfig('blog/slide/showtitle');
+$show_author = Mage::getStoreConfig('blog/slide/showauthor');
+$show_time = Mage::getStoreConfig('blog/slide/showtime');
+$show_shortcontent = Mage::getStoreConfig('blog/slide/showshortcontent');
+$show_readmore = Mage::getStoreConfig('blog/slide/showreadmore');
+if($enabled_slide){
+?>
+<script>
+	$jq(document).ready(function(){
+		$jq('.menu-recent .bxslider').bxSlider({
+			minSlides: <?php if($numbercolumn_slide) echo $numbercolumn_slide; else echo '1'; ?>,
+			maxSlides: <?php if($numbercolumn_slide) echo $numbercolumn_slide; else echo '1'; ?>,
+			slideWidth: <?php if($width_slide) echo $width_slide; else  echo '900'; ?>,
+			slideMargin: 30,
+			auto: <?php if($auto_slide) echo 'true'; else echo 'false'; ?>,
+			autoControls: false,
+			pager: false,
+			mode: 'horizontal',
+			speed: <?php if($speed_slide) echo $speed_slide; else echo '100'; ?>,
+			prevText: '<',
+			nextText: '>',
+			pause: 4000,
+			easing: 'jswing',
+			autoHover: true
+		});
+	});
+</script>
+<?php if ($posts = $this->getRecent()):  $i = 1;?>
+	<div class="menu-recent">
+		<div class="blog-title"><h2><?php echo Mage::getStoreConfig('blog/slide/blog_title'); ?></h2></div>
+		<ul class="bxslider">
+		<?php if($numberrow > 1){ ?>
+			<?php foreach ($posts as $post): ?>
+				<?php if($i % $numberrow == 1) echo '<li class="item-blog">'; ?>
+					<?php if($show_image) echo '<img width="'.$image_width.'px" height="'.$image_height.'px" src="'.Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA). $post->getThumbnailimage().'">'; ?>
+					<div class="box-blog">
+						<?php if($show_title): ?><h3 class="title"> <a href="<?php echo $post->getAddress(); ?>" ><?php echo $post->getTitle() ?></a></h3> <?php endif; ?>
+						<?php $s = $post->getCreatedTime(); $date = strtotime($s); ?>
+						<?php if($show_time) echo '<div class="timer_blog"><span class="hours">'.date("d", $date).'</span><span class="month">'.date("M", $date).'</span></div>'; ?>
+						<div class="blog-content">
+							<?php if($show_shortcontent) echo $this->getContentBlogSidebar($post->getShortContent(),100);?>
+						</div>
+						<?php if($show_readmore): ?> <div class="link-blog"><a href="<?php echo $post->getAddress(); ?>">Read more >></a></div> <?php endif; ?>
+					</div>
+				<?php if($i % $numberrow == 0)echo '</li>'; $i++; ?>
+			<?php endforeach; ?>
+			<?php if($i % $numberrow != 1)echo '</li>'; ?>
+		<?php } else{ ?>
+			<?php foreach ($posts as $post): ?>
+				<li class="item-blog">
+					<?php if($show_image) echo '<img  width="'.$image_width.'px" height="'.$image_height.'px"  src="'.Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA). $post->getThumbnailimage().'">'; ?>
+					<div class="box-blog">
+						<?php if($show_title): ?><h3 class="title"> <a href="<?php echo $post->getAddress(); ?>" ><?php echo $post->getTitle() ?></a></h3> <?php endif; ?>
+						<?php $s = $post->getCreatedTime(); $date = strtotime($s); ?>
+						<?php if($show_time) echo '<div class="timer_blog"><span class="hours">'.date("d", $date).'</span><span class="month">'.date("M", $date).'</span></div>'; ?>
+						<div class="blog-content">
+							<?php if($show_shortcontent) echo $this->getContentBlogSidebar($post->getShortContent(),100);?>
+						</div>
+						<?php if($show_readmore): ?> <div class="link-blog"><a href="<?php echo $post->getAddress(); ?>">Read more >></a></div> <?php endif; ?>
+					</div>
+				</li>
+			<?php endforeach; ?>
+		<?php } ?>
+		</ul>
+	</div>
+<?php endif;
+}
+?>

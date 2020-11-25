@@ -1,0 +1,40 @@
+<?php
+/**
+* Magegiant
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magegiant.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magegiant.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magegiant
+ * @package     Magegiant_Onestepcheckout
+ * @copyright   Copyright (c) 2012 Magegiant (http://www.magegiant.com/)
+ * @license     http://www.magegiant.com/license-agreement.html
+ */
+?><?php if ($this->canShow()): ?>
+<div class="block-wrapper">
+	<div id="giant-onestepcheckout-order-review-comments-wrapper">
+		<div id="giant-onestepcheckout-review-comments">
+			<?php if ($this->isDDANInstalled()): ?>
+				<?php echo $this->getChildHtml('ddan');?>
+			<?php else: ?>
+				<?php echo $this->getChildHtml('simple');?>
+			<?php endif; ?>
+		</div>
+		<script type="text/javascript">
+			var giantOSCReviewComments = new MagegiantOnestepcheckoutReviewComments({
+				containerSelector: "#giant-onestepcheckout-review-comments",
+				newRowCount: 5,
+				saveValuesUrl: <?php echo Zend_Json::encode($this->getSaveFormValuesUrl());?>
+			});
+		</script>
+	</div>
+</div>
+<?php endif;?>

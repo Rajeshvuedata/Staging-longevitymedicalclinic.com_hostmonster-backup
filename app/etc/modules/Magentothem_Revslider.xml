@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Magentothem_Revslider>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Magentothem_Revslider>
+    </modules>
+</config> 

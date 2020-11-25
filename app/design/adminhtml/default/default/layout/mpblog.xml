@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addCss"><value>mpblog/css/styles.css</value></action>
+        </reference>
+    </adminhtml_system_config_edit>
+    <mpblog_admin_adminhtml_post_index>
+        <reference name="content">
+            <block type="mpblog/adminhtml_post" name="mpblog.post.container" as="mpblog_post_container" template="mpblog/grid/container.phtml">
+                <block type="mpblog/adminhtml_store_switcher" name="store_switcher" as="store_switcher">
+                    <action method="setUseConfirm"><params>0</params></action>
+                </block>
+            </block>
+        </reference>
+    </mpblog_admin_adminhtml_post_index>
+    <mpblog_admin_adminhtml_post_new>
+        <update handle="mpblog_admin_adminhtml_post_edit" />
+    </mpblog_admin_adminhtml_post_new>
+    <mpblog_admin_adminhtml_post_edit>
+        <update handle="editor"/>
+        <update handle="apply_transliteration" />
+        <reference name="content">
+            <block type="mpblog/adminhtml_post_edit" name="mpblog_post_edit" />
+        </reference>
+        <reference name="left">
+            <block type="mpblog/adminhtml_post_edit_tabs" name="mpblog_post_edit_tabs">
+                <block type="mpblog/adminhtml_post_edit_tab_general" name="mpblog_post_edit_tab_post_content" />
+                <block type="mpblog/adminhtml_post_edit_tab_additional" name="mpblog_post_edit_tab_post_additional" />
+                <block type="mpblog/adminhtml_post_edit_tab_meta" name="mpblog_post_edit_tab_post_meta" />
+                <action method="addTab"><name>post_content</name><block>mpblog_post_edit_tab_post_content</block></action>
+                <action method="addTab"><name>additional</name><block>mpblog_post_edit_tab_post_additional</block></action>
+                <action method="addTab"><name>meta_data</name><block>mpblog_post_edit_tab_post_meta</block></action>
+            </block>
+        </reference>
+        <reference name="head">
+            <action method="addJs"><script>mpblog/adminhtml/preview.js</script></action>
+            <action method="addJs"><script>mpblog/adminhtml/common.js</script></action>
+            <action method="addJs"><script>mpblog/jquery/jquery.min.js</script></action>
+            <action method="addJs"><script>mpblog/jquery/autocomplete/lib/jquery.ajaxQueue.js</script></action>
+            <action method="addJs"><script>mpblog/jquery/autocomplete/lib/jquery.bgiframe.min.js</script></action>
+            <action method="addJs"><script>mpblog/jquery/autocomplete/lib/thickbox-compressed.js</script></action>
+            <action method="addJs"><script>mpblog/jquery/autocomplete/jquery.autocomplete.js</script></action>
+            <action method="addItem"><type>js_css</type><script>mpblog/jquery/autocomplete/lib/thickbox.css</script></action>
+            <action method="addItem"><type>js_css</type><script>mpblog/tiny_mce/plugins/blogcut/css/content.css</script></action>
+            <action method="addCss"><script>mpblog/css/jquery.autocomplete.css</script></action>
+            <action method="addCss"><script>mpblog/css/styles.css</script></action>
+        </reference>
+    </mpblog_admin_adminhtml_post_edit>
+
+    <mpblog_admin_adminhtml_post_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="mpblog/adminhtml_post_grid" name="admin.mpblog.post.grid"/>
+        </block>
+    </mpblog_admin_adminhtml_post_grid>
+
+    <mpblog_admin_adminhtml_category_index>
+        <reference name="content">
+            <block type="mpblog/adminhtml_category" name="mpblog.category.container" as="mpblog_category_container" template="mpblog/grid/container.phtml">
+                <block type="mpblog/adminhtml_store_switcher" name="store_switcher" as="store_switcher">
+                    <action method="setUseConfirm"><params>0</params></action>
+                </block>
+            </block>
+        </reference>
+    </mpblog_admin_adminhtml_category_index>
+
+    <mpblog_admin_adminhtml_category_new>
+        <update handle="mpblog_admin_adminhtml_category_edit" />
+    </mpblog_admin_adminhtml_category_new>
+    <mpblog_admin_adminhtml_category_edit>
+        <update handle="apply_transliteration" />
+        <reference name="head">
+            <action method="addCss"><script>mpblog/css/styles.css</script></action>
+            <action method="addJs"><script>mpblog/adminhtml/common.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="mpblog/adminhtml_category_edit" name="mpblog_category_edit" />
+        </reference>
+        <reference name="left">
+            <block type="mpblog/adminhtml_category_edit_tabs" name="mpblog_category_edit_tabs">
+                <block type="mpblog/adminhtml_category_edit_tab_general" name="mpblog_category_edit_tab_general" />
+                <block type="mpblog/adminhtml_category_edit_tab_meta" name="mpblog_category_edit_tab_meta" />
+                <action method="addTab"><name>general</name><block>mpblog_category_edit_tab_general</block></action>
+                <action method="addTab"><name>meta_data</name><block>mpblog_category_edit_tab_meta</block></action>
+            </block>
+        </reference>
+    </mpblog_admin_adminhtml_category_edit>
+
+    <mpblog_admin_adminhtml_category_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="mpblog/adminhtml_category_grid" name="admin.mpblog.categories.grid"/>
+        </block>
+    </mpblog_admin_adminhtml_category_grid>
+
+    <mpblog_admin_adminhtml_tag_index>
+        <reference name="content">
+            <block type="mpblog/adminhtml_tag" name="mpblog.tag.container" as="mpblog_tag_container" template="mpblog/grid/container.phtml">
+                <block type="mpblog/adminhtml_store_switcher" name="store_switcher" as="store_switcher">
+                    <action method="setUseConfirm"><params>0</params></action>
+                </block>
+            </block>
+        </reference>
+    </mpblog_admin_adminhtml_tag_index>
+
+    <mpblog_admin_adminhtml_tag_edit>
+        <reference name="content">
+            <block type="mpblog/adminhtml_tag_edit" name="mpblog_tag_edit" />
+        </reference>
+        <reference name="left">
+            <block type="mpblog/adminhtml_tag_edit_tabs" name="mpblog_tag_edit_tabs">
+                <block type="mpblog/adminhtml_tag_edit_tab_general" name="mpblog_tag_edit_tab_general" />
+                <block type="mpblog/adminhtml_tag_edit_tab_meta" name="mpblog_tag_edit_tab_meta" />
+                <block type="mpblog/adminhtml_tag_edit_tab_posts" name="mpblog_tag_edit_tab_posts" />
+                <action method="addTab"><name>general</name><block>mpblog_tag_edit_tab_general</block></action>
+                <action method="addTab"><name>meta_data</name><block>mpblog_tag_edit_tab_meta</block></action>
+                <action method="addTab"><name>posts</name><block>mpblog_tag_edit_tab_posts</block></action>
+            </block>
+        </reference>
+    </mpblog_admin_adminhtml_tag_edit>
+
+    <mpblog_admin_adminhtml_tag_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="mpblog/adminhtml_tag_grid" name="admin.mpblog.tag.grid"/>
+        </block>
+    </mpblog_admin_adminhtml_tag_grid>
+
+    <mpblog_admin_adminhtml_comment_index>
+        <reference name="content">
+            <block type="mpblog/adminhtml_comment" name="mpblog.comment.container" as="mpblog_comment_container" template="mpblog/grid/container.phtml">
+                <block type="mpblog/adminhtml_store_switcher" name="store_switcher" as="store_switcher">
+                    <action method="setUseConfirm"><params>0</params></action>
+                </block>
+            </block>
+        </reference>
+    </mpblog_admin_adminhtml_comment_index>
+
+    <mpblog_admin_adminhtml_comment_answer>
+        <update handle="mpblog_admin_adminhtml_comment_edit" />
+    </mpblog_admin_adminhtml_comment_answer>
+
+    <mpblog_admin_adminhtml_comment_edit>
+        <reference name="content">
+            <block type="mpblog/adminhtml_comment_edit" name="mpblog_comment_edit" />
+        </reference>
+        <reference name="left">
+            <block type="mpblog/adminhtml_comment_edit_tabs" name="mpblog_comment_edit_tabs">
+                <block type="mpblog/adminhtml_comment_edit_tab_general" name="mpblog_comment_edit_tab_general" />
+                <action method="addTab"><name>general</name><block>mpblog_comment_edit_tab_general</block></action>
+            </block>
+        </reference>
+    </mpblog_admin_adminhtml_comment_edit>
+
+    <mpblog_admin_adminhtml_comment_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="mpblog/adminhtml_comment_grid" name="admin.mpblog.comments.grid"/>
+        </block>
+    </mpblog_admin_adminhtml_comment_grid>
+
+    <mpblog_admin_adminhtml_import_wordpress>
+        <reference name="content">
+            <block type="mpblog/adminhtml_import" name="mpblog_import" >
+                <action method="setImportType"><type>wordpress</type></action>
+            </block>
+        </reference>
+    </mpblog_admin_adminhtml_import_wordpress>
+    <mpblog_admin_adminhtml_import_awblog>
+        <reference name="content">
+            <block type="mpblog/adminhtml_import" name="mpblog_import" >
+                <action method="setImportType"><type>awblog</type></action>
+            </block>
+        </reference>
+    </mpblog_admin_adminhtml_import_awblog>
+
+    <adminhtml_system_account_index>
+        <update handle="apply_ajax_form"/>
+    </adminhtml_system_account_index>
+
+    <mpblog_admin_adminhtml_notifications_comments_index>
+        <reference name="content">
+            <block type="mpblog/adminhtml_subscription_comment" name="mpblog.subscription.comment.container" as="mpblog_subscription_comment_container" template="mpblog/grid/container.phtml">
+                <block type="mpblog/adminhtml_store_switcher" name="store_switcher" as="store_switcher">
+                    <action method="setUseConfirm"><params>0</params></action>
+                </block>
+            </block>
+        </reference>
+    </mpblog_admin_adminhtml_notifications_comments_index>
+</layout>

@@ -1,0 +1,33 @@
+<?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('banner_right')->toHtml() ?>
+<?php 
+/*
+$product_name = 'Pure Green Coffee Extract'; //product name
+$category = Mage::getModel ('catalog/product')
+            ->getCollection ()
+            ->addAttributeToSelect ('name') //include the "name" property in the returned object
+            ->addAttributeToFilter ('url_key', 'pure-green-coffee-extract')
+            ->getFirstItem (); 
+print_r($category);
+*/
+$product_id = Mage::registry('current_product')->getId();
+$product = Mage::getModel('catalog/product')->load($product_id);
+$cats = $product->getCategoryIds();
+foreach($cats as $categoryId) {
+    $category = Mage::getModel('catalog/category')->load($categoryId);
+    $cat_id = $category->getEntity_id();
+if($cat_id == 7){
+echo $this->getLayout()->createBlock('cms/block')->setBlockId('supplement-banner-left')->toHtml();
+}
+elseif($cat_id == 16){
+echo $this->getLayout()->createBlock('cms/block')->setBlockId('labpanels-banner-left')->toHtml();
+}
+elseif($cat_id == 8){
+echo $this->getLayout()->createBlock('cms/block')->setBlockId('airwater-banner-left')->toHtml();
+}
+else{
+echo "";
+}
+}
+
+ ?>
+

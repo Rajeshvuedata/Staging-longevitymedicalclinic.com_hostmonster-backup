@@ -1,0 +1,274 @@
+	<?php
+        $_old_body_bg = $this->getConfig("bg_color");
+        $_body_background = '';
+        if ( isset($_COOKIE['body_background_cookie']) ) {
+            $_body_background = $_COOKIE['body_background_cookie'];
+        }
+
+        $_old_main_color = $this->getConfig("main_color");
+        $_main_color = 'ff9d34';
+        if ( isset($_COOKIE['main_color_cookie']) ) {
+            $_link_color = $_COOKIE['main_color_cookie'];
+        }
+		
+        $_old_link_color = $this->getConfig("link_color");
+        $_link_color = 'ff9d34';
+        if ( isset($_COOKIE['link_color_cookie']) ) {
+            $_link_color = $_COOKIE['link_color_cookie'];
+        }
+
+    ?>
+    <div class="ma-demo-wrap">
+		<h2 class="ma-demo-title">Theme Options</h2>
+		<div class="ma-demo-option">
+			<div class="cl-wrapper">
+				<div class="cl-container">
+					<div class="cl-table">
+
+						<div class="cl-tr cl-tr-main">
+							<div class="cl-td-l">Main Color:</div>
+							<div class="cl-td-r">
+								<div class="colorSelector cl-tool" id="mainColor">
+									<div style="background-color: #<?php  echo $_main_color ; ?>"></div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="cl-tr cl-tr-link">
+							<div class="cl-td-l">Active Color:</div>
+							<div class="cl-td-r">
+								<div class="colorSelector cl-tool" id="linkColor">
+									<div style="background-color: #<?php  echo $_link_color ; ?>"></div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="cl-tr cl-tr-background">
+							<div class="cl-td-l">Background Color:</div>
+							<div class="cl-td-r">
+								<div class="colorSelector cl-tool" id="bodyBackgroundColor">
+									<div style="background-color: #<?php  echo $_body_background ; ?>"></div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="cl-tr">
+							<div class="cl-td-l">Background Image:</div>
+							<div class="cl-td-bg">
+								<div class="cl-pattern">
+										<div id="pattern1" class="cl-image pattern1"></div>
+										<div id="pattern2" class="cl-image pattern2"></div>
+										<div id="pattern3" class="cl-image pattern3"></div>
+										<div id="pattern4" class="cl-image pattern4"></div>
+										<div id="pattern5" class="cl-image pattern5"></div>
+										<div id="pattern6" class="cl-image pattern6"></div>
+										<div id="pattern7" class="cl-image pattern7"></div>
+										<div id="pattern8" class="cl-image pattern8"></div>
+										<div id="pattern9" class="cl-image pattern9"></div>
+										<div id="pattern10" class="cl-image pattern10"></div>
+										<div id="pattern11" class="cl-image pattern11"></div>
+										<div id="pattern12" class="cl-image pattern12"></div>
+										<div id="pattern13" class="cl-image pattern13"></div>
+										<div id="pattern14" class="cl-image pattern14"></div>
+										<div id="pattern15" class="cl-image pattern15"></div>
+										<div id="pattern16" class="cl-image pattern16"></div>
+										<div id="pattern17" class="cl-image pattern17"></div>
+										<div id="pattern18" class="cl-image pattern18"></div>
+										<div id="pattern19" class="cl-image pattern19"></div>
+										<div id="pattern20" class="cl-image pattern20"></div>
+										<div id="pattern21" class="cl-image pattern21"></div>
+										<div id="pattern22" class="cl-image pattern22"></div>
+										<div id="pattern23" class="cl-image pattern23"></div>
+										<div id="pattern24" class="cl-image pattern24"></div>
+										<div id="pattern25" class="cl-image pattern25"></div>
+										<div id="pattern26" class="cl-image pattern26"></div>
+										<div id="pattern27" class="cl-image pattern27"></div>
+										<div id="pattern28" class="cl-image pattern28"></div>
+										<div id="pattern29" class="cl-image pattern29"></div>
+										<div id="pattern30" class="cl-image pattern30"></div>	
+								</div>
+							</div>
+						</div>
+                        <div class="cl-tr cl-row-reset">
+                            <span class="cl-reset"></span>
+                        </div>
+					</div>
+                </div>		
+			</div>
+		</div>
+		<div class="control inactive"><a href="javascript:void(0)"></a></div>
+		<script type="text/javascript">
+			$jq(document).ready( function(){
+				$jq('.control').click(function(){
+					if($jq(this).hasClass('inactive')) {
+						$jq(this).removeClass('inactive');
+						$jq(this).addClass('active');
+						$jq('.ma-demo-wrap').animate({left:'0'}, 500);
+					} else {
+						$jq(this).addClass('inactive');
+						$jq('.ma-demo-wrap').animate({left:'-210px'}, 500);
+					}
+				});
+			});
+		</script>
+	</div>
+<script type="text/javascript">
+//<![CDATA[    
+    $jq('#bodyBackgroundColor,#mainColor, #linkColor').each(function() {
+        var $jqel = $jq(this);
+        /* set time */
+        var date = new Date();
+        date.setTime(date.getTime() + (1440 * 60 * 1000));
+    
+        $jqel.ColorPicker({
+            color: '#0000ff',
+            onChange: function (hsb, hex, rgb) {
+    
+                $jqel.find('div').css('backgroundColor', '#' + hex);
+                switch ($jqel.attr("id")) {			
+					
+                  case 'bodyBackgroundColor' :
+                    $jq("body").css('backgroundColor', '#' + hex);
+                    // set cookie
+                    $jq.cookie('body_background_cookie', hex , { expires: date });
+                    break;
+				// main color
+				  case 'mainColor' :
+					$jq('<style type="text/css"> .block-footer1,.footer-static-container, .ma-footer-static { background-color:#'+hex+'}</style>').appendTo('head');
+					
+										$jq('<style type="text/css"> { background-color:#'+hex+' !important}</style>').appendTo('head');
+
+					
+					$jq('<style type="text/css"> { color:#'+hex+'}</style>').appendTo('head');
+					
+				  // set cookie
+				  $jq.cookie('main_color_cookie', hex , { expires: date });
+				  break;	
+				
+                  case 'linkColor' :
+                    //$jq("body a").css('color', '#' + hex);
+					$jq('<style type="text/css">.products-list button.btn-cart span,.block-footer .f-icon a:hover,.product-view button.btn-cart span,.opc .step-title .number,.banner-static-contain .banner-box:hover .box-images a { background-color:#'+hex+'}</style>').appendTo('head');
+					
+					
+					$jq('<style type="text/css">{ background-color:#'+hex+' !important}</style>').appendTo('head');
+					
+					$jq('<style type="text/css"> .breadcrumbs li strong,.top-cart-wrapper .btn-edit:hover,.top-cart-wrapper .btn-remove:hover,.top-cart-wrapper .fa-trash-o,.top-cart-wrapper .fa-pencil-square-o,.currency-language li .fa-caret-down,.drop-lang .sub-lang li a:hover, .dropit-trigger a .fa-caret-down, .register-login .fa-sign-in,.register-login .fa-sign-out,.register-login a:hover,.register .fa-lock,.register-login .register a:hover,.dropit  .dropit-submenu li a:hover,.drop-currency .sub-currency li a:hover,.top-cart-wrapper .title-cart .fa-shopping-cart, .top-cart-content .top-subtotal .price, .top-cart-contain .product-details .price, .block-layered-nav dt,.block-tags .block-content .actions a:hover,.product-view .product-shop .availability span,.product-options-bottom .tier-prices .benefit,.block-footer1 .footer-static-content a:hover,.footer address a,.banner-static-contain .banner-box .box-title a:hover,.pt_custommenu div.pt_menu.act .itemMenu .itemMenuName:hover span,.pt_custommenu div.pt_menu.act .itemSubMenu .itemMenuName:hover span,.pt_custommenu div.pt_menu.act a span,.pt_custommenu div.pt_menu .parentMenu a:hover span,.pt_custommenu div.pt_menu .parentMenu span.block-title:hover,.pt_custommenu #pt_menu_link ul li a:hover span, .pt_custommenu div.pt_menu.active .parentMenu a span,.pt_custommenu .itemMenu h4.level1:hover span,.pt_custommenu .itemMenu a.level1:hover span,.pt_custommenu .itemSubMenu a.level2:hover,.pt_custommenu .itemMenu a.level1.nochild:hover,.pt_custommenu div.popup a.actParent,.bulkhead a,.tweetprofilelink a:hover, .tweet-time a:hover,.bx-wrapper .bx-controls-direction a .fa,.ma-timer-container  .bx-wrapper .bx-controls-direction a .fa { color:#'+hex+'}</style>').appendTo('head');
+					
+					$jq('<style type="text/css">.pt_custommenu div.popup a.act { color:#'+hex+' !important}</style>').appendTo('head');
+					
+					
+					$jq('<style type="text/css">.product-tabs li.active .tab-top,.product-tabs li.active .tab-top:hover,.product-tabs li:hover .tab-top,.opc .step-title .number,.opc .active .step-title .number,.pt_custommenu div.popup,.pt_custommenu div.pt_menu.act a span,.pt_custommenu div.pt_menu .parentMenu a:hover span, .pt_custommenu div.pt_menu .parentMenu span.block-title:hover,.pt_custommenu #pt_menu_link ul li a:hover span,.pt_custommenu div.pt_menu.active .parentMenu a span{ border-color:#'+hex+'}</style>').appendTo('head');
+					
+                    // set cookie
+                    $jq.cookie('link_color_cookie', hex , { expires: date });
+                    break;			
+				
+                }
+            }
+        });
+    });
+    /* set time */
+    var date = new Date();
+    date.setTime(date.getTime() + (1440 * 60 * 1000));
+	
+	<?php
+		// set default background image
+		$_old_bd_img = '';
+		$_bd_img = '';
+		if ( isset($_COOKIE['body_image_cookie']) ) {
+			$_bd_img = $_COOKIE['body_image_cookie'];
+		}
+	?>
+		
+	$jq(document).ready(function(){
+		
+		//load selected font
+		$jq("#select-fontselector option").filter(function() {
+			//may want to use $.trim in here
+			return $jq(this).text() == $jq.cookie('font_cookie'); 
+		}).attr('selected', true);
+		//change font
+		$jq(function(){
+			fontSelect=$jq("#select-fontselector");
+			fontUpdate=function(){
+				curFont=$jq("#select-fontselector").val();
+				$jq(".block-title strong span").css({ fontFamily: curFont });
+				//$jq("<link />",{href:"http://fonts.googleapis.com/css?family="+curFont,rel:"stylesheet",type:"text/css"}).appendTo("head");
+			}
+			fontSelect.change(function(){
+				fontUpdate();
+			}).keyup(function(){
+				fontUpdate();
+			}).keydown(function(){
+				fontUpdate();
+			});
+			
+			$jq("#select-fontselector").trigger("change");
+		})
+		
+		$jq('#select-fontselector').change(function() {
+			$jq.cookie('font_cookie', $jq(this).val(), { expires: date });
+		});
+		$jq(".block-title strong span").css({ fontFamily: $jq.cookie('font_cookie') }); 
+		//$jq("<link />",{href:"http://fonts.googleapis.com/css?family="+$jq.cookie('font_cookie'),rel:"stylesheet",type:"text/css"}).appendTo("head");
+		
+		//set cookie
+		$jq("body").css('backgroundColor', '#<?php echo $_body_background ?>');
+		$jq("body").css('background-image', $jq.cookie('body_image_cookie'));
+		$jq("body").css('background-repeat','repeat');
+		
+		// main color
+
+		$jq('<style type="text/css">.block-footer1,.footer-static-container, .ma-footer-static { background-color:#'+$jq.cookie('main_color_cookie')+'}</style>').appendTo('head');
+		
+		$jq('<style type="text/css"> { background-color:#'+$jq.cookie('main_color_cookie')+' !important}</style>').appendTo('head');
+
+		
+		$jq('<style type="text/css"> { color:#'+$jq.cookie('main_color_cookie')+'}</style>').appendTo('head');
+					
+		
+		//link color
+		$jq('<style type="text/css">.products-list button.btn-cart span,.block-footer .f-icon a:hover,.product-view button.btn-cart span,.opc .step-title .number,.banner-static-contain .banner-box:hover .box-images a { background-color:#'+$jq.cookie('link_color_cookie')+'}</style>').appendTo('head');
+		
+		$jq('<style type="text/css">{ background-color:#'+$jq.cookie('link_color_cookie')+' !important}</style>').appendTo('head');
+		
+		$jq('<style type="text/css">.breadcrumbs li strong,.top-cart-wrapper .btn-edit:hover,.top-cart-wrapper .btn-remove:hover,.top-cart-wrapper .fa-trash-o,.top-cart-wrapper .fa-pencil-square-o,.currency-language li .fa-caret-down,.drop-lang .sub-lang li a:hover, .dropit-trigger a .fa-caret-down, .register-login .fa-sign-in,.register-login .fa-sign-out,.register-login a:hover,.register .fa-lock,.register-login .register a:hover,.dropit  .dropit-submenu li a:hover,.drop-currency .sub-currency li a:hover,.top-cart-wrapper .title-cart .fa-shopping-cart, .top-cart-content .top-subtotal .price, .top-cart-contain .product-details .price, .block-layered-nav dt,.block-tags .block-content .actions a:hover,.product-view .product-shop .availability span,.product-options-bottom .tier-prices .benefit,.block-footer1 .footer-static-content a:hover,.footer address a,.banner-static-contain .banner-box .box-title a:hover,.pt_custommenu div.pt_menu.act .itemMenu .itemMenuName:hover span,.pt_custommenu div.pt_menu.act .itemSubMenu .itemMenuName:hover span,.pt_custommenu div.pt_menu.act a span,.pt_custommenu div.pt_menu .parentMenu a:hover span,.pt_custommenu div.pt_menu .parentMenu span.block-title:hover,.pt_custommenu #pt_menu_link ul li a:hover span, .pt_custommenu div.pt_menu.active .parentMenu a span,.pt_custommenu .itemMenu h4.level1:hover span,.pt_custommenu .itemMenu a.level1:hover span,.pt_custommenu .itemSubMenu a.level2:hover,.pt_custommenu .itemMenu a.level1.nochild:hover,.pt_custommenu div.popup a.actParent,.bulkhead a,.tweetprofilelink a:hover, .tweet-time a:hover,.bx-wrapper .bx-controls-direction a .fa,.ma-timer-container  .bx-wrapper .bx-controls-direction a .fa  { color:#'+$jq.cookie('link_color_cookie')+'}</style>').appendTo('head');
+		
+		$jq('<style type="text/css">.pt_custommenu div.popup a.act { color:#'+$jq.cookie('link_color_cookie')+' !important}</style>').appendTo('head');
+		
+		$jq('<style type="text/css">.product-tabs li.active .tab-top,.product-tabs li.active .tab-top:hover,.product-tabs li:hover .tab-top,.opc .step-title .number,.opc .active .step-title .number,.pt_custommenu div.popup,.pt_custommenu div.pt_menu.act a span,.pt_custommenu div.pt_menu .parentMenu a:hover span, .pt_custommenu div.pt_menu .parentMenu span.block-title:hover,.pt_custommenu #pt_menu_link ul li a:hover span,.pt_custommenu div.pt_menu.active .parentMenu a span { border-color:#'+$jq.cookie('link_color_cookie')+'}</style>').appendTo('head');
+		
+		//set background image
+		$jq('.cl-pattern div').click(function(){
+			$jq("body").css('background-image', 'url(<?php echo $this->getSkinUrl('magentothem/colortool/images/pattern/'); ?>'+this.id+'.png)');
+			$jq("body").css('background-repeat','repeat');
+			$jq.cookie('body_image_cookie', 'url(<?php echo $this->getSkinUrl('magentothem/colortool/images/pattern/'); ?>'+this.id+'.png)', { expires: date });
+		});
+	
+		//set cookie for theme color
+		var cl = $jq(".cl-row-themeskin");
+		cl.find("a").each(function() {
+			$jq(this).click(function(){
+				$jq.cookie('style_color', $jq(this).attr('title') , { expires: date });
+				location.reload();
+			});
+		});
+	});
+		
+	
+    //reset button
+    $jq('.cl-reset').click(function(){
+		
+		$jq.cookie('font_cookie','');
+		$jq.cookie('main_color_cookie','');
+		$jq.cookie('link_color_cookie','');
+		
+        $jq.cookie('body_image_cookie','');	
+		$jq("body").css('background-image', 'url(<?php echo $this->getSkinUrl('magentothem/colortool/images/pattern/').$_old_bd_img; ?>)');
+		
+        $jq.cookie('body_background_cookie','');
+        $jq("body").css('backgroundColor', '#<?php echo $_old_body_bg ?>');
+		location.reload();
+    });
+//]]>
+</script>

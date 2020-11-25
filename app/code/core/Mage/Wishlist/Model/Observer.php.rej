@@ -1,0 +1,20 @@
+--- app/code/core/Mage/Wishlist/Model/Observer.php
++++ app/code/core/Mage/Wishlist/Model/Observer.php
+@@ -102,7 +102,7 @@
+             $wishlistIds = array($singleWishlistId);
+         }
+ 
+-        if (!empty($wishlistIds) && $request->getParam('wishlist_next')){
++        if (count($wishlistIds) && $request->getParam('wishlist_next')){
+             $wishlistId = array_shift($wishlistIds);
+ 
+             if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+@@ -125,7 +125,7 @@
+             Mage::getSingleton('checkout/session')->setSingleWishlistId(null);
+         }
+ 
+-        if ($request->getParam('wishlist_next') && !empty($urls)) {
++        if ($request->getParam('wishlist_next') && count($urls)) {
+             $url = array_shift($urls);
+             $message = array_shift($messages);
+ 

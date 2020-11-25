@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Tech9logy_Events>
+      <version>0.1.0</version>
+    </Tech9logy_Events>
+  </modules>
+  <frontend>
+    <routers>
+      <events>
+        <use>standard</use>
+          <args>
+            <module>Tech9logy_Events</module>
+            <frontName>events</frontName>
+          </args>
+      </events>
+    </routers>
+		<layout>
+		  <updates>
+			<events>
+			  <file>events.xml</file>
+			</events>
+		  </updates>
+		</layout>
+  </frontend>
+  <global>
+    <helpers>
+      <events>
+        <class>Tech9logy_Events_Helper</class>
+      </events>
+    </helpers>
+	<blocks>
+	  <events>
+		<class>Tech9logy_Events_Block</class>
+	  </events>
+	</blocks>
+	<models>
+	  <events>
+		<class>Tech9logy_Events_Model</class>
+		<resourceModel>events_mysql4</resourceModel>
+	  </events>
+	  <events_mysql4>
+		<class>Tech9logy_Events_Model_Mysql4</class>
+		<entities>		  
+			  <event>
+				<table>tech9_events</table>
+			  </event>
+			   <seminar>
+				<table>tech9_seminar_reg</table>
+			  </seminar>
+			  <howhear>
+				<table>tech9_events_howhear</table>
+			  </howhear>
+			  <seminarreg>
+				<table>tech9_seminar_static_reg</table>
+			  </seminarreg>
+        </entities>
+	  </events_mysql4>
+	</models>
+	<resources>
+	  <events_setup>
+		<setup>
+		  <module>Tech9logy_Events</module>
+		</setup>
+		<connection>
+		  <use>core_setup</use>
+		</connection>
+	  </events_setup>
+	  <events_write>
+		<connection>
+		  <use>core_write</use>
+		</connection>
+	  </events_write>
+	  <events_read>
+		<connection>
+		  <use>core_read</use>
+		</connection>
+	  </events_read>
+	</resources>
+  </global>
+  <admin>
+	<routers>
+	  <events>
+	    <use>admin</use>
+		<args>
+		  <module>Tech9logy_Events</module>
+		  <frontName>admin_events</frontName>
+		</args>
+	  </events>
+	</routers>
+  </admin>
+  <adminhtml>
+	<menu>
+	  <events module="events">
+		<title>Events</title>
+		<sort_order>100</sort_order>
+		<children>
+		  <eventsbackend module="events">
+			<title>Schedule Event</title>
+			<sort_order>0</sort_order>
+			<action>admin_events/adminhtml_eventsbackend</action>
+		  </eventsbackend>
+		  <event module="events">
+		    <title>Manage Events</title>
+			<sort_order>1</sort_order>
+			<action>admin_events/adminhtml_event</action>
+		  </event>
+		  <howhear module="events">
+		    <title>Settings</title>
+			<sort_order>3</sort_order>
+			<action>admin_events/adminhtml_howhear</action>
+		  </howhear>
+		</children>
+	  </events>
+	</menu>
+	<acl>
+	  <resources>
+		<all>
+		  <title>Allow Everything</title>
+		</all>
+		<admin>
+		  <children>
+			<events translate="title" module="events">
+			  <title>Events</title>
+			  <sort_order>1000</sort_order>
+			  <children>
+		  <eventsbackend translate="title">
+			<title>Backend Page Title</title>
+		  </eventsbackend>
+		  <event translate="title">
+			<title>Manage Event</title>
+			<sort_order>0</sort_order>
+		  </event>
+		  <howhear translate="title">
+			<title>Manage Howhear</title>
+			<sort_order>1</sort_order>
+		  </howhear>
+			  </children>
+			</events>
+		  </children>
+		</admin>
+	  </resources>
+	</acl>
+	<layout>
+	  <updates>
+		<events>
+		  <file>events.xml</file>
+		</events>
+	  </updates>
+	</layout>
+  </adminhtml>
+</config> 

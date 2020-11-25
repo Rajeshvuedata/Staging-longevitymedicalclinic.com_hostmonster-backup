@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<MP_Presentations>
+			<version>1.0.0</version>
+		</MP_Presentations>
+	</modules>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <mp_presentations after="Mage_Adminhtml">MP_Presentations_Adminhtml</mp_presentations>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <frontend>
+        <routers>
+            <mp_presentations>
+                <use>standard</use>
+                <args>
+                    <module>MP_Presentations</module>
+                    <frontName>mp_presentations</frontName>
+                </args>
+            </mp_presentations>
+        </routers>
+    </frontend>
+	<global>
+		<helpers>
+			<mp_presentations><class>MP_Presentations_Helper</class></mp_presentations>
+		</helpers>
+		<blocks>
+			<mp_presentations>
+				<class>MP_Presentations_Block</class>
+			</mp_presentations>
+		</blocks>
+		<models>
+            <mp_presentations>
+                <class>MP_Presentations_Model</class>
+				<resourceModel>mp_presentations_resource</resourceModel>
+            </mp_presentations>
+            <mp_presentations_resource>
+                <class>MP_Presentations_Model_Resource</class>
+                <entities>
+                    <topical><table>mp_presentations_topical</table></topical>
+                </entities>
+            </mp_presentations_resource>
+		</models>
+	</global>
+	<adminhtml>
+	<!-- 
+	   <menu>
+            <system>
+                <children>
+                    <tools>
+                        <children>
+                            <mp_presentations translate="title" module="mp_presentations">
+                                <title>SMTPPro - Email Log</title>
+                                <action>adminhtml/smtp_log</action>
+                            </mp_presentations>
+                        </children>
+                    </tools>
+                </children>
+            </system>
+        </menu>
+		<acl>
+			<resources>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<mp_presentations translate="title" module="mp_presentations">
+											<title>SMTP Pro Email Settings</title>
+										</mp_presentations>
+									</children>
+								</config>
+					            <tools>
+					              <children>
+					                <mp_presentations  translate="title" module="mp_presentations">
+					                  <title>Email Log</title>
+					                </mp_presentations>
+					              </children>
+					            </tools>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		 -->
+	</adminhtml>
+</config>

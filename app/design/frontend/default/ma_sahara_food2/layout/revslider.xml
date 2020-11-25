@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <cms_index_index>
+	   <reference name ="head">
+		   <action method="addJs" >
+                <script>magentothem/revslider/jquery.themepunch.plugins.min.js</script>
+            </action>
+			<action method="addJs" >
+                <script>magentothem/revslider/jquery.themepunch.revolution.min.js</script>
+            </action>
+			<action method="addCss">
+                <script>magentothem/revslider/css/settings.css</script>
+            </action>
+			<action method="addCss">
+                <script>magentothem/revslider/css/captions.css</script>
+            </action>
+	    <action method="addCss">
+                <script>magentothem/revslider/css/revslider.css</script>
+            </action>
+	   </reference>
+		<!-- <reference name="content">
+            <block type="revslider/revslider" name="revslider" template="revslider/revslider.phtml" />
+        </reference> -->
+		   <reference name="content">
+            <block type="revslider/revslider" name="banner.top">
+                <action method="setBlockPosition">
+                    <block_position>banner-top</block_position>
+                </action>
+            </block>
+        </reference>
+        <reference name="before_body_end" >
+            <block type="revslider/revslider" name="page.bottom" >
+                <action method="setBlockPosition">
+                    <block_position>page-bottom</block_position>
+                </action>
+            </block>
+        </reference>
+        <reference name="ma_banner" >
+            <block type="revslider/revslider" name="top-menu" >
+                <action method="setBlockPosition">
+                    <block_position>menu-top</block_position>
+                </action>
+            </block>
+        </reference>
+        <reference name="left">
+            <block type="revslider/revslider" name="sidebar.left.top" before="-">
+                <action method="setBlockPosition">
+                    <block_position>sidebar-left-top</block_position>
+                </action>
+            </block>
+            <block type="revslider/revslider" name="sidebar.left.bottom">
+                <action method="setBlockPosition">
+                    <block_position>sidebar-left-bottom</block_position>
+                </action>
+            </block>
+        </reference>
+        <reference name="right">
+            <block type="revslider/revslider" name="sidebar.right.top" before="-">
+                <action method="setBlockPosition">
+                    <block_position>sidebar-right-top</block_position>
+                </action>
+            </block>
+            <block type="revslider/revslider" name="sidebar.right.bottom">
+                <action method="setBlockPosition">
+                    <block_position>sidebar-right-bottom</block_position>
+                </action>
+            </block>
+        </reference>
+    </cms_index_index>
+    <revslider_index_index>
+        <reference name="content">
+            <block type="revslider/revslider" name="revslider" template="revslider/revslider.phtml" />
+        </reference>
+    </revslider_index_index>
+</layout> 

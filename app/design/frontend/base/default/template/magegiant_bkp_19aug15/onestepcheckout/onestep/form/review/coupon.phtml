@@ -1,0 +1,64 @@
+<?php
+/**
+* Magegiant
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magegiant.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magegiant.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magegiant
+ * @package     Magegiant_Onestepcheckout
+ * @copyright   Copyright (c) 2012 Magegiant (http://www.magegiant.com/)
+ * @license     http://www.magegiant.com/license-agreement.html
+ */
+?>
+
+<?php if ($this->canShow()): ?>
+<div class="block-wrapper">
+	<div id="giant-onestepcheckout-order-review-coupon-wrapper">
+		<div id="giant-onestepcheckout-review-coupon">
+			<div class="coupon-message-container" style="overflow:hidden;height:0px;"></div>
+			<div class="coupon-code-form">
+				<label for="coupon_code"><?php echo $this->__('Coupon Code') ?></label>
+				<div class="input-box field-row">
+					<input class="input-text<?php if ($this->getConfig()->isApplyCouponButton()) : ?> with-buttons<?php endif; ?>" id="coupon_code" name="coupon_code" value="<?php echo $this->getCouponCode(); ?>" />
+					
+				</div>
+				<div class="ac-button">
+					<?php if ($this->getConfig()->isApplyCouponButton()) : ?>
+						<button type="button" class="button" id="giant-onestepcheckout-coupon-code-apply-btn" onclick="return false;"<?php if ($this->getCouponCode()) : ?> style="display:none;"<?php endif; ?>>
+							<span><span><?php echo $this->__('Apply Coupon'); ?></span></span>
+						</button>
+						<button type="button" class="button" id="giant-onestepcheckout-coupon-code-cancel-btn" onclick="return false;"<?php if (!$this->getCouponCode()) : ?> style="display:none;"<?php endif; ?>>
+							<span><span><?php echo $this->__('Cancel Coupon'); ?></span></span>
+						</button>
+					<?php endif; ?>
+				</div>
+			</div>
+			<script type="text/javascript">
+				var giantOSCReviewCoupon = new MagegiantOnestepcheckoutReviewCoupon({
+					isCouponApplied: <?php echo ($this->getCouponCode()) ? 'true' : 'false'; ?>,
+					isApplyCouponButton: <?php echo ($this->getConfig()->isApplyCouponButton()) ? 'true' : 'false'; ?>,
+					applyCouponButtonSelector: '#giant-onestepcheckout-coupon-code-apply-btn',
+					cancelCouponButtonSelector: '#giant-onestepcheckout-coupon-code-cancel-btn',
+					msgContainerSelector: '.coupon-message-container',
+					applyCouponUrl: '<?php echo $this->getApplyCouponAjaxUrl(); ?>',
+					cancelCouponUrl: '<?php echo $this->getCancelCouponAjaxUrl(); ?>',
+					couponCodeInput: 'coupon_code',
+					successMessageBoxCssClass: 'giant-onestepcheckout-success-msg',
+					errorMessageBoxCssClass: 'giant-onestepcheckout-error-msg',
+					jsErrorMsg: <?php echo Zend_Json::encode($this->__("Oops something's wrong")); ?>,
+					jsSuccessMsg: <?php echo Zend_Json::encode($this->__("Ok")); ?>
+				});
+			</script>
+		</div>
+	</div>
+</div>
+<?php endif; ?>

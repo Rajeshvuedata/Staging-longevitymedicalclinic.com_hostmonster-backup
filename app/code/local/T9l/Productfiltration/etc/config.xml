@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+ 
+<config>
+    <modules>
+        <T9l_Productfiltration>
+            <version>1.6.0.0</version>
+        </T9l_Productfiltration>
+    </modules>
+    <global>
+	<models>
+            <t9l_productfiltration>
+                <class>T9l_Productfiltration_Model</class>
+            </t9l_productfiltration>
+        </models>
+	<blocks>
+		<productfiltration>
+			<class>T9l_Productfiltration_Block</class>
+		</productfiltration>
+	</blocks>
+	<helpers>
+        	 <productfiltration>
+       			  <class>T9l_Productfiltration_Helper</class>
+       		 </productfiltration>
+       	</helpers>	
+   </global>
+	
+   <default>
+        <tab1>
+            <general>
+                <dropdown>key2</dropdown>
+                
+             </general>
+        </tab1>
+    </default>   
+    <frontend>
+        <routers>
+            <T9l_Productfiltration_SomeFreeRouterName1>
+                <use>standard</use>
+                <args>
+                    <module>T9l_Productfiltration</module>
+                    <frontName>t9l-productfiltration</frontName>
+                </args>
+            </T9l_Productfiltration_SomeFreeRouterName1>
+        </routers>
+	<layout>
+            <updates>
+                <t9l_productfiltration>
+                      <file>pflayout.xml</file>
+                </t9l_productfiltration>
+            </updates>
+    </layout>
+    </frontend>  
+
+</config>

@@ -1,0 +1,129 @@
+<div class="content-header">
+    <table cellspacing="0" class="grid-header">
+        <tr>
+            <td><h3><?=$this->__('Schedule an Event')?></h3></td>
+            <td class="a-right">
+                <button onclick="editForm.submit()" class="scalable save" type="button"><span>Add Event</span></button>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="entry-edit">
+    <form id="edit_form" name="edit_form" enctype="multipart/form-data" method="post" action="<?=$this->getUrl('*/*/post')?>">
+        <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+        <h4 class="icon-head head-edit-form fieldset-legend"><?=$this->__('Add your Event Here')?></h4>
+        <fieldset id="my-fieldset">
+            <table cellspacing="0" class="form-list">
+                <tr>
+                    <td class="label"><?=$this->__('Webinar')?> </td>
+					<td class="input-ele"><input onclick="hideextradiv();" id="webinar_check" type="checkbox" name="myform[iswebinar]" /> Note: Select if it is webinar</td>
+                    
+                </tr>
+				<tr>
+                    <td class="label"><?=$this->__('Title')?> <span class="required">*</span></td>
+                    <td class="input-ele"><input class="input-text required-entry" name="myform[title]" /></td>
+                </tr>
+				
+				 <tr>
+                    <td class="label"><?=$this->__('Date')?> <span class="required">*</span></td>
+                    <td class="input-ele"><input type="date" class="input-text required-entry" name="myform[date]" /></td>
+                </tr>
+				
+				 <tr>
+                    <td class="label"><?=$this->__('Time')?> <span class="required">*</span></td>
+                    <td class="input-ele"><input type="time" class="input-text required-entry" name="myform[time]" /></td>
+                </tr>
+				
+				 <tr class="hidemeifwebinar">
+                    <td class="label"><?=$this->__('Location Name')?></td>
+                    <td class="input-ele"><input class="input-text" name="myform[locationname]" /></td>
+                </tr>
+				
+				 <tr>
+                    <td class="label"><?=$this->__('Address:')?></td>
+                    <td class="input-ele"></td>
+                </tr>
+				
+				 <tr class="hidemeifwebinar">
+                    <td class="label">&nbsp; <?=$this->__('Street')?></td>
+                    <td class="input-ele"><input class="input-text" name="myform[street]" /></td>
+                </tr>
+				
+				<tr>
+                    <td class="label">&nbsp; <?=$this->__('City')?></td>
+                    <td class="input-ele"><input class="input-text" name="myform[city]" /></td>
+                </tr>
+				
+				 <tr class="hidemeifwebinar">
+                    <td class="label">&nbsp; <?=$this->__('State')?></td>
+                    <td class="input-ele"><input class="input-text" name="myform[state]" /></td>
+                </tr>
+				
+				 <tr class="hidemeifwebinar">
+                    <td class="label">&nbsp; <?=$this->__('Zipcode')?></td>
+                    <td class="input-ele"><input class="input-text" name="myform[zipcode]" /></td>
+                </tr>
+				
+				<tr>
+                    <td class="label"><?=$this->__('Display Start Date')?> <span class="required">*</span></td>
+                    <td class="input-ele"><input id="startdate" type="date" class="input-text required-entry" name="myform[dis_start_date]" /></td>
+                	<td class="label"><?=$this->__('Display End Date')?> <span class="required">*</span></td>
+                    <td class="input-ele"><input type="date" id="enddate" class="input-text required-entry" name="myform[dis_end_date]" /></td>
+                </tr>
+				
+				<tr>
+                    <td class="label"><?=$this->__('Display Start Time')?> <span class="required">*</span></td>
+                    <td class="input-ele"><input type="time" id="starttime" class="input-text required-entry" name="myform[dis_start_time]" /></td>
+                	<td class="label"><?=$this->__('Display End Time')?> <span class="required">*</span></td>
+                    <td class="input-ele"><input type="time" id="endtime" class="input-text required-entry" name="myform[dis_end_time]" /></td>
+                </tr>
+				
+				<tr class="hidemeifwebinar">
+                    <td class="label"><?=$this->__('Description')?> <span class="required">*</span></td>
+                    <td class="input-ele" colspan="3"><textarea cols="100" rows="10" class="input-text" name="myform[description]"></textarea></td>
+                </tr>
+				
+				<tr class="hidemeifwebinar">
+                    <td class="label"><?=$this->__('Google Map')?> </td>
+                    <td class="input-ele" cols="50"><textarea rows="5" cols="50" class="input-text" name="myform[google_map]"></textarea></td>
+                </tr>
+				<tr class="hidemeifwebinar">
+                    <td class="label"><?=$this->__('Image')?> </td>
+                    <td class="input-ele" cols="50"><input type="file" class="input-text" name="uploadedimage"/></td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+</div>
+
+
+<script type="text/javascript">
+    var editForm = new varienForm('edit_form');
+	function hide (elements) {
+	  elements = elements.length ? elements : [elements];
+	  for (var index = 0; index < elements.length; index++) {
+		elements[index].style.display = 'none';
+	  }
+	}
+	function show(elements) {
+	  elements = elements.length ? elements : [elements];
+	  for (var index = 0; index < elements.length; index++) {
+		elements[index].style.display = 'table-row';
+	  }
+	}
+	function hideextradiv(){
+			// Get the checkbox
+		  var checkBox = document.getElementById("webinar_check");
+		  
+
+		  // If the checkbox is checked, display the output text
+		  if (checkBox.checked == true){
+			  hide(document.querySelectorAll('.hidemeifwebinar'));
+			 
+		  } else {
+			
+			show(document.querySelectorAll('.hidemeifwebinar'));
+			
+		  }
+	}
+</script>

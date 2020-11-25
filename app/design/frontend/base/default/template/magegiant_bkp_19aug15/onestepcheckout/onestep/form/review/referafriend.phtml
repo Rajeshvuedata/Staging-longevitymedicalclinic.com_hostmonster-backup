@@ -1,0 +1,39 @@
+<?php
+/**
+* Magegiant
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magegiant.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magegiant.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magegiant
+ * @package     Magegiant_Onestepcheckout
+ * @copyright   Copyright (c) 2012 Magegiant (http://www.magegiant.com/)
+ * @license     http://www.magegiant.com/license-agreement.html
+ */
+?><?php if ($this->canShow()): ?>
+<div id="giant-onestepcheckout-review-referafriend">
+    <?php if ($this->isDiscountSectionAvailable()) : ?>
+        <div class="refer-a-friend-message-container" style="overflow:hidden;height:0px;"></div>
+        <div class="refer-a-friend-form">
+            <label for="raf_discount_amount"><?php echo $this->__('Referred Friends Discount') ?></label>
+            <div class="field-row">
+                <input class="input-text" id="raf_discount_amount" name="raf_discount_amount" value="<?php echo (float)$this->getAppliedAmount(); ?>" />
+                <div class="raf-details">
+                    <?php echo $this->__('of %s available balance', $this->getAvailableAmount(true)); ?>
+                </div>
+            </div>
+            <?php if($this->getMaxDiscountPercent()): ?>
+                <label class="raf-maximum-discount"><?php echo $this->__('Maximum allowed discount to order is %d%%', $this->getMaxDiscountPercent()); ?></label>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+</div>
+<?php endif; ?>

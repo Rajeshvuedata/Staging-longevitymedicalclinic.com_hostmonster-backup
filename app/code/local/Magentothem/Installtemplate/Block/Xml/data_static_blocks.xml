@@ -1,0 +1,412 @@
+<?xml version="1.0"?>
+<ma_sahara_food2>
+    <blocks>
+
+        <block>
+            <title>Static Block Footer1</title>
+            <identifier>static_block_footer1</identifier>
+            <content>
+                    <![CDATA[
+			<div class="container">
+			<div class="row">
+			<div class="f-col col-sm-6 col-md-3 col-sms-6 col-smb-12 col">
+			<div class="f-title">
+			<h3>CONTACT US</h3>
+			</div>
+			<div class="footer-static-content">
+			<div class="f1-icon address"><a href="#"><em class="shapes">&nbsp;</em><em class="fa fa-map-marker"></em></a>
+			<div class="f1-content"><span>8901 Marmora Road, Glasgow</span> <span>D04 89 GR, New York</span></div>
+			</div>
+			<div class="f1-icon phone"><a href="#"><em class="shapes">&nbsp;</em><em class="fa fa-phone"></em></a>
+			<div class="f1-content"><span>Telephone: (801) 2345 - 6789</span> <span>Fax: (801) 2345 - 6789</span></div>
+			</div>
+			<div class="f1-icon email"><a href="#"><em class="shapes">&nbsp;</em><em class="fa fa-envelope"></em></a>
+			<div class="f1-content"><span>Email: support@plaza-themes.com</span> <span>Website: <a href="http://www.plazathemes.com/">www.plazathemes.com</a></span></div>
+			</div>
+			</div>
+			</div>
+			<div class="f-col f-col2 col-sm-6 col-md-2 col-sms-6 col-smb-12 col1">
+			<div class="f-title">
+			<h3>INFORMATION</h3>
+			</div>
+			<div class="footer-static-content row-fluid">
+			<ul>
+			<li class="first"><a href="{{store direct_url="catalog/seo_sitemap/category"}}">Sitemap</a></li>
+			<li><a href="{{store direct_url="privacy-policy-cookie-restriction-mode"}}">Privacy Policy</a></li>
+			<li><a href="{{store direct_url="customer/account/index"}}">Your Account</a></li>
+			<li><a href="{{store direct_url="catalogsearch/advanced"}}">Advanced Search</a></li>
+			<li class="last"><a href="{{store direct_url="contacts"}}">Contact Us</a></li>
+			</ul>
+			</div>
+			</div>
+			<div class="f-col f-col3 col-sm-6 col-md-2 col-sms-6 col-smb-12 col2">
+			<div class="f-title">
+			<h3>MY ACCOUNT</h3>
+			</div>
+			<div class="footer-static-content">
+			<ul>
+			<li class="first"><a href="{{store direct_url="customer/account/index"}}">My Account</a></li>
+			<li><a href="{{store direct_url="sales/order/history/"}}">Order History</a></li>
+			<li><a href="#">Returns</a></li>
+			<li><a href="#">Mobiles</a></li>
+			<li class="last"><a href="{{store direct_url="catalog/seo_sitemap/category"}}">Site Map</a></li>
+			</ul>
+			</div>
+			</div>
+			<div class="f-col f-col4 col-sm-6 col-md-2 col-sms-6 col-smb-12 col3">
+			<div class="f-title">
+			<h3>EXTRAS</h3>
+			</div>
+			<div class="footer-static-content">
+			<ul>
+			<li class="first"><a href="{{store direct_url="customer/account/index"}}">My Account</a></li>
+			<li><a href="#">Specials</a></li>
+			<li><a href="{{store direct_url="sales/order/history/"}}">Order History</a></li>
+			<li><a href="{{store direct_url="catalog/seo_sitemap/category"}}">Site Map</a></li>
+			<li class="last"><a href="#">Specials</a></li>
+			</ul>
+			</div>
+			</div>
+			<div class="f-col f-col5 col-sm-12 col-md-3 col4">
+			<div class="f-title">
+			<h3>OPENING TIME</h3>
+			</div>
+			<div class="footer-static-content">
+			<div class="footer-day">
+			<div class="day-arrow">
+			<div class="name-day">
+			<p>Monday - Friday</p>
+			</div>
+			<div class="time">
+			<p>8.00 - 18.00</p>
+			</div>
+			</div>
+			</div>
+			<div class="footer-day">
+			<div class="day-arrow">
+			<div class="name-day">
+			<p>Saturday</p>
+			</div>
+			<div class="time">
+			<p>9.00 - 21.00</p>
+			</div>
+			</div>
+			</div>
+			<div class="footer-day">
+			<div class="day-arrow">
+			<div class="name-day">
+			<p>Sunday</p>
+			</div>
+			<div class="time">
+			<p>10.00 - 21.00</p>
+			</div>
+			</div>
+			</div>
+			<div class="payment"><img src="{{media url="wysiwyg/payment.png"}}" alt="" /></div>
+			</div>
+			</div>
+			</div>
+			</div>
+		    ]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+
+
+        <block>
+            <title>Banner Left</title>
+            <identifier>banner_left</identifier>
+            <content>
+                <![CDATA[
+		<div class="banner-left"><a href="{{store direct_url="appetizers.html"}}"><img src="{{media url="wysiwyg/banner-left.jpg"}}" alt="" /></a>
+		<div class="banner-left-text">
+		<h3>Lorem ipsum dolor</h3>
+		<h2><span>Lorem ipsum dolorsit</span> <span>amet consectetur</span></h2>
+		</div>
+		</div>
+		]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+	
+	<block>
+            <title>Static Block Product</title>
+            <identifier>static_block_product</identifier>
+            <content>
+                <![CDATA[
+		<div class="footer-static-center">
+		<div class="home-testimonial">
+		<div class="container">{{block type="testimonial/sidebar" name="testimonial.sidebar"}}</div>
+		</div>
+		<div class="container">{{block type="bestsellerproductslider/bestsellerproductslider" name="bestsellerproductslider" template="magentothem/bestsellerproductslider/bestsellerproductslider.phtml"}}</div>
+		</div>
+		]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+	
+	<block>
+            <title>Banner Static One</title>
+            <identifier>banner_static_one</identifier>
+            <content>
+                <![CDATA[
+		<div class="banner-static-one">
+		<div class="container">
+		<div class="banner-one">
+		<div class="row">
+		<div class="col-md-5 col-sm-5 col-sms-12">
+		<div class="banner-box col"><a href="{{store direct_url="desserts.html"}}"><img src="{{media url="wysiwyg/bg1.jpg"}}" alt="" /></a>
+		<div class="text">
+		<h3>Lorem ipsum dolor</h3>
+		<h2>Lorem ipsum dolorsit ametcons tetur adipisicing elit</h2>
+		</div>
+		</div>
+		</div>
+		<div class="col-md-7 col-sm-7 col-sms-12">
+		<div class="banner-box col1"><a href="{{store direct_url="appetizers.html"}}"><img src="{{media url="wysiwyg/bg2.jpg"}}" alt="" /></a>
+		<div class="text">
+		<h3>Lorem ipsum</h3>
+		<h2>Lorem ipsum dolorsit ametconse</h2>
+		<p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehen derit in voluptate velit fugiat pariatur.</p>
+		<div class="link"><a href="{{store direct_url="main-dishes.html"}}"><em class="fa fa-arrow-circle-right"></em>View more</a></div>
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		<div class="banner-two">
+		<div class="row">
+		<div class="col-md-8 col-sm-8 col-sms-12">
+		<div class="banner-box col"><a href="{{store direct_url="snacks.html"}}"><img src="{{media url="wysiwyg/bg3.jpg"}}" alt="" /></a>
+		<div class="text">
+		<h3>Lorem ipsum dolor</h3>
+		<h2>Lorem ipsum dolorsit amet consectetur</h2>
+		</div>
+		</div>
+		</div>
+		<div class="col-md-4 col-sm-4 col-sms-12">
+		<div class="banner-box col1"><a href="{{store direct_url="desserts.html"}}"><img src="{{media url="wysiwyg/bg4.jpg"}}" alt="" /></a>
+		<div class="text">
+		<h3>Lorem ipsum dolor</h3>
+		<h2>Lorem ipsum dolorsit amet tetur adipisicing</h2>
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+	
+	<block>
+            <title>Static Sub Menu Col Right</title>
+            <identifier>pt_menu_idcat_3_right</identifier>
+            <content>
+                <![CDATA[
+		<div class="custom-menu-right">
+		<div class="menu-right col">
+		<div class="menu-image"><a href="{{store direct_url="women.html"}}"><img src="{{media url="wysiwyg/bg-menu-right.jpg"}}" alt="" /></a></div>
+		</div>
+		</div>
+		]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+	
+	<block>
+            <title>Static Sub Menu Top</title>
+            <identifier>pt_menu_idcat_4</identifier>
+            <content>
+                <![CDATA[
+		<div class="custom-menu-top">
+		<div class="menu-top images">
+		<div class="cus-image"><a href="{{store direct_url="jewelry.html"}}"><img src="{{media url="wysiwyg/top-menu.jpg"}}" alt="" /></a></div>
+		</div>
+		<div class="menu-top images1">
+		<div class="cus-image"><a href="{{store direct_url="men.html"}}"><img src="{{media url="wysiwyg/top-menu1.jpg"}}" alt="" /></a></div>
+		</div>
+		<div class="menu-top images2">
+		<div class="cus-image"><a href="{{store direct_url="men.html"}}"><img src="{{media url="wysiwyg/top-menu2.jpg"}}" alt="" /></a></div>
+		</div>
+		<div class="menu-top images3">
+		<div class="cus-image"><a href="{{store direct_url="men.html"}}"><img src="{{media url="wysiwyg/top-menu3.jpg"}}" alt="" /></a></div>
+		</div>
+		</div>
+		]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+	
+	<block>
+            <title>Banner Static</title>
+            <identifier>home_banner_static</identifier>
+            <content>
+                <![CDATA[
+		<div class="banner-static-contain">
+		<div class="container">
+		<div class="home-banner-static row">
+		<div class="banner-box1 col-sm-12 col-md-4 col-sms-12 col-smb-12">
+		<div class="banner-box">
+		<div class="box-images"><a href="{{store direct_url="appetizers.html"}}"><em class="shapes">&nbsp;</em><em class="fa fa-coffee"></em></a></div>
+		<div class="box-title">
+		<h2>BREAKFAST MENU</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmo delia temporate incididunt labore..</p>
+		<a href="{{store direct_url="appetizers.html"}}">Read more <em class="fa fa-angle-double-right"></em></a></div>
+		</div>
+		</div>
+		<div class="banner-box2 col-sm-12 col-md-4 col-sms-12 col-smb-12">
+		<div class="banner-box">
+		<div class="box-images"><a href="{{store direct_url="main-dishes.html"}}"><em class="shapes">&nbsp;</em><em class="fa fa-cutlery"></em></a></div>
+		<div class="box-title">
+		<h2>LUNCH MENU</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmo delia temporate incididunt labore.</p>
+		<a href="{{store direct_url="main-dishes.html"}}">Read more <em class="fa fa-angle-double-right"></em></a></div>
+		</div>
+		</div>
+		<div class="banner-box3 col-sm-12 col-md-4 col-sms-12 col-smb-12">
+		<div class="banner-box">
+		<div class="box-images"><a href="{{store direct_url="desserts.html"}}"><em class="shapes">&nbsp;</em><em class="fa fa-beer"></em></a></div>
+		<div class="box-title">
+		<h2>DINNER MENU</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmo delia temporate incididunt labore..</p>
+		<a href="{{store direct_url="desserts.html"}}">Read more <em class="fa fa-angle-double-right"></em></a></div>
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+	
+	<block>
+            <title>Static Block Product1</title>
+            <identifier>static_block_product1</identifier>
+            <content>
+                <![CDATA[
+		<div class="static-block-product1">
+		<div class="container">
+		<div class="row">
+		<div class="col-md-3 col-sm-6 col-sms-12">{{block type="newproduct/newproduct" name="newproduct" template="magentothem/newproduct/newproduct.phtml"}}</div>
+		<div class="col-md-3 col-sm-6 col-sms-12">{{block type="mostviewedproduct/mostviewedproduct" name="mostviewedproduct" template="magentothem/mostviewedproduct/mostviewedproduct.phtml"}}</div>
+		<div class="col-md-3 col-sm-6 col-sms-12">{{block type="onsaleproduct/onsaleproduct" name="onsaleproduct" template="magentothem/onsaleproduct/onsaleproduct.phtml"}}</div>
+		<div class="col-md-3 col-sm-6 col-sms-12">{{block type="featuredproduct/featuredproduct" name="featuredproduct" template="magentothem/featuredproduct/featuredproduct.phtml"}}</div>
+		</div>
+		</div>
+		</div>
+		]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+	
+	<block>
+            <title>Blog Slider</title>
+            <identifier>blog_slider</identifier>
+            <content>
+                <![CDATA[
+		<div class="home-blog">
+		<div class="container">{{block type="blog/menu_sidebar" name="blog.slider" template="magentothem_blog/blog_slide.phtml"}}</div>
+		</div>
+		]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+	
+	<block>
+            <title>Static Block Footer</title>
+            <identifier>static_block_footer</identifier>
+            <content>
+                <![CDATA[
+		<div class="block-footer">
+		<div class="container">
+		<div class="block-footer-border">
+		<div class="row">
+		<div class="col-md-4 col-sm-4 col-sms-12 col">
+		<div class="f-title">
+		<h3>ABOUT US</h3>
+		</div>
+		<div class="f-content"><a href="{{store direct_url="desserts.html"}}"><img src="{{media url="wysiwyg/img-footer.jpg"}}" alt="" /></a>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+		<div class="f-icon">
+		<ul>
+		<li class="first"><a class="facebook fa fa-facebook" href="#"><span>facebook</span></a></li>
+		<li><a class="twitter fa fa-twitter" href="#"><span>twitter</span></a></li>
+		<li><a class="google fa fa-google-plus" href="#"><span>google</span></a></li>
+		<li><a class="pinterest fa fa-pinterest" href="#"><span>pinterest</span></a></li>
+		<li class="last"><a class="instagram fa fa-instagram" href="#"><span>instagram</span></a></li>
+		</ul>
+		</div>
+		</div>
+		</div>
+		<div class="col-md-4 col-sm-4 col-sms-12 col1">
+		<div class="f-title">
+		<h3>RECENT TWEET</h3>
+		</div>
+		<div class="f-content">{{block type="core/template" name="lastesttweet" template="magentothem/lastesttweet/lastesttweet.phtml"}}</div>
+		</div>
+		<div class="col-md-4 col-sm-4 col-sms-12 col2">
+		<div class="f-title">
+		<h3>NEWSLETTER</h3>
+		</div>
+		<div class="f-content">{{block type="newsletter/subscribe" name="left.newsletter" template="newsletter/subscribe.phtml"}}
+		<div class="box-footer"><a href="#"><em class="shapes">&nbsp;</em><em class="fa fa-rocket"></em></a>
+		<div class="box-f-content">
+		<h2>WORLDWIDE SHIPPING</h2>
+		<h3>Free Shipping On Order Over $100</h3>
+		</div>
+		</div>
+		<div class="box-footer1"><a href="#"><em class="shapes">&nbsp;</em><em class="fa fa-phone"></em></a>
+		<div class="box-f-content">
+		<h2>ORDER ONLINE SERVICE</h2>
+		<h3>Call Us Now: (801)-2345-6789</h3>
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+	
+	<block>
+            <title>Banner Right</title>
+            <identifier>banner_right</identifier>
+            <content>
+                <![CDATA[
+		<div class="banner-left"><a href="{{store direct_url="women.html"}}"><img src="{{media url="wysiwyg/banner-left.jpg"}}" alt="" /></a>
+		    <div class="banner-left-text">
+		    <h3>Lorem ipsum dolor</h3>
+		    <h2><span>Lorem ipsum dolorsit</span> <span>amet consectetur</span></h2>
+		    </div>
+		</div>
+		]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+	
+	<block>
+            <title>Menu Link</title>
+            <identifier>pt_menu_links</identifier>
+            <content>
+                <![CDATA[
+		<ul>
+		<li><a href="{{store url="contacts"}}"><span>Contact Us</span></a></li>
+		<li><a href="{{store direct_url="about-magento-demo-store"}}"><span>About us</span></a></li>
+		</ul>
+		]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+	
+    </blocks>
+
+</ma_sahara_food2>
+

@@ -1,0 +1,94 @@
+<?php
+class Tech9logy_Events_Block_Adminhtml_Event_Edit_Tab_Form extends Mage_Adminhtml_Block_Widget_Form
+{
+		protected function _prepareForm()
+		{
+
+				$form = new Varien_Data_Form();
+				$this->setForm($form);
+				$fieldset = $form->addFieldset("events_form", array("legend"=>Mage::helper("events")->__("Event information")));
+
+				
+						$fieldset->addField("title", "text", array(
+						"label" => Mage::helper("events")->__("Title"),
+						"name" => "title",
+						"required"  => true,
+						));
+					
+						$fieldset->addField("event_date", "text", array(
+						"label" => Mage::helper("events")->__("Event Date"),
+						"name" => "event_date",
+						));
+						
+						$fieldset->addField("event_time", "text", array(
+						"label" => Mage::helper("events")->__("Event Time"),
+						"name" => "event_time",
+						));
+						
+						$fieldset->addField("location", "text", array(
+						"label" => Mage::helper("events")->__("Location"),
+						"name" => "location",
+						));
+						
+						$fieldset->addField("street", "text", array(
+						"label" => Mage::helper("events")->__("Street"),
+						"name" => "street",
+						));
+						
+						$fieldset->addField("city", "text", array(
+						"label" => Mage::helper("events")->__("City"),
+						"name" => "city",
+						));
+						
+						$fieldset->addField("state", "text", array(
+						"label" => Mage::helper("events")->__("State"),
+						"name" => "state",
+						));
+						
+						$fieldset->addField("zipcode", "text", array(
+						"label" => Mage::helper("events")->__("Zipcode"),
+						"name" => "zipcode",
+						));
+						
+						$fieldset->addField("event_start_date", "text", array(
+						"label" => Mage::helper("events")->__("Display Start Date"),
+						"name" => "event_start_date",
+						));
+						
+						$fieldset->addField("event_end_date", "text", array(
+						"label" => Mage::helper("events")->__("Display End Date"),
+						"name" => "event_end_date",
+						));
+						
+						$fieldset->addField("event_start_time", "text", array(
+						"label" => Mage::helper("events")->__("Display Start Time"),
+						"name" => "event_start_time",
+						));
+						
+						$fieldset->addField("event_end_time", "text", array(
+						"label" => Mage::helper("events")->__("Display End Time"),
+						"name" => "event_end_time",
+						));
+						
+						$fieldset->addField("description", "textarea", array(
+						"label" => Mage::helper("events")->__("Description"),
+						"name" => "description",
+						));
+						
+						$fieldset->addField("google_map", "textarea", array(
+						"label" => Mage::helper("events")->__("Google Map"),
+						"name" => "google_map",
+						));
+					
+
+				if (Mage::getSingleton("adminhtml/session")->getEventData())
+				{
+					$form->setValues(Mage::getSingleton("adminhtml/session")->getEventData());
+					Mage::getSingleton("adminhtml/session")->setEventData(null);
+				} 
+				elseif(Mage::registry("event_data")) {
+				    $form->setValues(Mage::registry("event_data")->getData());
+				}
+				return parent::_prepareForm();
+		}
+}

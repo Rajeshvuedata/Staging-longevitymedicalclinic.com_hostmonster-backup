@@ -1,0 +1,21 @@
+--- app/code/core/Mage/Core/Model/Session/Abstract/Varien.php
++++ app/code/core/Mage/Core/Model/Session/Abstract/Varien.php
+@@ -62,7 +62,6 @@
+              * backward compatibility with db argument (option is @deprecated after 1.12.0.2)
+              */
+             case 'db':
+-                $moduleName = 'user';
+                 /* @var $sessionResource Mage_Core_Model_Resource_Session */
+                 $sessionResource = Mage::getResourceSingleton('core/session');
+                 $sessionResource->setSaveHandler();
+@@ -78,9 +77,9 @@
+                 }
+             default:
+                 session_save_path($this->getSessionSavePath());
++                session_module_name($moduleName);
+                 break;
+         }
+-        session_module_name($moduleName);
+ 
+         $cookie = $this->getCookie();
+         if (Mage::app()->getStore()->isAdmin()) {

@@ -1,0 +1,321 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @see Mage_Catalog_Block_Category_View
+ */
+?>
+<?php
+    $_helper    = $this->helper('catalog/output');
+    $_category  = $this->getCurrentCategory();
+    $_imgHtml   = '';
+    if ($_imgUrl = $_category->getImageUrl()) {
+        $_imgHtml = '<p class="category-image"><img src="'.$_imgUrl.'" alt="'.$this->escapeHtml($_category->getName()).'" title="'.$this->escapeHtml($_category->getName()).'" /></p>';
+        $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
+    }
+?>
+<div class="page-title category-title">
+    <?php if($this->IsRssCatalogEnable() && $this->IsTopCategory()): ?>
+        <a href="<?php echo $this->getRssLink() ?>" class="link-rss"><?php echo $this->__('Subscribe to RSS Feed') ?></a>
+    <?php endif; ?>
+    <h1><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h1>
+</div>
+
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+
+<?php if($_imgUrl): ?>
+    <?php echo $_imgHtml ?>
+<?php endif; ?>
+
+<?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+    <div class="category-description std">
+        <?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?>
+    </div>
+    <?php endif; ?>
+
+<?php if($this->isContentMode()): ?>
+    <?php echo $this->getCmsBlockHtml() ?>
+
+<?php elseif($this->isMixedMode()): ?>
+    <?php echo $this->getCmsBlockHtml() ?>
+    <?php echo $this->getProductListHtml() ?>
+
+<?php else: ?>
+    <?php echo $this->getProductListHtml() ?>
+<?php endif; ?>
+<!-- custom added for addtocart popup -->
+		<!-- pop up block -->
+		<div id="lightbox"></div>
+		<div  id="lb-content-refresh">
+			<span id="lb-close">x</span>
+				
+			<div class="popup_block" id="popup_block">
+				
+			</div> <!-- end of popup block -->
+				
+		</div> <!-- end of lb content div -->
+	<?php 
+	$currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
+	$currency_symbol = Mage::app()->getLocale()->currency($currency_code)->getSymbol();
+	?>
+	
+	<script type="text/javascript">
+	var lightBox = jQuery('#lightbox'),
+    lightBoxContent = jQuery('#lb-content-refresh');
+	var positionLightbox = function() {
+			var viewWidth = jQuery(window).width(),
+				lbContentMargin = (viewWidth / 2),
+				lbContent = jQuery('#lb-content-refresh');
+	};
+	
+	function openpop(getone,url1,id){			
+		
+		//var datastring = 'id='+ id + '&&popid='+ pid;
+		var datastring = 'id='+ id;
+		var replacestring = "<div class='popup_block' id='popup_block'></div>";
+		jQuery('#popup_block').replaceWith(replacestring);
+		jQuery.ajax({
+			type: "POST",
+			url: "<?php echo Mage::getBaseUrl(); ?>checkout/cart/data",
+			data: datastring,
+			cache: false,
+			datatype:'html',
+			success: function(result){
+			//alert(result);
+				jQuery('#popup_block').replaceWith(result);
+			
+			
+			}
+		});
+		lightBox.fadeIn(function() {
+		lightBoxContent.show();                               
+		});
+		positionLightbox();
+		jQuery('body').addClass('modal-open');
+	}
+	jQuery('#lightbox').click(function() {
+		lightBox.hide();
+		lightBoxContent.hide();
+		jQuery('body').removeClass('modal-open');
+	});
+	jQuery('#lb-close').click(function() {
+		lightBox.hide();
+		lightBoxContent.hide();
+		jQuery('body').removeClass('modal-open');
+	});
+		
+		//console.log('test');
+		
+	function reloadpopupprice(id){
+			var option_price = jQuery(id).attr("price");		 
+			var reg_price = jQuery("#product_prices").attr("value");   
+			var currency_symbol = '<?php echo $currency_symbol ?>';
+			/*alert(option_price);
+			alert(reg_price);
+			alert(currency_symbol);*/
+			var result = parseFloat(reg_price) + parseFloat(option_price);
+			
+			if(jQuery(id).attr("checked")){
+				var regular_price = parseFloat(result).toFixed(2);
+				var final_res = currency_symbol + regular_price;
+				jQuery('.bottom_sec .price-box .price').html(final_res);
+				
+			}else{
+				
+				var regular_price = parseFloat(reg_price).toFixed(2);
+				var final_res = currency_symbol + regular_price;
+				jQuery('.bottom_sec .price-box .price').html(final_res);
+			}
+			
+	}
+	function hidepop() {			
+			lightBox.hide();
+			lightBoxContent.hide();
+		};
+	</script>
+
+<style>
+#lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.8;
+    text-align: center;
+    display: none;
+    z-index:1111;
+}  
+#lb-content-refresh {
+	display: none;
+	top: 5%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+	width: 80%;
+    max-width: 498px;
+    color: #222;
+    background-color: #fff;
+    position: fixed;
+    text-align: center;
+    padding: 30px 15px;
+    border-radius: 4px;
+    z-index:11111;
+}
+#lb-content-refresh p { color:#000;  }
+
+#lb-close {
+    cursor: pointer;
+	display: block;
+	position: absolute;
+    top: -15px;
+    right: -15px; 
+    height: 30px;
+    width: 30px;
+    color: #000;
+    text-align: center;   
+    border-radius: 50%;    
+	font-size: 22px;
+	background-color: #fff;
+    -webkit-box-shadow: -3px 4px 8px 1px rgba(0,0,0,0.38); 
+    box-shadow: -3px 4px 8px 1px rgba(0,0,0,0.38);
+}
+
+
+#lb-content-refresh .popup_block {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
+
+
+@media screen and (max-width: 600px) {
+    #lb-content-refresh .left_block {
+        display: none;
+    }
+}
+
+#lb-content-refresh .popup_block .price-box {
+	display: none;
+}
+
+#lb-content-refresh .popup_content_wrapper {
+	width: 100%;
+}
+
+#lb-content-refresh .left_block {
+	width: 100%;
+	margin-bottom: 15px;
+}
+#lb-content-refresh .left_block img {
+    width: 30%;
+}
+
+#lb-content-refresh .right_block  {
+	width: 90%;
+	margin: 0 auto 25px auto;
+}
+
+#lb-content-refresh .right_block .options-list li{
+	display: flex;
+	align-items: flex-start;
+}
+
+#lb-content-refresh .right_block .options-list input{
+	margin: 0;
+	width: 30px;
+    height: 30px;
+    vertical-align: unset;
+}
+#lb-content-refresh .right_block .options-list .label {
+	display: inline-block;
+	margin: 0;
+    padding: 0 0 0 5px;
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 17px;
+    color: #000;
+    text-align: left;
+    white-space: normal;
+    vertical-align: unset;
+    border-radius: 0;
+}
+
+#lb-content-refresh .right_block .label label {
+	margin-right: 5px;
+	margin-left: 8px;
+    font-weight: normal;
+	font-size: 15px;
+	line-height: 18px;
+    color: #444444;
+    text-align: left;
+}
+
+
+#lb-content-refresh dt {
+    display: none;
+}
+
+#lb-content-refresh .popup_cta_wrapper {
+	display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+
+
+#lb-content-refresh .popup_cta_wrapper a {
+	background-color: #16386E;
+    padding: 11px;
+	color:#fff;
+}
+
+#lb-content-refresh .popup_cta_wrapper a + a {
+	margin-left: 35px;
+	margin-bottom: 5px;
+}
+
+@media screen and (max-width: 600px) { 
+	#lb-content-refresh .popup_cta_wrapper {
+		flex-flow: column;
+		justify-content: center;
+	}
+
+	#lb-content-refresh .popup_cta_wrapper a + a {
+		margin: 20px 0 0 0;
+	}
+}
+
+
+</style>
+
+<!-- custom added for addtocart popup -->

@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <update handle="apply_glyphicons" />
+        <reference name="head">
+            <action method="addCss"><styles>mpblog/css/styles.css</styles></action>
+            <block type="mpblog/rss_wrapper" name="mpblog.rss.wrapper" as="mpblog_rss_wrapper"  />
+        </reference>
+        <reference name="top.links">
+            <block type="mpblog/menu_item" name="mpblog_item_top">
+                <action method="addBlogLink"/>
+            </block>
+        </reference>
+        <reference name="footer_links">
+            <block type="mpblog/menu_item" name="mpblog_item_footer">
+                <action method="addBlogLink"/>
+            </block>
+        </reference>
+    </default>
+    <mpblog_default>
+        <reference name="head">
+           <!--  <action method="addJs"><script>mpblog/wp-cumulus/swfobject.js</script></action> -->
+            <action method="addJs"><script>mpblog/common.js</script></action>
+            <block type="mpblog/content_archive_wrapper" name="mpblog.content.archive.wrapper" as="mpblog_content_archive_wrapper" />
+        </reference>
+        <reference name="left">
+            <block type="mpblog/sidebar_archive" name="mpblog.sidebar.archive.left" as="mp_sidebar_archive_left" before="-" >
+                <action method="setPlace"><place>left</place></action>
+            </block>
+
+            <block type="mpblog/sidebar_recentcomments" name="mpblog.sidebar.recentcomments.left" as="mp_sidebar_recentcomments_left" before="-" >
+                <action method="setPlace"><place>left</place></action>
+            </block>
+
+            <block type="mpblog/sidebar_recentpost" name="mpblog.sidebar.recentpost.left" as="mp_sidebar_recentpost_left" before="-" >
+                <action method="setPlace"><place>left</place></action>
+            </block>
+
+            <block type="mpblog/sidebar_tag" name="mpblog.sidebar.tag.left" as="mp_sidebar_tag_left" before="-" >
+                <action method="setPlace"><place>left</place></action>
+            </block>
+
+            <block type="mpblog/sidebar_search" name="mpblog.sidebar.search.left" as="mp_sidebar_search_left" before="-" >
+                <action method="setPlace"><place>left</place></action>
+            </block>
+
+            <block type="mpblog/sidebar_category" name="mpblog.sidebar.category.left" as="mp_sidebar_category_left" before="-" >
+                <action method="setPlace"><place>left</place></action>
+            </block>
+        </reference>
+		  <reference name="right">
+            <block type="mpblog/sidebar_archive" name="mpblog.sidebar.archive.right" as="mp_sidebar_archive_right" before="-" >
+                <action method="setPlace"><place>right</place></action>
+            </block>
+
+            <block type="mpblog/sidebar_recentcomments" name="mpblog.sidebar.recentcomments.right" as="mp_sidebar_recentcomments_right" before="-" >
+                <action method="setPlace"><place>right</place></action>
+            </block>
+
+            <block type="mpblog/sidebar_recentpost" name="mpblog.sidebar.recentpost.right" as="mp_sidebar_recentpost_right" before="-" >
+                <action method="setPlace"><place>right</place></action>
+            </block>
+
+            <block type="mpblog/sidebar_tag" name="mpblog.sidebar.tag.right" as="mp_sidebar_tag_right" before="-" >
+                <action method="setPlace"><place>right</place></action>
+            </block>
+
+            <block type="mpblog/sidebar_search" name="mpblog.sidebar.search.right" as="mp_sidebar_search_right" before="-" >
+                <action method="setPlace"><place>right</place></action>
+            </block>
+			
+			<block type="mpblog/sidebar_recommendation" name="mpblog.recommendation.search.right" as="mp_sidebar_recommendation_right" after="mp_sidebar_recentpost_right">
+                <action method="setPlace"><place>right</place></action>
+            </block>
+			
+            <block type="mpblog/sidebar_category" name="mpblog.sidebar.category.right" as="mp_sidebar_category_rigth" after="mp_sidebar_recommendation_right">
+                <action method="setPlace"><place>right</place></action>
+            </block>
+			
+        </reference>
+        <!--<reference name="right">
+            <block type="mpblog/sidebar_archive" name="mpblog.sidebar.archive.right" as="mp_sidebar_archive_right" before="-" >
+                <action method="setPlace"><place>right</place></action>
+            </block>
+
+            <block type="mpblog/sidebar_recentcomments" name="mpblog.sidebar.recentcomments.right" as="mp_sidebar_recentcomments_right" before="-" >
+                <action method="setPlace"><place>right</place></action>
+            </block>
+
+            <block type="mpblog/sidebar_recentpost" name="mpblog.sidebar.recentpost.right" as="mp_sidebar_recentpost_right" before="-" >
+                <action method="setPlace"><place>right</place></action>
+            </block>
+
+            <block type="mpblog/sidebar_tag" name="mpblog.sidebar.tag.right" as="mp_sidebar_tag_right" before="-" >
+                <action method="setPlace"><place>right</place></action>
+            </block>
+
+            <block type="mpblog/sidebar_search" name="mpblog.sidebar.search.right" as="mp_sidebar_search_right" before="-" >
+                <action method="setPlace"><place>right</place></action>
+            </block>
+
+            <block type="mpblog/sidebar_category" name="mpblog.sidebar.category.right" as="mp_sidebar_category_rigth" before="-" >
+                <action method="setPlace"><place>right</place></action>
+            </block>
+        </reference>-->
+        <remove name="cart_sidebar"/>
+        <remove name="left.permanent.callout"/>
+        <remove name="right.permanent.callout"/>
+        <remove name="catalog.compare.sidebar"/>
+        <remove name="right.poll"/>
+    </mpblog_default>
+
+    <mpblog_index_index>
+        <update handle="mpblog_default"/>
+        <reference name="head">
+            <block type="mpblog/content_list_wrapper" name="mpblog.content.list.wrapper" as="mpblog_content_list_wrapper" />
+        </reference>
+        <reference name="content">
+            <block type="mpblog/content_list" name="mpblog.content.list" as="mpblog_content_list" />
+        </reference>
+    </mpblog_index_index>
+
+    <mpblog_index_category>
+        <update handle="mpblog_default"/>
+        <reference name="head">
+            <block type="mpblog/content_list_wrapper" name="mpblog.content.list.wrapper" as="mpblog_content_list_wrapper" />
+        </reference>
+        <reference name="content">
+            <block type="mpblog/content_category" name="mpblog.content.category" as="mpblog_content_category" />
+        </reference>
+    </mpblog_index_category>
+
+    <mpblog_index_search>
+        <update handle="mpblog_default"/>
+        <reference name="head">
+            <block type="mpblog/content_list_wrapper" name="mpblog.content.list.wrapper" as="mpblog_content_list_wrapper" />
+        </reference>
+        <reference name="content">
+            <block type="mpblog/content_search" name="mpblog.content.search" as="mpblog_content_search" />
+        </reference>
+    </mpblog_index_search>
+
+    <mpblog_index_tag>
+        <update handle="mpblog_default"/>
+        <reference name="head">
+            <block type="mpblog/content_list_wrapper" name="mpblog.content.list.wrapper" as="mpblog_content_list_wrapper" />
+        </reference>
+        <reference name="content">
+            <block type="mpblog/content_tag" name="mpblog.content.tag" as="mpblog_content_tag" />
+        </reference>
+    </mpblog_index_tag>
+
+    <mpblog_index_archive>
+        <update handle="mpblog_default"/>
+        <reference name="head">
+            <block type="mpblog/content_list_wrapper" name="mpblog.content.list.wrapper" as="mpblog_content_list_wrapper" />
+        </reference>
+        <reference name="content">
+            <block type="mpblog/content_archive" name="mpblog.content.archive" as="mpblog_content_archive" />
+        </reference>
+    </mpblog_index_archive>
+
+    <mpblog_index_post>
+        <update handle="mpblog_default"/>
+        <reference name="head">
+            <action method="addJs"><styles>mpblog/comments.js</styles></action>
+            <action method="addJs"><styles>scriptaculous/effects.js</styles></action>
+            <block type="mpblog/social_wrapper" name="mpblog.social.wrapper" as="mpblog_social_wrapper"  />
+        </reference>
+
+        <reference name="content">
+            <block type="mpblog/content_post" name="mpblog.content.post" as="mpblog_content_post">
+                <block type="mpblog/social" name="mpblog_social" as="mpblog_social" />
+                <block type="mpblog/comments" name="mpblog_comments" as="mpblog_comments" />
+            </block>
+        </reference>
+    </mpblog_index_post>
+
+    <mpblog_preview_window>
+        <reference name="head">
+            <action method="addCss"><styles>mpblog/css/styles.css</styles></action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"><template>page/empty.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="mpblog/preview" name="mpblog.preview" as="mpblog_preview" />
+        </reference>
+    </mpblog_preview_window>
+
+</layout> 

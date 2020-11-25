@@ -1,0 +1,226 @@
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">// <![CDATA[
+        jQuery(document).ready(function () {           
+             
+jQuery(".showpop").click(function(){
+jQuery(".iframe_cls").hide();
+var Id = jQuery(this).attr('iframe_id');
+if(Id=="test6")
+{
+    jQuery("#light").addClass("white_content_iframe");
+}
+else
+{
+    jQuery("#light").removeClass("white_content_iframe");
+}
+jQuery("#"+Id).show();
+jQuery("#light").show();
+jQuery("#fade").show();
+});
+jQuery(".hidepop").click(function(){
+ jQuery(".iframe_cls").hide();
+jQuery("#light").hide();
+jQuery("#fade").hide();
+stopAudio();
+
+});
+function stopAudio(){
+   $(".iframe_cls").trigger('pause');
+   $(".iframe_cls").prop("currentTime",0);
+ 
+}
+ });
+// ]]></script>
+<?php $testimonial=$this->getTestimonial(); ?>
+<div class="customer-testimonials">
+	
+		<div class="page-title">
+		<h1><?php echo $this->__('Testimonials');?></h1>
+      <!--  <?php if(Mage::getStoreConfig('testimonial/testimonial_options/allow_customers_write_testimonial') == 1):?>
+		<div class="submit-testimonial">
+				<button class="button" onclick="setLocation('<?php echo $this->getFormUrl(); ?>')">
+					<span>
+						<span>
+							<?php echo $this->__('Submit Your Testimonial');?>					
+						</span>
+					</span>
+				</button>
+		</div>
+        <?php endif ?>-->
+    </div> 
+	
+<?php  //Audio testimonials   ?>
+<div id="light" class="white_content_audio">
+<a href ="javascript:void(0)" class="hidepop textright_audio">X</a>
+<audio  id="test1" class="iframe_cls" width="300" height="32" controls="controls"><source src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) ?>wysiwyg/Bill&Carolyn Crow.wav"  type="audio/mpeg"> </audio>
+<audio  id="test2" class="iframe_cls" width="300" height="32" controls="controls"><source src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) ?>wysiwyg/Dave Yanitz.WAV"  type="audio/mpeg"> </audio>
+<audio  id="test3" class="iframe_cls" width="300" height="32" controls="controls"><source src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) ?>wysiwyg/Doug Bird.mp3" type="audio/mpeg"> </audio>
+<audio  id="test4" class="iframe_cls" width="300" height="32" controls="controls"><source src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) ?>wysiwyg/Mary Anne.mp3"  type="audio/mpeg"> </audio>
+<audio  id="test5" class="iframe_cls" width="300" height="32" controls="controls"><source src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) ?>wysiwyg/Robert Pratt.mp3" type="audio/mpeg"> </audio>
+
+<div  id="test6" class="iframe_cls" >
+<iframe  src='https://secure.boast.io/site/kudos/LMC' frameBorder=0 class="iframe_cls_test6" style='margin: 0px 6px 0px 14px;' id='submit_kudo'></iframe><br /><a href='http://boast.io/' style='font-family:Arial;font-size:10px;color:#BABABA' target='_blank'>Testimonials collected with Boast</a>
+</div>
+
+</div>
+<div id="fade" class="black_overlay"></div>
+
+
+	<div class="row row-left">
+					<!--<div class="testimonial_content">
+						<div class="testimonial-container">-->
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 anti ">
+							<div class="row row-left">
+							<div class="testimonial-container">	
+							<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 anti ">
+								<div class="testimonial-left">
+									<!-- <img src="{{media url="wysiwyg/testimonial_left.jpg"}}" alt="testimonial" />-->
+                                                                                  <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) ?>wysiwyg/Dollarphotoclub_34745400.jpg" alt="testimonial" />      
+                                                                          
+								</div>
+							
+							</div>
+							<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 anti">
+								<div class="testimonial-right ">
+									<div class="testimonial-matter">
+										<!-- <p class="testimonial_box_heading"><strong>Bill & Carolyn Crow</strong></p>  -->
+										<!--<p>"It's so cool...you have to try it. It saves me a huge amount of time and effort every month"I used to dread doing our book-keeping, but now I actually enjoy  It saves me a huge amount of time and effort every month"I used to dread doing our book-keeping, but now I actually enjoy it</p>-->
+                                                                           <p>"We became patients when we were in our sixties and it was like the movie Jerry Maguire, he had us at hello.  Now we are in our 70’s and people mistake us for being 20 years younger and we feel like we are 20 years younger. I truly recommend everyone attend a free Longevity seminar. Now we are able to do the things we love together like biking, kayaking, and working out on a regular basis!"
+</p>
+                                                                           <p class="testimonial_box_heading"><strong><i>- Bill & Carolyn Crow</i></strong>
+                                                                                 <a href ="javascript:void(0)"  iframe_id="test1" class="showpop">
+                                                                                  <i style="padding-left:15px; font-size:20px;color:#fff; vertical-align:middle;" class="fa fa-play"></i>
+
+                                                                                  </a>
+                                                                          </p>
+									</div>
+									<!--<div class="button_testimonial">
+										<a href="javascript:void(0)" iframe_id="test6" class="showpop">Share Your Story <i class="fa fa-chevron-circle-right"></i></a>
+									</div>-->
+
+								</div>
+							</div>
+
+							</div></div></div>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 anti ">
+							<div class="row row-left">	
+								<div class="testimonial-middle-box">
+						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 anti">
+							<div class="testimonial_box_design">
+								<div class="testimonial_pic">
+									<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) ?>wysiwyg/Dollarphotoclub_56662971.jpg" alt="Dave Yawitz" />
+                                                                        
+								</div>
+								<div class="testimonial_text">
+									<!--<p class="tesimonial_box_top"><a href="#">I actually enjoy using it</a></p>-->
+									<p class="tesimonial_box_middle">"I have been a patient for about a 1 1/2 years, I am impressed with the program and I have gained a lot of benefits from it."</p>
+									<span><i>- Dave Yawitz</i></span>
+                                                                                          <a href ="javascript:void(0)"  iframe_id="test2" class="showpop">
+                                                                                        <i style="padding-left:15px; font-size:20px;color:#aaa; vertical-align:middle;" class="fa fa-play"></i>
+                                                                                           </a>
+								</div>
+								<div style="clear:both;"></div>
+							</div>
+							<div class="testimonial_box_design">
+								<div class="testimonial_pic">
+									<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) ?>wysiwyg/Dollarphotoclub_38965281.jpg" alt="Doug Bird" />
+                                                                         
+								</div>
+								<div class="testimonial_text">
+									<!--<p class="tesimonial_box_top"><a href="#">I'm never struggling with it</a></p>-->
+									<p class="tesimonial_box_middle">"I am pushing 60 years old. Longevity has helped me develop a work out plan which has allowed me to weigh what I did in high school."</p>
+									<span><i>- Doug Bird</i></span>
+                                                                              <a href ="javascript:void(0)"  iframe_id="test3" class="showpop">
+                                                                             <i style="padding-left:15px; font-size:20px;color:#aaa; vertical-align:middle;" class="fa fa-play"></i>
+
+                                                                               </a>
+								</div>
+								<div style="clear:both;"></div>
+							</div>
+							
+						</div>
+						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 anti">
+							<div class="testimonial_box_design">
+								<div class="testimonial_pic">
+									<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) ?>wysiwyg/Dollarphotoclub_47580227.jpg" alt="Mary Anne" />
+                                                                        
+								</div>
+								<div class="testimonial_text">
+									<!--<p class="tesimonial_box_top"><a href="#">Everything is accessible</a></p>-->
+									<p class="tesimonial_box_middle">"Dr. Mixon changed my life for the better!"</p>
+									<span><i>- Mary Anne</i></span>
+                                                                                <a href ="javascript:void(0)"  iframe_id="test4" class="showpop">
+                                                                               <i style="padding-left:15px; font-size:20px;color:#aaa; vertical-align:middle;" class="fa fa-play"></i>
+                                                                                   </a>
+								</div>
+								<div style="clear:both;"></div>
+							</div>
+							<div class="testimonial_box_design">
+								<div class="testimonial_pic">
+									<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) ?>wysiwyg/Dollarphotoclub_60547843.jpg"}}" alt="Robert Pratt" />
+                                                                        
+								</div>
+								<div class="testimonial_text">
+									<!--<p class="tesimonial_box_top"><a href="#">It's improved our cashflow</a></p> -->
+									<p class="tesimonial_box_middle">"4 years ago I was in big trouble, lost my emotional energy, physical energy, intellectual energy."</p>
+									<span><i>- Robert Pratt</i></span>
+                                                                        <a href ="javascript:void(0)"  iframe_id="test5" class="showpop">
+                                                                      <i style="padding-left:15px; font-size:20px;color:#aaa; vertical-align:middle;" class="fa fa-play"></i>
+                                                                       </a>
+								</div>
+								<div style="clear:both;"></div>
+							</div>
+						</div>
+					</div>
+
+							</div></div>
+
+						</div>
+					<!--</div>
+					
+				</div>-->
+				<?php  //end of Audio testimonials here   ?>
+
+	<?php if(Mage::getStoreConfig('testimonial/testimonial_options/allow_customers_write_testimonial') == 1):?>
+		<div class="submit-testimonial">
+				<button class="button" onclick="setLocation('<?php echo $this->getFormUrl(); ?>')">
+					<span>
+						<span>
+							<?php echo $this->__('Submit Your Testimonial');?>					
+						</span>
+					</span>
+				</button>
+		</div>
+        <?php endif ?>
+	<?php //echo $this->getPagerHtml();//uncomment it for pagination ?>
+	<?php if ($testimonial->getSize()): ?>
+		<?php $i=0; foreach ($testimonial as $obj):?>
+			<?php if($obj->getStatus()==1 && $obj->getName()!="Bill & Carolyn Crow"): ?>
+			<div class="customer-testimonials-content<?php if($i==0):?> first<?php endif;?><?php if($i==(count($testimonial)-1)):?> last<?php endif;?>" name="<?php echo $obj->getName(); ?>" id="<?php echo $obj->getName(); ?>">
+				<div class="testimonial-content">
+                    <div class="testimonial-content-avatar">
+                        <?php
+                            if($obj->getAvatarName() != ''){
+                                $avatarLink = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) .'magentothem/avatar/'.$obj->getAvatarName();
+                                ?><img src="<?php echo $avatarLink ?>" alt="test" height="60" width="60" /><?php
+                            }
+                        ?>
+                    </div>
+					<?php echo $obj->getTestimonial();?>
+				</div>
+				<div class="testimonial-source">
+					<span class="testimonial-author"><?php echo $obj->getName(); ?></span>
+					<span class="testimonial-date">
+						<?php echo date('F d, Y', Mage::getModel('core/date')->gmtTimestamp($obj->getCreatedTime())); ?>
+					</span>
+				</div>
+			</div>
+			<?php endif ?>
+			<?php $i++; ?>
+		<?php endforeach;?>
+		<?php //echo $this->getPagerHtml(); ?>
+	<?php else: ?>
+		<p class="note-msg"><?php echo $this->__('There is no testimonial submitted.'); ?></p>
+	<?php endif ?>
+</div>
+

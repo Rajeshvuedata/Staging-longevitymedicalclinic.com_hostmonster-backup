@@ -1,0 +1,96 @@
+.tp-caption.title_banner {
+text-decoration:none;
+font-size:28px;
+color:#444444;
+font-family:breeserifregular;
+background-color:transparent;
+border-width:0px;
+border-color:rgb(68, 68, 68);
+border-style:none;
+}
+
+.tp-caption.des_banner {
+text-decoration:none;
+background-color:transparent;
+font-family:LatoRegular;
+color:#444444;
+font-size:14px;
+border-width:0px;
+border-color:rgb(34, 34, 34);
+border-style:none;
+}
+
+.tp-caption.des1_banner {
+text-decoration:none;
+background-color:transparent;
+font-size:12px;
+font-family:LatoBold;
+color:#ffffff;
+text-shadow:1px 1px #cbcbcd;
+text-transform:uppercase;
+border-width:0px;
+border-color:rgb(34, 34, 34);
+border-style:none;
+}
+
+.tp-caption.title_banner1 {
+font-family:breeserifregular;
+color:#ffffff;
+text-decoration:none;
+font-size:30px;
+text-transform:uppercase;
+border-width:0px;
+border-color:rgb(255, 255, 255);
+border-style:none;
+}
+
+.tp-caption.des_banner1 {
+text-decoration:underline;
+background:#848486;
+font-size:14px;
+font-family:latoheavy;
+color:#444444;
+padding:3px 16px 5px 16px;
+background-color:transparent;
+text-transform:uppercase;
+border-width:0px;
+border-color:rgb(68, 68, 68);
+border-style:none;
+}
+
+.tp-caption.price_banner1 {
+text-decoration:none;
+text-transform:uppercase;
+font-size:20px;
+font-family:breeserifregular;
+color:#ffffff;
+background:#ff9d34;
+padding:6px 16px 8px 16px;
+border-width:0px;
+border-color:rgb(255, 255, 255);
+border-style:none;
+}
+
+.tp-caption.price1_banner1 {
+text-decoration:none;
+background:#848486;
+font-size:13px;
+font-family:breeserifregular;
+color:#ffffff;
+padding:3px 16px 5px 16px;
+border-width:0px;
+border-color:rgb(34, 34, 34);
+border-style:none;
+}
+
+.tp-caption.title_banner2 {
+text-decoration:none;
+font-size:30px;
+font-family:breeserifregular;
+color:#444444;
+text-transform:uppercase;
+border-width:0px;
+border-color:rgb(68, 68, 68);
+border-style:none;
+}
+

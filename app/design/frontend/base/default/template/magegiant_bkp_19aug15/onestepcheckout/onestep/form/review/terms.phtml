@@ -1,0 +1,107 @@
+<?php
+/**
+ * Magegiant
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magegiant.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magegiant.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magegiant
+ * @package     Magegiant_Onestepcheckout
+ * @copyright   Copyright (c) 2012 Magegiant (http://www.magegiant.com/)
+ * @license     http://www.magegiant.com/license-agreement.html
+ */
+?><?php if ($this->canShow()): ?>
+    <div id="giant-onestepcheckout-review-terms">
+        <ol>
+            <?php foreach ($this->getAgreements() as $_a): ?>
+                <li>
+                    <input type="checkbox" name="giant_osc_agreement[<?php echo $_a->getId(); ?>]"
+                           id="giant-onestepcheckout-review-terms-agreement-<?php echo $_a->getId(); ?>"
+                           class="giant-osc-agreement-checkbox-<?php echo $_a->getId(); ?>" value="1" class="checkbox"/>
+                    <?php $label = '<a href="javascript:void(0)" title="' . $this->htmlEscape($_a->getCheckboxText()) . '">' .
+                        $this->htmlEscape($_a->getCheckboxText()) . '</a>';
+                    ?>
+                    <label
+                        for="giant-onestepcheckout-review-terms-agreement-<?php echo $_a->getId(); ?>"><?php echo $this->__('I agree with the %s', $label) ?></label>
+
+                    <div class="giant-onestepcheckout-review-terms-description-container">
+                        <div class="onestep-title review-terms-title">
+                            <h2><?php echo $_a->getTitle(); ?></h2>
+                        </div>
+                        <div class="giant-onestepcheckout-review-terms-description-content">
+                            <?php if ($_a->getIsHtml()): ?>
+								<div class="term-content">
+                                <?php echo $_a->getContent() ?>
+								</div>
+                            <?php else: ?>
+								<div class="term-content">
+                                <?php echo nl2br($this->htmlEscape($_a->getContent())) ?>
+								</div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </li>
+                <script type="text/javascript">
+                    Validation.add(
+                        'giant-osc-agreement-checkbox-<?php echo $_a->getId();?>',
+                        <?php echo Zend_Json::encode($this->__('You must accept the "%s"', $this->htmlEscape($_a->getCheckboxText()))); ?>,
+                        function (v) {
+                            return !Validation.get('IsEmpty').test(v);
+                        }
+                    );
+                </script>
+            <?php endforeach; ?>
+        </ol>
+        <div id="giant-onestepcheckout-review-terms-popup" class="giant-onestepcheckout-popup" style="display:none">
+            <div id="giant-onestepcheckout-review-terms-popup-close" class="giant-onestepcheckout-popup-close">
+                <a href="javascript:void(0)" title="<?php echo $this->__('Close') ?>"><?php echo $this->__('X'); ?></a>
+            </div>
+            <div id="giant-onestepcheckout-review-terms-popup-content" class="giant-onestepcheckout-popup-content">
+            </div>
+            <div id="giant-onestepcheckout-review-terms-popup-accept" class="giant-onestepcheckout-popup-accept">
+                <ul>
+                    <li>
+                        <button class="button" title="<?php echo $this->__('ACCEPT'); ?>"
+                                type="button"><?php echo $this->__('ACCEPT'); ?></button>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+        <div id="giant-onestepcheckout-review-terms-overlay" class="giant-onestepcheckout-popup-overlay"
+             style="display:none"></div>
+    </div>
+    <script type="text/javascript">
+        var giantOSCReviewTerms = new MagegiantOnestepcheckoutReviewTerms({
+            containerSelector: "#giant-onestepcheckout-review-terms",
+            itemsSelector: "#giant-onestepcheckout-review-terms ol li",
+            linkFromItemSelector: "label a",
+            checkboxFromItemSelector: "input[type=checkbox]",
+            descriptionContainerFromItemSelector: ".giant-onestepcheckout-review-terms-description-container",
+            popup: {
+                overlaySelector: "#giant-onestepcheckout-review-terms-overlay",
+                containerSelector: "#giant-onestepcheckout-review-terms-popup",
+                contentContainerSelector: "#giant-onestepcheckout-review-terms-popup-content",
+                acceptContainerSelector: "#giant-onestepcheckout-review-terms-popup-accept",
+                buttons: {
+                    accept: {
+                        selector: "#giant-onestepcheckout-review-terms-popup-accept button",
+                        enabled: true
+                    },
+                    close: {
+                        selector: "#giant-onestepcheckout-review-terms-popup-close a",
+                        enabled: true
+                    }
+                }
+            }
+        });
+    </script>
+<?php endif; ?>

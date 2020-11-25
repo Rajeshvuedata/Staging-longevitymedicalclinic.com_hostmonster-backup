@@ -1,0 +1,84 @@
+<div class="seminar-event-form">
+<h3> Register for Longevity Event!</h3>
+<form class="form-inline" id="seminar-register" action="<?php $pstUrl= Mage::getBaseUrl(); echo str_replace('http','http',$pstUrl);?>events/register/post/" method="post">
+					<div class="form-left-column">
+						<div class="form-group">
+							<label class="sr-only" for="inputfirst-name">First Name</label>
+							<input name="fname" class="form-control" type="text" id="txtFirstName" placeholder="first name" required/>
+						</div>
+						
+						<div class="form-group">
+							<label class="sr-only" for="inputlast-name">last-name</label>
+ 							<input name="lname" class="form-control" placeholder="last name" type="text" id="txtLastName" required/>
+						</div>
+						<div class="form-group">
+						  <label class="sr-only" for="inputemail">email address</label>
+			                         <input name="email" type="text" class="form-control" id="txtEmail" placeholder="Email Address" pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" required />				
+						</div>
+						<div class="form-group">
+							<label class="sr-only" for="inputphone">phone number</label>
+ 							<input name="telephone" class="form-control" type="text" placeholder="Phone number" id="txtPhone" required />
+						</div>
+						<div class="form-group">
+							<label class="sr-only" for="inputphone">Event</label>
+
+
+                                                  <select class="form-control" name="selSeminar" id="selSeminar" onchange="checksemval(this);" style="width: 85%; font-size: 10px;" required>
+								<option value="">Select Event</option>
+						<?php		
+			
+						$collection = Mage::getModel("events/event")->getCollection();
+			 $count=1;
+			 foreach($collection as $final_model)
+			{ 
+
+
+			  $current_time= strtotime(date('Y-m-d H:i:s',strtotime('-8 hour')));
+			  $event_start_time= strtotime(date($final_model->_origData['event_start_date'].' '.$final_model->_origData['event_start_time']));
+			  $event_end_time=strtotime(date($final_model->_origData['event_end_date'].' '.$final_model->_origData['event_end_time']));
+
+			if($current_time>=$event_start_time)
+			{
+	
+				if($current_time<$event_end_time)
+				{
+
+				 	$date_arr=explode("-",$final_model->_origData['event_date']);
+					$new_date_str=$date_arr['1']."/".$date_arr['2']."/".substr($date_arr[0], 2); 
+				?>
+			<option data-id="event<?php echo $count?>" value="<?php echo $final_model->_origData['title']?>"><?php echo $final_model->_origData['title']?></option>
+			<!--<option value="<?php echo $final_model->_origData['title'].' '.$new_date_str?>"><?php echo $final_model->_origData['title']?></option>-->
+
+			<?php		
+				 $count++;}
+			}
+                        }   
+			?>	                 </select>
+
+						</div>
+						<div class="form-group">
+							<label class="sr-only" for="inputphone">How did you hear about this Event?</label>
+
+
+ <select name="selHowHear"class="form-control" id="selHowHear" style="width: 85%; font-size: 10px;" required>
+			<option value="">How did you hear about this Event?</option>
+			<?php $collection = Mage::getModel("events/howhear")->getCollection()->addFieldToFilter('status', array('eq' => 0));
+				$how_hear = $collection->getData();
+				foreach($how_hear as $how_hear_keys => $how_hear_vals){
+				?>
+				<option value="<?php echo $how_hear_vals['from_where_hear']; ?>"><?php echo $how_hear_vals['from_where_hear']; ?></option>
+
+							
+				<?php  }//end of foreach ?>			
+
+						</select>
+
+								
+						</div>
+						<div style="width:51%;text-align:center;margin:0 auto;" class="g-recaptcha" data-sitekey="6LeqaysUAAAAABWHLTxqmVG8deLy4mrcuBcPvu6H"></div>
+					</div>
+					
+				<button type="submit" class="lmc-event-register"><img alt="event-registered-btn" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);?>wysiwyg/event-registered-btn.png" />REGISTER NOW</button>
+				</form>
+</div> 
+

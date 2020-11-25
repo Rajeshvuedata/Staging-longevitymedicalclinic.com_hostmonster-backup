@@ -1,0 +1,64 @@
+<?php
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE-CE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE-CE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * MagPleasure does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Magpleasure does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   MagPleasure
+ * @package    Magpleasure_Blog
+ * @version    1.2.3
+ * @copyright  Copyright (c) 2012-2013 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE-CE.txt
+ */
+
+/** @var Magpleasure_Blog_Helper_Data $helper  */
+$helper = $this->_helper();
+/** @var Magpleasure_Blog_Model_Post $post  */
+$post = $this->getPost();
+?>
+<div class="mpblog-container">
+    <?php echo $this->getMessagesBlock()->getGroupedHtml(); ?>
+    <div class="mpblog-post">
+        <div class="mp-blog-head mp-post-header">
+            <h1 class=""><?php echo $this->escapeHtml($post->getTitle()); ?></h1>
+            <?php if($this->getShowPrintLink()): ?>
+                <span class="mp-blog-print">
+                    <i class="<?php echo $this->getColorClass(); ?> glyphicons print"></i>
+                    <a class="mp-blog-print-link" href="#" onclick="window.print(); return false;" title="<?php echo $this->__("Print This Page"); ?>">
+                        <?php echo $this->__("Print"); ?>
+                    </a>
+                </span>
+            <?php endif; ?>
+            <div class="fixed"></div>
+        </div>
+        <div class="mp-header"><?php echo $this->getHeaderHtml($post); ?></div>
+        <div class="mp-content std">
+            <?php echo $post->getFullContent(); ?>
+            <div class="fixed"></div>
+            <div class="mp-details"><?php echo $this->getFooterHtml($post); ?></div>
+        </div>
+        <?php if ($helper->getSocialEnabled()): ?>
+            <?php echo $this->getSocialHtml(); ?>
+        <?php endif; ?>
+        <?php if ($post->getCommentsEnabled()): ?>
+            <div class="mpblog-comments-container" id="comments">
+            <?php echo $this->getCommentsHtml(); ?>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<?php 
+$cat_id = $this->getData('category_id');
+
+if($cat_id == 7){
+$products_count = Mage::getModel('catalog/category')->load($cat_id)
+->getProductCount();
+echo "(".$products_count.")";
+}
+elseif($cat_id == 16){
+$products_count = Mage::getModel('catalog/category')->load($cat_id)
+->getProductCount();
+echo "(".$products_count.")";
+}
+elseif($cat_id == 8){
+$products_count = Mage::getModel('catalog/category')->load($cat_id)
+->getProductCount();
+echo "(".$products_count.")";
+}
+else{
+echo "";
+}
+

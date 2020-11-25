@@ -1,0 +1,5 @@
+<?php $order = Mage::getModel('sales/order')->load(Mage::getSingleton('checkout/session')->getLastOrderId()); ?>
+
+<p><?php echo $order->getId(); ?></p>
+
+<?php echo "sasa";?>

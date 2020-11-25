@@ -1,0 +1,43 @@
+<div class="static-event-form">
+	<h3>REGISTER FOR LONGEVITY SEMINAR!</h3>
+	<form id="static-register-form" class="form-inline" action="<?php $pstUrl= Mage::getBaseUrl(); echo str_replace('http','http',$pstUrl);?>events/register/staticpost/" method="post">
+		<div class="static-form-group">
+			<div class="form-group">
+				<input type="text" name="firstname" class="form-control" placeholder="First name" required>
+			</div>
+			<div class="form-group">
+				<input type="text" name="lastname" class="form-control" placeholder="Last name" required>
+			</div>
+		</div>
+		<div class="static-form-group">
+			<div class="form-group">
+				<input type="text" name="email" class="form-control" placeholder="Email address" pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" required>
+			</div>
+			<div class="form-group">
+				<input type="text" name="number" class="form-control" placeholder="Phone number" required>
+			</div>
+		</div>
+		<div class="static-form-group">
+			<div class="form-group">
+				<input type="text" name="selSeminar" readonly style="font-weight: bold;" value="Yelm Event 11/15/17 at 7:07 PM" class="form-control required-entry" placeholder="event-date">
+			</div>
+			<div class="form-group">
+				<select name="fromwherehear" class="form-control" required>
+					<option value="">How did you hear about this Seminar?</option>
+					<option value="E-mail">E-mail</option>
+					<option value="KTTH 770AM">KTTH 770AM</option>
+					<option value="KVI 570AM">KVI 570AM</option>
+					<option value="KIRO - Leading Edge Medicine">KIRO - Leading Edge Medicine</option>
+					<option value="I'm a current patient">I'm a current patient</option>
+					<option value="From a current patient/friend">From a current patient/friend</option>
+				</select>
+				
+			</div>
+		</div>
+		<div style="width:51%;clear: both;margin:0 auto;" class="g-recaptcha" data-sitekey="6LeqaysUAAAAABWHLTxqmVG8deLy4mrcuBcPvu6H"></div>
+		<button type="submit" class="static-register-btn">
+		<span><img alt="event-registered-btn" src="https://www.longevitymedicalclinic.com/media/wysiwyg/event-registered-btn.png"></span><span>register now</span>
+		</button>
+	</form>
+</div>
+

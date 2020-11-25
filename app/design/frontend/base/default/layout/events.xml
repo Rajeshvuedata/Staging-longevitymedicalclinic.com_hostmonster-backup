@@ -1,0 +1,22 @@
+<?xml version="1.0"?>   
+<layout version="0.1.0">   
+  <events_index_index>   
+    <reference name="root">   
+      <action method="setTemplate"><template>page/1column.phtml</template></action>   
+    </reference>   
+    <reference name="content">   
+      <block type="events/index" name="events_index" template="events/index.phtml"/>   
+    </reference>   
+  </events_index_index>   
+  
+   <events_register_index>   
+    <reference name="root">   
+      <action method="setTemplate"><template>page/1column.phtml</template></action>   
+    </reference>   
+    <reference name="content">   
+      <block type="core/Template" name="events_register" template="events/register.phtml"/>   
+    </reference>   
+  </events_register_index>  
+  
+</layout>   
+	

@@ -1,0 +1,138 @@
+<?php
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE-CE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE-CE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * MagPleasure does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Magpleasure does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   MagPleasure
+ * @package    Magpleasure_Blog
+ * @version    1.2.3
+ * @copyright  Copyright (c) 2012-2013 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE-CE.txt
+ */
+?>
+<?php
+		$currentUrl = Mage::helper('core/url')->getCurrentUrl();
+		$url = Mage::getSingleton('core/url')->parseUrl($currentUrl);
+		$path = $url->getPath();
+		$blogPaths = array('/blog', '/blog/', '/index.php/blog/',strpos($path,'/blog/search'));
+
+?>
+
+<div class="mpblog-container">
+    <div class="mp-blog-head">
+         <?php if(!in_array($path, $blogPaths)){ ?>
+	   <h1 class="mp-title"><?php echo "Radio Podcasts";//echo $this->getPageHeader(); ?></h1>
+		<?php } else  { ?>
+		<h1 class="mp-title"><?php echo $this->getPageHeader(); ?></h1>		
+        <?php } if($this->getShowRssLink()): ?>
+        <?php if(!in_array($path, $blogPaths)){ ?><span class="mp-blog-rss">
+		<a class="mp-blog-rss-link" href="<?php echo $this->getRssFeedUrl(); ?>" target="_blank" title="<?php echo $this->__("Subscribe RSS Feed"); ?>">           
+		 <i class="<?php echo $this->getColorClass(); ?> glyphicons rss"></i>
+            
+                <?php echo $this->__("RSS Feed"); ?>
+            </a>
+        </span><?php } ?>        <?php endif; ?>
+        <!--<div class="fixed"></div>-->
+	<!-- added on 15 mar-->
+	<div class="fixed" style="float:right;">
+	<?php 
+		
+		if(in_array($path, $blogPaths)){
+		$mpblog_search_obj = new Magpleasure_Blog_Block_Sidebar_Search();  ?>	
+	<div class="block mpblog-search" style="margin:0px 0px;">
+    <!--<div style="padding:0px 0px;" class="block-title">
+        <strong style="padding:0px 0px;"><span style="padding:10px 50px;"><?php echo $this->__('Blog Search');//echo $mpblog_search_obj->getBlockHeader(); ?></span></strong>
+    </div>-->
+    <div class="block-content">
+        <form id="mp_blog_search" action="<?php echo $mpblog_search_obj->getSearchUrl(); ?>" method="get">
+            <div class="input-box">
+                <input type="text" placeholder="  Blog Search" class="input-text input-text1 empty required-entry" title="<?php echo $mpblog_search_obj->getBlockHeader(); ?>" id="search-blog" name="query" value="<?php echo $mpblog_search_obj->getQuery(); ?>" />
+            </div>
+            <button style="display:none;" class="button" title="<?php echo $this->__('Search'); ?>" type="submit"><span><span><?php echo $this->__("Search"); ?></span></span></button>
+        </form>
+	 <span class="mp-blog-rss">
+		<a class="mp-blog-rss-link" href="<?php echo $this->getRssFeedUrl(); ?>" target="_blank" title="<?php echo $this->__("Subscribe RSS Feed"); ?>">           
+		 <i class="<?php echo $this->getColorClass(); ?> glyphicons rss"></i>
+            
+                <?php echo $this->__("RSS Feed"); ?>
+            </a>
+        </span>
+        <script type="text/javascript">
+            new VarienForm('mp_blog_search');
+        </script>
+    </div>
+</div>
+<?php  }  ?>
+</div>
+	<!-- end here -->
+    </div>
+	<?php if(!in_array($path, $blogPaths)){ ?>
+	<div class="row" style="margin:0;">
+<div class="radio-postcods">
+<p>For 18 years Longevity Medical Clinic has sponsored our own radio program, Leading Edge Medicine. All of our radio is live call in, interactive discussions on the hot topics and latest medical developments that deal with you and your general health and aging process. Three full hours of live interative radio. You can reach us "On The Air" with your health question at 1-800-465-8770 between 8-10 AM or between 10-11 AM at 1-888-312-5757. Give us a call on air!</p>
+<span style="font-size:18px;">Leading Edge Medicine airtimes:</span>
+<ul>
+
+<li><i class="fa fa-microphone" aria-hidden="true"></i> <span>8-9 AM Saturdays...simulcasting on KIRO (97.3 FM) & KTTH (770 AM) </li>
+<li><i class="fa fa-microphone" aria-hidden="true"></i> <span>9-10 AM Saturdays...KTTH (770 AM)</span></li>
+<li><i class="fa fa-microphone" aria-hidden="true"></i> <span>10-11 AM Saturdays...KVI (570 AM).</span></li>
+</ul>
+</div>
+
+</div>
+	<?php } ?>
+    <?php if ($this->getCollection()->getSize()): 
+		//  $cat_obj= new Magpleasure_Blog_Model_Mysql4_Post_Collection();
+		// $get_uri=explode('/',$_SERVER['REQUEST_URI']);
+		?>
+		
+				  <div class="mpblog-list">
+            <?php foreach ($this->getCollection() as $post): ?>
+		
+            <div class="mpblog-post">
+			 
+                <h2 class="mp-post-header"><a href="<?php echo $post->getPostUrl(); ?>"><?php echo $this->escapeHtml($post->getTitle()); ?></a></h2>
+                <div class="mp-header"><?php echo $this->getHeaderHtml($post); ?></div>
+                <div class="mp-content std">
+                    <?php $string = $post->getShortContent();
+			if (strlen($string) > 1000) {
+
+   			 // truncate string
+   			 $stringCut = substr($string, 0, 1000);
+
+   			 // make sure it ends in a word so assassinate doesn't become ass...
+   			 $string = substr($stringCut, 0, strrpos($stringCut, ' ')); 
+				}		
+			echo $string; ?>
+                    <div class="mp-readmore"><a href="<?php echo $this->getReadMoreUrl($post); ?>"><?php echo $this->__("Listen to More..."); ?></a></div>
+					<?php // print_r($post->post_id)?>
+					
+					
+                    <div class="mp-details"><?php echo $this->getFooterHtml($post); ?></div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+		
+		
+        <?php echo $this->getToolbarHtml(); ?>
+        <?php else: ?>
+        <?php echo $this->__("There are no posts yet."); ?>
+    <?php endif; ?>
+</div>

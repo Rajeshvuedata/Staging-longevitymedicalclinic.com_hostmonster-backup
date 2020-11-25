@@ -1,0 +1,294 @@
+<div class="row">
+<div class="page-title-programe">
+<h1 style="width:31%;"> Registration</h1>
+</div>
+</div>
+<form class="register_form_events" onsubmit="return regSubmit()" action="<?php echo Mage::getBaseUrl();?>events/register/post/" method="post">
+     <div class="super-fieldset">
+    <div class="fieldset">
+       <div class="register-form-left">
+        <ul class="form-list">
+            <li class="fields">
+                <div class="field">
+                    <label for="name" class="required">First Name</label>
+                    <div class="input-box">
+                        <input name="fname" type="text" id="txtFirstName" />
+                    </div>
+                </div>
+			</li>	
+			 <li class="fields">	
+                <div class="field">
+                    <label for="name" class="required">Last Name</label>
+                    <div class="input-box">
+                        <input name="lname" type="text" id="txtLastName"/>
+                    </div>
+                </div>
+            </li>
+         
+		    <li class="fields">
+			  <div class="field">
+					<label for="comment" class="required">Email</label>
+					<div class="input-box">
+						<input name="email" type="text"  id="txtEmail" onblur="checkEmail();"/>
+					</div>
+			  </div>		
+            </li>
+		 
+		    <li class="fields">
+			  <div class="field"> 
+                <label for="telephone">Telephone</label>
+                <div class="input-box">
+                    <input name="telephone" type="text" id="txtPhone" />
+                </div>
+			</div>	
+            </li>
+			
+         	 <li class="fields">
+			  <div class="field">
+                <label for="comment" class="required">Seminar</label>
+                <div class="input-box">
+                    <select name="selSeminar" id="selSeminar" onchange="checksemval(this);" style="width: 85%; font-size: 10px;">
+					<option data-id="event0" value="None">Select</option>
+			<?php		
+			
+			$collection = Mage::getModel("events/event")->getCollection();
+ $count=1;
+ foreach($collection as $final_model)
+{ 
+
+
+  $current_time= strtotime(date('Y-m-d H:i:s'));
+  $event_start_time= strtotime(date($final_model->_origData['event_start_date'].' '.$final_model->_origData['event_start_time']));
+  $event_end_time=strtotime(date($final_model->_origData['event_end_date'].' '.$final_model->_origData['event_end_time']));
+
+if($current_time>=$event_start_time)
+{
+	
+	if($current_time<$event_end_time)
+	{
+
+	 	$date_arr=explode("-",$final_model->_origData['event_date']);
+		$new_date_str=$date_arr['1']."/".$date_arr['2']."/".substr($date_arr[0], 2); 
+	?>
+<option data-id="event<?php echo $count?>" value="<?php echo $final_model->_origData['title']?>"><?php echo $final_model->_origData['title']?></option>
+<!--<option value="<?php echo $final_model->_origData['title'].' '.$new_date_str?>"><?php echo $final_model->_origData['title']?></option>-->
+
+<?php		
+	 $count++;}
+}
+
+
+ }   
+?>					
+							
+					</select>
+                </div>
+			  </div>	
+            </li>
+			
+			<li class="fields">
+			  <div class="field">
+					 <label>
+							How did you hear about this Seminar?
+					 </label>
+				<div class="input-box">
+                   <select name="selHowHear" class="FormLabel" id="selHowHear" style="width: 85%; font-size: 10px;">
+			<option value="None">Select</option>
+			<?php $collection = Mage::getModel("events/howhear")->getCollection()->addFieldToFilter('status', array('eq' => 0))->setOrder('from_where_hear', 'asc');
+				$how_hear = $collection->getData();
+				foreach($how_hear as $how_hear_keys => $how_hear_vals){
+				?>
+				<option value="<?php echo $how_hear_vals['from_where_hear']; ?>"><?php echo $how_hear_vals['from_where_hear']; ?></option><?php }//end of foreach ?>
+							<!--<option value="None">Select</option>
+							<option value="E-mail">E-mail</option>
+							<option value="ESPN">ESPN</option>
+							<option value="KTTH 770AM">KTTH 770AM</option>
+							<option value="KVI 570AM">KVI 570AM</option>
+							<option value="KIRO - Leading Edge Medicine">KIRO - Leading Edge Medicine</option>
+							<option value="Facebook">Facebook</option>
+							<option value="current patient">I'm a current patient</option>
+							<option value="From a current patient">From a current patient</option>
+							<option value="In-clinic flyer">In-clinic flyer</option>
+							<option value="Newcastle Neighborhood Life Newsletter">Newcastle Neighborhood Life Newsletter</option>
+							<option value="Friend">Friend</option>-->
+			
+						</select>
+                </div></div>
+				</li>
+			<li class="fields">
+			  <div class="field">
+
+				<?php
+				$num1 = rand(0,10); // pick a random number from 0 to 10 inclusive
+				
+				$num2 = rand(0,10); // same idea
+				
+				$o = rand(0,2); // 0 = plus, 1 = minus, 2 = multiply
+				/* This function will use the integer value of $operand to show either a plus, minus, or times. */
+				function operand($o) {
+ 				   switch($o) {
+    					 case 0: return "+"; break;
+   		       	   		 case 1: return "-"; break;
+        				 case 2: return " x "; break;
+      					default: return "?"; break; //Remark: We shouldn't ever get down here.
+    					 }
+					}
+				?>
+
+				<label for="math">What is <?php echo $num1 . "&nbsp;" . operand($o) . "&nbsp;" . $num2 . "?"; ?></label>
+				<div class="input-box">				
+				<input type="text" id="math" name="userAnswer" size="3"></input>
+				</div>
+				<input type="hidden" id="num1" value="<?php echo $num1; ?>"></input>
+				<input type="hidden" id="operand" value="<?php echo $o; ?>"></input>
+				<input type="hidden" id="num2" value="<?php echo $num2; ?>"></input>
+				</div></li>
+			<!-- <li class="fields">
+			  <div class="field">
+                <div class="input-box">
+                   <select name="selHowHear" class="FormLabel" id="selHowHear" style="width: 100%; font-size: 10px;">
+							<option value="None">Select</option>
+							<option value="E-mail">E-mail</option>
+							<option value="KTTH 770AM">KTTH 770AM</option>
+							<option value="KVI 570AM">KVI 570AM</option>
+							<option value="KIRO - Leading Edge Medicine">KIRO - Leading Edge Medicine</option>
+							<option value="Facebook">Facebook</option>
+							<option value="current patient">I'm a current patient</option>
+							<option value="From a current patient">From a current patient</option>
+							<option value="In-clinic flyer">In-clinic flyer</option>
+							<option value="Newcastle Neighborhood Life Newsletter">Newcastle Neighborhood Life Newsletter</option>
+							<option value="Friend">Friend</option>
+						</select>
+                </div>
+			   </div>	
+            </li>-->
+        </ul>
+    </div>
+	<div class="register-form-right">
+	<div class="iframe">
+	<div id="test1" class="event0">
+	<img  src="/media/wysiwyg/screenshot03.jpg" alt="register"/></div>
+	<?php 
+	$collection1 = Mage::getModel("events/event")->getCollection();
+ 	$countframe=1;?>
+	<?php
+	 foreach($collection1 as $final_models)
+	{ 
+	//echo "<pre>"; print_r($final_model);die;?>
+	
+	<div id="test2" class="event<?php echo $countframe ?>" style="display:none;">
+	<?php
+	echo $final_models->_origData['google_map'];
+	?></div><?php
+	$countframe++;
+	}
+	?></div><div id="overlay" style="display:none;"><img style="width:300px;height:278px;" src="https://www.longevitymedicalclinic.com/media/theme/default/loader_3.gif"></div>
+	<!--<img id="test1" class="iframe_cls" src="/media/wysiwyg/screenshot03.jpg" alt="register">
+	<iframe style="display:none;" id="test2" class="event0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2690.1437218701167!2d-122.18654699999999!3d47.603894999999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54906c70203389e3%3A0xd7da014a86f50778!2sResidence+Inn+Seattle+Bellevue%2FDowntown!5e0!3m2!1sen!2sus!4v1444206191302" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" class="iframe_wh" width="300px" height="278px"></iframe>
+	<iframe style="display:none;" id="test3" class="event1" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2708.3649820877613!2d-122.43890499999999!3d47.248565899999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x549055744d668161%3A0xe464395e6d5c8dd5!2sGreater+Tacoma+Convention+Center!5e0!3m2!1sen!2sus!4v1444206335221" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" class="iframe_wh" width="300px" height="278px"></iframe>
+	<iframe style="display:none;" id="test4" class="event2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2678.9342843259387!2d-122.28360819999999!3d47.821490999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5490056bed29e9bb%3A0x9ba35561d5be79df!2sLynnwood+Convention+Center!5e0!3m2!1sen!2sus!4v1444206400804" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" class="iframe_wh" width="300px" height="278px"></iframe>-->
+	</div>
+	</div>
+    <div class="buttons-set" style="width:96%"><div class="button-align-set">
+        <button type="submit" class="button"><span><span>Submit</span></span></button>
+    </div></div></div>
+</form>
+
+
+<script type="text/javascript">
+
+		function isCaptcha(){
+		
+			var user_ans = document.getElementById("math").value;
+
+			var num1 = document.getElementById("num1").value; 
+			var num2 = document.getElementById("num2").value; 
+			var o = document.getElementById("operand").value;
+			var actual = -999;
+			switch(parseInt(o)) {
+    			case 0: actual = parseInt(num1) + parseInt(num2); break; // 0 = Addition
+    			case 1: actual = parseInt(num1) - parseInt(num2); break; // 1 = Subtraction
+    			case 2: actual = parseInt(num1) * parseInt(num2); break; // 2 = Multiplication
+			}
+
+			/* Check against the user's input and cancel form submission if it's incorrect */
+			if(user_ans != actual) {
+  			  return false;
+			}
+			else
+			{
+			  return true;	
+			}
+
+
+		}
+		function isInteger()
+		{  
+		var phone = document.getElementById("txtPhone");
+		var filter = /^([0-9]{10})+$/;
+			if (!filter.test(phone.value)) {
+				
+				phone.focus;
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+
+
+		function checkEmail() {
+			var email = document.getElementById('txtEmail');
+			var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if (!filter.test(email.value)) {
+				alert('Please provide a valid email address');
+				email.focus;
+				return false;
+			}
+		}
+		function checksemval(getValue){
+		//jQuery('#overlay').show();
+		var selectedValue=jQuery(getValue).find(':selected').attr('data-id');
+		//alert(selectedValue);
+		
+		jQuery(".iframe").each(function(){
+		
+		jQuery(this).children().hide('slow');
+		
+		});
+		//jQuery(".event0, .event1, .event2, .event3").hide();
+		//jQuery('#overlay').hide('slow');
+		jQuery("."+selectedValue).show('slow');
+		
+		}
+		function regSubmit() {
+			var errStr = "";
+			if (document.getElementById("txtFirstName").value == "") errStr += "You must enter your first name.\r\n"
+			if (document.getElementById("txtLastName").value == "") errStr += "You must enter your last name.\r\n"
+          
+		    //var validPhone= isInteger();
+		   
+		    if ((document.getElementById("txtPhone").value == "")) errStr += "Please provide phone number.\r\n"
+
+			/*else if((document.getElementById("txtPhone").value.length != 10) || isNaN(document.getElementById("txtPhone").value))
+			errStr += "Please enter 10 digit phone number.\r\n"*/
+			if (document.getElementById("txtEmail").value == "") errStr += "You must enter your email address.\r\n"
+           
+			if (document.getElementById("selSeminar").value == "None") errStr += "You must select a seminar.\r\n"
+			if (document.getElementById("selHowHear").value == "None") errStr += "You must tell us how you heard about this seminar.\r\n"
+			
+			var captcha= isCaptcha();
+			
+			if (document.getElementById("math").value == "" || !captcha) {
+			errStr += "Please provide valid value for captcha.\r\n";
+				 }
+			var email = document.getElementById('txtEmail');
+			var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if (!filter.test(email.value)) errStr += "Please provide a valid email address.\r\n";
+			if (errStr != "") {
+				if (errStr != "") alert(errStr);
+				return false;
+			}
+		}
+	</script>

@@ -1,0 +1,53 @@
+<?php
+/**
+ * Magegiant
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magegiant.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magegiant.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magegiant
+ * @package     Magegiant_Onestepcheckout
+ * @copyright   Copyright (c) 2012 Magegiant (http://www.magegiant.com/)
+ * @license     http://www.magegiant.com/license-agreement.html
+ */
+?>
+<?php if ($this->canShow()): ?>
+    <div id="giant-onestepcheckout-related">
+        <?php echo $this->getHelperTimerBlockHtml(); ?>
+        <?php echo $this->getChildHtml('crosssell'); ?>
+    </div>
+    <script type="text/javascript">
+        var giantOSCRelatedBlock = new MagegiantOnestepcheckoutRelated({
+            containerSelector: "#giant-onestepcheckout-related",
+            productContainerSelector: "#giant-onestepcheckout-related-block",
+            useForShippingCheckboxContainerSelector: "#giant-onestepcheckout-billing-use-for-shipping",
+            timer: {
+                blockSelector: "#<?php echo $this->_timerConfig['block_html_id'];?>",
+                timerClockElSelector: "#<?php echo $this->_timerConfig['timer_clock_html_id'];?>",
+                redirectActionElSelector: "#<?php echo $this->_timerConfig['redirect_now_action_html_id'];?>",
+                cancelActionElSelector: "#<?php echo $this->_timerConfig['cancel_action_html_id'];?>",
+                startTimerFrom: 5 //in sec
+            },
+            urlToAddProductToWishlist: <?php echo Zend_Json::encode($this->getUrlToAddProductToWishlist()); ?>,
+            urlToAddProductToCompareList: <?php echo Zend_Json::encode($this->getUrlToAddProductToCompareList()); ?>,
+            ajaxCartItemUrl: <?php echo Zend_Json::encode($this->getAjaxCartItemUrl()); ?>,
+            successMessageBoxCssClass: 'giant-onestepcheckout-success-msg ',
+            errorMessageBoxCssClass: 'giant-onestepcheckout-error-msg ',
+            overlayConfig: {
+                '48px': 'giant-onestepcheckout-overlay giant-onestepcheckout-overlay-48',
+                '24px': 'giant-onestepcheckout-overlay giant-onestepcheckout-overlay-24',
+                '16px': 'giant-onestepcheckout-overlay giant-onestepcheckout-overlay-16'
+            },
+            jsErrorMsg: <?php echo Zend_Json::encode($this->__("Oops something's wrong")); ?>,
+            errorOnAddToCartMsg: <?php echo Zend_Json::encode($this->__("Product has not been added")); ?>
+        });
+    </script>
+<?php endif; ?>

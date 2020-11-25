@@ -1,0 +1,74 @@
+<?php 
+
+
+?>
+<div class="col-md-7">
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe id="primary-video" src="https://player.vimeo.com/video/330873781?title=0&byline=0&portrait=0"  frameborder="0" 
+        webkitallowfullscreen mozallowfullscreen allowfullscreen class="embed-responsive-item"></iframe>
+    </div>
+    <p id="primary-text" class="text-left">Voluptatum possimus nobis velit dolorem dolorem qui consequuntur. Vitae ut itaque minima consequatur. Qui minus dignissimos sequi nihil et magnam vero facere. Quia laborum ut et sed harum et mollitia nisi. Placeat minus enim nulla numquam. Et ipsa quo libero consequatur quisquam sequi exercitationem id.</p>
+    <a id="primary-link" class="btn btn-ha" style="margin-right:0;" href=""><i aria-hidden="true" class="fa fa-calendar" style="font-size: 33px;margin-right:10px"></i> Schedule <span id="primary-title">Free Health Analysis</span></a>
+</div>
+
+<div class="col-md-5">
+    <div class="topical-title">Topical Presentations</div>
+    
+    <div id="presentation-topical-wrapper">
+        <?php foreach($this->getPresentations() as $topical): ?>
+    		<div class="row">
+        		<div class="col-sm-12">
+        		
+                <div id="media-<?php echo $topical->getId() ?>" data-link="<?php echo $topical->getLink() ?>" data-video="<?php echo $topical->getVideo() ?>" data-text="<?php echo $topical->getText() ?>" data-longtext="<?php echo $topical->getLongText() ?>" data-title="<?php echo $topical->getTitle() ?>" class="media <?php echo $topical->getPosition()==1?'active':''?>">
+                  <div class="media-left col-sm-4">
+                      <img class="media-object" src="<?php echo $this->getSkinUrl('player.png'); ?>"/>
+                  </div>
+                  <div class="media-body col-sm-8">
+                      <h4 class="media-heading"><?php echo $topical->getTitle() ?></h4>
+                      <p><?php echo $topical->getText() ?>&nbsp;</p>
+                  </div>
+                </div>
+                
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    
+    <div id="presentation-pagination">
+    	<a class="paginate endcap" href="<?php echo $this->getPaginationUrl(1) ?>"> &#60; </a>
+    	<?php for ($i=1; $i<=$this->getLastPage(); $i++): ?>
+    	<a class="paginate innerpage <?php echo ($this->getCurrentPage()==$i) ?'active':'' ?>" href="<?php echo $this->getPaginationUrl($i) ?>"> 
+    		<?php echo $i ?> 
+    	</a>
+    	<?php endfor; ?>
+    	<a class="paginate endcap" href="<?php echo $this->getPaginationUrl($this->getLastPage()) ?>"> &#62; </a>
+    </div>
+</div>
+
+<div class="clear clearfix"></div>
+<script type="text/javascript">
+jQuery('.paginate').click(function(e) {
+	var elem = jQuery(e.currentTarget);
+	e.preventDefault();
+
+    jQuery.ajax({
+    	  url: elem.attr('href')
+    })
+    .done(function( data ) {
+        jQuery('.presentation-wrapper.container-fluid').html(data.presentation);
+    });
+
+    return false;
+});
+jQuery('#presentation-topical-wrapper .media').each(function(k,el) {
+	jQuery(el).click(function(){
+		jQuery('#presentation-topical-wrapper .media').removeClass('active');
+		jQuery(this).addClass('active');
+
+		jQuery('#primary-video').attr('src', jQuery(el).attr('data-video')?jQuery(el).attr('data-video'):'');
+		jQuery('#primary-link').attr('src', jQuery(el).attr('data-link')?jQuery(el).attr('data-link'):'');
+		jQuery('#primary-title').text(jQuery(el).attr('data-title')?jQuery(el).attr('data-title'):'');
+		jQuery('#primary-text').text(jQuery(el).attr('data-longtext')?jQuery(el).attr('data-longtext'):'');
+	});
+});
+</script>

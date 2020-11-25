@@ -1,0 +1,235 @@
+.ma-timer-title { display: inline-block; width: 100%; text-align: center;}
+.ma-timer-title h2 {
+	color: #222222;
+	font-size: 20px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	font-family: 'LatoBold';
+}
+.ma-timer-container .bx-wrapper .timer-item {
+	margin-right: 30px;
+	border:0;
+}
+.timer-grid{ float: left; width: 100%; padding: 0; color: #e62d15; font-size: 14px; font-family: 'LatoBold'; }
+.timer-list{float: left;width: 100%;padding: 0;color: #000000;font-size: 18px;font-family: arial; font-weight: bold;}
+.timer-compare{float: left;width: 100%;padding: 0;color: #000000;font-size: 22px;font-family: arial; font-weight: bold;}
+.timerspec{float: left;width: 100%;color: #1E7EC8;font-size: 13px;}
+.timerdate{float: left;width: 100%;padding:0;color: #444444;font-size: 10px; text-transform: capitalize;}
+
+.ma-timer-container  .bx-wrapper {
+	position: relative;
+	margin: 0;
+	padding: 23px 0 0;
+	max-width: 100% !important;
+	*zoom: 1;
+}
+
+.ma-timer-container  .bx-wrapper img {
+	max-width: 100%;
+	display: block;
+}
+.ma-timer-container .box-timer { border: 1px solid #f1f1f1; float:left; width: 100%;}
+.ma-timer-container .box-timer .time_margin { display: none !important;}
+.ma-timer-container .box-timer span { width: 25%; display: inline-block; text-align: center; border-right: 1px solid #f1f1f1;}
+.ma-timer-container .box-timer span.sec { border: 0;}
+.ma-timer-container .box-timer span span { width: auto; display: inline-block; border: 0;}
+.ma-timer-container .box-timer .timer-grid span { padding: 3px 0 0;}
+.ma-timer-container .box-timer .timerdate span { line-height: 10px; display: inherit; float: left; padding: 0 0 10px; }
+.ma-timer-container  .bx-wrapper .bx-pager,
+.ma-timer-container  .bx-wrapper .bx-controls-auto {
+	position: absolute;
+	bottom: -30px;
+	width: 100%;
+}
+
+/* LOADER */
+
+.ma-timer-container  .bx-wrapper .bx-loading {
+	min-height: 50px;
+	background: url(images/bx_loader.gif) center center no-repeat #fff;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2000;
+}
+
+/* PAGER */
+
+.ma-timer-container  .bx-wrapper .bx-pager {
+	text-align: center;
+	font-size: .85em;
+	font-family: Arial;
+	font-weight: bold;
+	color: #666;
+	padding-top: 20px;
+}
+
+.ma-timer-container  .bx-wrapper .bx-pager .bx-pager-item,
+.ma-timer-container  .bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+}
+
+.ma-timer-container  .bx-wrapper .bx-pager.bx-default-pager a {
+	background: url(../images/bg-slider.png) no-repeat 0 0;
+	text-indent: -9999px;
+	display: block;
+	width: 9px;
+	height: 15px;
+	margin: 0 5px;
+	outline: 0;
+}
+
+.ma-timer-container  .bx-wrapper .bx-pager.bx-default-pager a:hover,
+.ma-timer-container  .bx-wrapper .bx-pager.bx-default-pager a.active {
+	background: #000;
+}
+
+/* DIRECTION CONTROLS (NEXT / PREV) */
+
+.ma-timer-container .bx-wrapper .bx-controls-direction .bx-prev {
+	left:50%;
+	margin-left:-115px;
+}
+.ma-timer-container .bx-wrapper .bx-controls-direction .bx-prev:hover {
+	background-position:0 100%;
+}
+.ma-timer-container .bx-wrapper .bx-controls-direction .bx-next {
+	right:50%;
+	margin-right:-110px;
+	background-position:100% 0;
+}
+.ma-timer-container .bx-wrapper .bx-controls-direction .bx-next:hover {
+	background-position:100% 100%;
+}
+
+/*.ma-timer-container  .bx-wrapper .bx-prev:hover {
+	background-position: 0 0;
+}
+
+.ma-timer-container  .bx-wrapper .bx-next:hover {
+	background-position: -43px 0;
+}*/
+
+.ma-timer-container  .bx-wrapper .bx-controls-direction a {
+	position: absolute;
+	top:0;
+	margin-top: -31px;
+	outline: 0;
+	width: 9px;
+	height: 15px;
+	text-indent:0;
+	z-index: 9999;
+	opacity:1;
+	background: none;
+	font-size:0px;
+}
+
+.ma-timer-container  .bx-wrapper .bx-controls-direction a:hover .fa { color:#444;}
+.ma-timer-container  .bx-wrapper .bx-controls-direction a.disabled {
+	display: none;
+}
+
+/* AUTO CONTROLS (START / STOP) */
+
+.ma-timer-container  .bx-wrapper .bx-controls-auto {
+	text-align: center;
+}
+
+.ma-timer-container  .bx-wrapper .bx-controls-auto .bx-start {
+	display: block;
+	text-indent: -9999px;
+	width: 10px;
+	height: 11px;
+	outline: 0;
+	background: url(images/controls.png) -86px -11px no-repeat;
+	margin: 0 3px;
+}
+
+.ma-timer-container  .bx-wrapper .bx-controls-auto .bx-start:hover,
+.ma-timer-container  .bx-wrapper .bx-controls-auto .bx-start.active {
+	background-position: -86px 0;
+}
+
+.ma-timer-container  .bx-wrapper .bx-controls-auto .bx-stop {
+	display: block;
+	text-indent: -9999px;
+	width: 9px;
+	height: 11px;
+	outline: 0;
+	background: url(images/controls.png) -86px -44px no-repeat;
+	margin: 0 3px;
+}
+
+.ma-timer-container  .bx-wrapper .bx-controls-auto .bx-stop:hover,
+.ma-timer-container  .bx-wrapper .bx-controls-auto .bx-stop.active {
+	background-position: -86px -33px;
+}
+
+/* PAGER WITH AUTO-CONTROLS HYBRID LAYOUT */
+
+.ma-timer-container  .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {
+	text-align: left;
+	width: 80%;
+}
+
+.ma-timer-container  .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto {
+	right: 0;
+	width: 35px;
+}
+
+/* IMAGE CAPTIONS */
+
+.ma-timer-container  .bx-wrapper .bx-caption {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: #666\9;
+	background: rgba(80, 80, 80, 0.75);
+	width: 100%;
+}
+
+.ma-timer-container  .bx-wrapper .bx-caption span {
+	color: #fff;
+	font-family: Arial;
+	display: block;
+	font-size: .85em;
+	padding: 10px;
+}
+
+.ma-timer-container  .bx-wrapper li {
+}
+
+.ma-timer-container .ma-loading {
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	z-index: 99;
+	background: url(../images/loader.gif) no-repeat ;
+	top: 50%;
+	left: 50%;
+	margin: -8px 0 0 -8px;
+}
+
+.ma-timer-container .ma-loading {
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	z-index: 99;
+	background: url(../images/loader.gif) no-repeat ;
+	top: 50%;
+	left: 50%;
+	margin: -8px 0 0 -8px;
+}
+
+.timer_product{
+	text-align:center;
+	margin-top:10px;
+	margin-bottom:5px;
+}
+.timer_product .product-image img{
+margin:0px auto;
+}

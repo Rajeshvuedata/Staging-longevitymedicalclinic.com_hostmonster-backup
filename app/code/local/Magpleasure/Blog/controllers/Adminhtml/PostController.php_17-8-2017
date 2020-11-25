@@ -1,0 +1,552 @@
+<?php
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE-CE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE-CE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * MagPleasure does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Magpleasure does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   MagPleasure
+ * @package    Magpleasure_Blog
+ * @version    1.2.3
+ * @copyright  Copyright (c) 2012-2013 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE-CE.txt
+ */
+
+class Magpleasure_Blog_Adminhtml_PostController extends Magpleasure_Blog_Controller_Adminhtml_Filterable
+{
+    /**
+     * Helper
+     * @return Magpleasure_Blog_Helper_Data
+     */
+    protected function _helper()
+    {
+        return Mage::helper('mpblog');
+    }
+
+    /**
+     * Check for is allowed
+     *
+     * @return boolean
+     */
+    protected function _isAllowed()
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('cms/mpblog/posts');
+    }
+
+    /**
+     * Initialize layout prefer any action
+     *
+     * @return $this
+     */
+    protected function _initAction()
+    {
+        $this->loadLayout()
+            ->_setActiveMenu('cms/mpblog/posts')
+            ->_addBreadcrumb($this->_helper()->__('Blog'), $this->_helper()->__('Blog'));
+        return $this;
+    }
+
+
+    public function indexAction()
+    {
+        $this->_prepareStoreFilter();
+
+        $this->_initAction()
+            ->renderLayout();
+    }
+
+    public function newAction()
+    {
+        $this->_prepareStoreFilter();
+
+        $this->_forward('edit');
+    }
+
+    public function editAction()
+    {
+        $id = $this->getRequest()->getParam('id');
+        /** @var Magpleasure_Blog_Model_Post $post */
+        $post = Mage::getModel('mpblog/post');
+        if ($id){
+            $post->load($id);
+        }
+
+        if ($post->getId() || !$id){
+            Mage::register('current_post', $post);
+            $data = Mage::getSingleton('adminhtml/session')->getPostData(true);
+
+            if (!empty($data)) {
+                $post->setData($data);
+            }
+
+            if ($post->getId() && $post->isHidden()){
+                $postClone = clone $post;
+
+                $stores = $postClone->getStores();
+                if ($stores && is_array($stores) && count($stores) && isset($stores[0])){
+                    $storeId = $stores[0];
+                } else {
+                    $storeId = Mage::app()->getDefaultStoreView()->getId();
+                }
+
+                $postClone->setStoreId($storeId);
+                $postUrl = $postClone->getPostUrl();
+
+                $this->_getSession()->addNotice($this->__("This Post is hidden but you can see it here - <a href='%s' target='_blank'>%s</a>.", $postUrl, $postUrl));
+            }
+
+        } else {
+            $this->_getSession()->addError($this->_helper()->__('Post is not exists.'));
+            $this->_redirect('*/*/index');
+        }
+
+        $this->loadLayout();
+
+        # Load Wysiwyg on demand and Prepare layout
+        if (Mage::getSingleton('cms/wysiwyg_config')->isEnabled()) {
+            $this->getLayout()->getBlock('head')->setCanLoadTinyMce(true);
+        }
+
+        $this->_addBreadcrumb($this->_helper()->__('Blog'), $this->_helper()->__('Blog'));
+        $this->_addBreadcrumb($this->_helper()->__('Post'), $this->_helper()->__('Post'));
+
+        $this->_setActiveMenu('cms/mpblog/posts');
+        $this->renderLayout();
+    }
+
+    public function saveAction()
+    {
+        $requestPost = $this->getRequest()->getPost();
+		
+        /** @var Magpleasure_Blog_Model_Post $post  */
+        
+		/*********************************************** save image code*************************************/
+				if(isset($_FILES['postimage']['name'])) {
+
+					try {
+						 $uploader = new Varien_File_Uploader('postimage');
+						$uploader->setAllowedExtensions(array('jpg','jpeg','gif','png')); // or pdf or anything
+					  
+						$uploader->setAllowRenameFiles(false);
+						$uploader->setFilesDispersion(false);
+						
+						$path = Mage::getBaseDir('media').'/blogpost/image/' . DS ;
+									
+						$uploader->save($path, $_FILES['postimage']['name']);
+					  
+						$data['postimage'] = trim(addslashes($_FILES['postimage']['name']));
+						
+						$filename = preg_replace('/[^-_a-z0-9.]+/i', '_',  $data['postimage']);
+						$requestPost['postimage'] = '/'.$filename;
+						
+					}catch(Exception $e) {
+
+						//print_r($e);
+
+					}
+
+				}
+				
+/*********************************************** save image code*************************************/
+		
+        $post = Mage::getModel('mpblog/post');
+        if ($id = $this->getRequest()->getParam('id')){
+            $post->load($id);
+        }
+		try {
+            $post->addData($requestPost);
+
+            # Set checkbox data
+            $post->setData('notify_on_enable', (isset($requestPost['notify_on_enable']) ? '1' : '0') );
+            $post->setData('comments_enabled', (isset($requestPost['comments_enabled']) ? '1' : '0') );
+
+            # Process Timezone
+            if (($post->getUserDefinePublish() || $post->getId() || $post->getId())){
+                $datetimeFormat = Mage::app()->getLocale()->getDateTimeFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT);
+                $publishedAt = new Zend_Date($post->getPublishedAt(), $datetimeFormat);
+                $publishedAt->addSecond($this->_helper()->getTimezoneOffset());
+                $post->setPublishedAt($publishedAt->toString(Varien_Date::DATETIME_INTERNAL_FORMAT));
+            }
+
+            $post->save();
+            $this->_getSession()->addSuccess($this->_helper()->__("Post was successfully saved."));
+
+            $params = $this->_getCommonParams();
+            if ($this->getRequest()->getParam('back')){
+                $params['id'] = $this->getRequest()->getParam('id') ? $this->getRequest()->getParam('id') : $post->getId();
+                $this->_redirect('*/*/edit', $params);
+            } else {
+                $this->_redirect('*/*/index', $params);
+            }
+
+        } catch (Exception $e) {
+            Mage::getSingleton('adminhtml/session')->setPostData($requestPost);
+            $this->_getSession()->addError($this->_helper()->__("Error while saving the post. %s", $e->getMessage()));
+            $this->_redirectReferer();
+        }
+
+    }
+
+    /**
+     * Delete slide
+     * @param int|string $id
+     * @return boolean
+     */
+    protected function _delete($id)
+    {
+        $post = Mage::getModel('mpblog/post')->load($id);
+        if ($post->getId()){
+            try{
+                $post->delete();
+                return true;
+            } catch(Exception $e) {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Duplicate form
+     * @param int|string $id
+     * @return boolean
+     */
+    protected function _duplicate($id)
+    {
+        /** @var Magpleasure_Blog_Model_Post $post  */
+        $post = Mage::getModel('mpblog/post')->load($id);
+        if ($post->getId()){
+            try{
+                $newPost = $post->duplicate();
+                return $newPost;
+            } catch(Exception $e) {
+                return false;
+            }
+        }
+        return false;
+    }
+
+
+    protected function _updateStatus($id, $status)
+    {
+        if ($id){
+            try {
+                $post = Mage::getModel('mpblog/post')->load($id);
+                $post->setStatus($status);
+                $post->save();
+                return true;
+            } catch (Exception $e){
+                return false;
+            }
+        }
+    }
+
+    public function massStatusAction()
+    {
+        $posts = $this->getRequest()->getPost('posts');
+        $status = $this->getRequest()->getPost('status');
+        if ($posts){
+            $success = 0;
+            $error = 0;
+            foreach ($posts as $postId){
+                if ($this->_updateStatus($postId, $status)){
+                    $success++;
+                } else {
+                    $error++;
+                }
+            }
+            if ($success){
+                $this->_getSession()->addSuccess($this->_helper()->__("%s posts successfully updated.", $success));
+            }
+            if ($error){
+                $this->_getSession()->addError($this->_helper()->__("%s posts was not updated.", $error));
+            }
+        }
+        $this->_redirectReferer();
+    }
+
+    public function massDeleteAction()
+    {
+        $posts = $this->getRequest()->getPost('posts');
+        if ($posts){
+            $success = 0;
+            $error = 0;
+            foreach ($posts as $postId){
+                if ($this->_delete($postId)){
+                    $success++;
+                } else {
+                    $error++;
+                }
+            }
+            if ($success){
+                $this->_getSession()->addSuccess($this->_helper()->__("%s posts successfully deleted.", $success));
+            }
+            if ($error){
+                $this->_getSession()->addError($this->_helper()->__("%s posts was not deleted.", $error));
+            }
+        }
+        $this->_redirectReferer();
+    }
+
+
+    public function massDuplicateAction()
+    {
+        $posts = $this->getRequest()->getPost('posts');
+        if ($posts){
+            $success = 0;
+            $error = 0;
+            foreach ($posts as $postId){
+                if ($this->_duplicate($postId)){
+                    $success++;
+                } else {
+                    $error++;
+                }
+            }
+            if ($success){
+                $this->_getSession()->addSuccess($this->_helper()->__("%s posts successfully duplicated.", $success));
+            }
+            if ($error){
+                $this->_getSession()->addError($this->_helper()->__("%s posts was not duplicated.", $error));
+            }
+        }
+        $this->_redirectReferer();
+    }
+
+    public function duplicateAction()
+    {
+        $id = $this->getRequest()->getParam('id');
+        if ($id){
+            try {
+                $newPost = $this->_duplicate($id);
+                $this->_getSession()->addSuccess($this->_helper()->__("Post was successfully duplicated."));
+
+                $params = $this->_getCommonParams();
+                $params['id'] = $newPost->getId();
+
+                $this->_redirect('*/*/edit', $params);
+
+            } catch (Exception $e){
+
+                $this->_getSession()->addError($this->_helper()->__("Post was not duplicated. %s", $e->getMessage()));
+                $this->_helper()->getCommon()->getException()->logException($e);
+                $this->_redirectReferer();
+
+                return;
+            }
+        }
+    }
+
+    public function deleteAction()
+    {
+        $id = $this->getRequest()->getParam('id');
+        if ($id){
+            try {
+                $this->_delete($id);
+                $this->_getSession()->addSuccess($this->_helper()->__("Post was successfully deleted."));
+            } catch (Exception $e){
+                $this->_getSession()->addError($this->_helper()->__("Post was not deleted (%s).", $e->getMessage()));
+                $this->_redirectReferer();
+                return;
+            }
+        }
+        $params = $this->_getCommonParams();
+        $this->_redirect('*/*/index', $params);
+    }
+
+    public function gridAction()
+    {
+        $this->loadLayout();
+        $this->renderLayout();
+    }
+
+    public function tagsAction()
+    {
+        if ($q = $this->getRequest()->getParam('q')){
+            /** @var Magpleasure_Blog_Model_Mysql4_Tag_Collection $collection  */
+            $collection = Mage::getModel('mpblog/tag')->getCollection();
+
+            $collection
+                ->addFieldToFilter('name', array('like'=>"%{$q}%"))
+            ;
+
+            if ($this->isStoreFilterApplied()){
+                $collection->addWieghtData($this->getAppliedStoreId());
+            }
+
+            if ($limit = $this->getRequest()->getParam('limit')){
+                $collection->setPageSize($limit);
+            }
+
+            foreach ($collection as $tag){
+                $key = $tag->getName();
+                $name = $tag->getName();
+                echo "{$name}|{$key}\n";
+            }
+        };
+    }
+
+    public function massUpdateStoreViewGoAction()
+    {
+        $post = $this->getRequest()->getPost();
+        $post['add_store_view'] = isset($post['add_store_view']) ? 1 : 0;
+        $post['remove_store_view'] = isset($post['remove_store_view']) ? 1 : 0;
+        $data = new Varien_Object($post);
+
+        if ($posts = $data->getPostIds()){
+
+            $posts = explode(",", $posts);
+            if (is_array($posts) && count($posts) && ($data->getAddStoreView() || $data->getRemoveStoreView())){
+
+                $success = 0;
+                $errors = 0;
+                foreach ($posts as $postId){
+                    try {
+                        /** @var $post Magpleasure_Blog_Model_Post */
+                        $post = Mage::getModel('mpblog/post')->load($postId);
+                        $stores = $post->getStores();
+
+                        if ($data->getRemoveStoreView()){
+                            foreach ($data->getRemoveStore() as $storeId){
+                                if (($index = array_search($storeId, $stores)) !== false){
+                                    unset($stores[$index]);
+                                }
+                            }
+                        }
+
+                        if ($data->getAddStoreView()){
+                            $stores = array_merge($stores, $data->getAddStore());
+                            $stores = array_unique($stores);
+                        }
+
+                        $post->setStores($stores)->save();
+
+                        $success++;
+                    } catch (Exception $e) {
+                        $errors++;
+                    }
+                }
+
+                if ($success){
+                    $this->_getSession()->addSuccess($this->_helper()->__("%s posts was successfully updated.", $success));
+                }
+                if ($errors){
+                    $this->_getSession()->addError($this->_helper()->__("%s posts was not updated.", $errors));
+                }
+            }
+        }
+
+        $this->_redirect('*/*/index');
+    }
+
+    public function massUpdateStoreViewAction()
+    {
+        $posts = $this->getRequest()->getPost('posts');
+        if ($posts && is_array($posts)){
+
+            $this->loadLayout();
+            $this->_setActiveMenu('cms/mpblog/post');
+
+            /** @var $edit Magpleasure_Blog_Block_Adminhtml_Post_Update_Edit */
+            $edit = $this->getLayout()->createBlock('mpblog/adminhtml_post_update_edit');
+            if ($edit){
+                Mage::register(Magpleasure_Blog_Block_Adminhtml_Post_Update_Edit_Form::POSTS_KEY, $posts, true);
+                $this->_addContent($edit);
+            }
+            $this->renderLayout();
+
+        } else {
+            $this->_getSession()->addError($this->_helper()->__("Anyone post required."));
+            $this->_redirectReferer();
+        }
+    }
+
+
+    public function massUpdateCategoryGoAction()
+    {
+        $post = $this->getRequest()->getPost();
+        $post['add_category'] = isset($post['add_category']) ? 1 : 0;
+        $post['remove_category'] = isset($post['remove_category']) ? 1 : 0;
+        $data = new Varien_Object($post);
+
+        if ($posts = $data->getPostIds()){
+
+            $posts = explode(",", $posts);
+            if (is_array($posts) && count($posts) && ($data->getAddCategory() || $data->getRemoveCategory())){
+
+                $success = 0;
+                $errors = 0;
+                foreach ($posts as $postId){
+                    try {
+                        /** @var $post Magpleasure_Blog_Model_Post */
+                        $post = Mage::getModel('mpblog/post')->load($postId);
+                        $categories = $post->getCategories();
+
+                        if ($data->getRemoveCategory()){
+                            foreach ($data->getRemoveCategoryIds() as $storeId){
+                                if (($index = array_search($storeId, $categories)) !== false){
+                                    unset($categories[$index]);
+                                }
+                            }
+                        }
+
+                        if ($data->getAddCategory()){
+                            $categories = array_merge($categories, $data->getAddCategoryIds());
+                            $categories = array_unique($categories);
+                        }
+
+                        $post->setCategories($categories)->save();
+
+                        $success++;
+                    } catch (Exception $e) {
+                        $errors++;
+                    }
+                }
+
+                if ($success){
+                    $this->_getSession()->addSuccess($this->_helper()->__("%s posts was successfully updated.", $success));
+                }
+                if ($errors){
+                    $this->_getSession()->addError($this->_helper()->__("%s posts was not updated.", $errors));
+                }
+            }
+        }
+
+        $this->_redirect('*/*/index', $this->_getCommonParams());
+    }
+
+    public function massUpdateCategoryAction()
+    {
+        $posts = $this->getRequest()->getPost('posts');
+        if ($posts && is_array($posts)){
+
+            $this->loadLayout();
+            $this->_setActiveMenu('cms/mpblog/post');
+
+            /** @var $edit Magpleasure_Blog_Block_Adminhtml_Post_Category_Edit */
+            $edit = $this->getLayout()->createBlock('mpblog/adminhtml_post_category_edit');
+            if ($edit){
+                Mage::register(Magpleasure_Blog_Block_Adminhtml_Post_Update_Edit_Form::POSTS_KEY, $posts, true);
+                $this->_addContent($edit);
+            }
+            $this->renderLayout();
+
+        } else {
+            $this->_getSession()->addError($this->_helper()->__("Anyone post required."));
+            $this->_redirectReferer();
+        }
+    }
+}

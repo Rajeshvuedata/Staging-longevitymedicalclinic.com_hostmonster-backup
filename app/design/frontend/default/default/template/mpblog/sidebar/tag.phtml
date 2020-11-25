@@ -1,0 +1,71 @@
+<?php
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE-CE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE-CE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * MagPleasure does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Magpleasure does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   MagPleasure
+ * @package    Magpleasure_Blog
+ * @version    1.2.3
+ * @copyright  Copyright (c) 2012-2013 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE-CE.txt
+ */
+
+
+/** @var Magpleasure_Blog_Block_Sidebar_Tag $this  */
+/** @var Magpleasure_Blog_Model_Mysql4_Tag_Collection $collection  */
+$collection = $this->getCollection();
+?>
+<?php if ($this->getDisplay() && $collection->getSize()): ?>
+<div class="block mpblog-tags">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Tags') ?></span></strong>
+    </div>
+    <div class="block-content<?php if ($this->getMtEnabled()): ?> tagcloud<?php endif; ?>"<?php if ($this->getMtEnabled()): ?> id="tagcloudflash"<?php endif; ?>>
+        <?php foreach ($collection as $tag): ?>
+        <a href="<?php echo $tag->getTagUrl(); ?>" class="tag<?php echo $tag->getTagType(); ?><?php if ($this->isActive($tag)): ?> active<?php endif; ?>" title="<?php echo $this->__("%s Topics", $tag->getPostCount()); ?>"  ><?php echo $this->escapeHtml($tag->getName()); ?></a>
+        <?php endforeach; ?>
+    </div>
+    <?php if ($this->getMtEnabled()): ?>
+
+    <script type="text/javascript">
+        var rnumber = Math.floor(Math.random()*9999999);
+        var so = new SWFObject("<?php echo $this->getMtPath(); ?>?r="+rnumber, "tagcloudflash", "<?php echo $this->getMtWidth(); ?>", "<?php echo $this->getMtHeight(); ?>", "7", "#<?php echo $this->getMtBackground(); ?>");
+        so.addVariable("tcolor", "0x<?php echo $this->getMtTextColor(); ?>");
+        <?php if ($this->getMtTextColor2()): ?>
+        so.addVariable("tcolor2", "0x<?php echo $this->getMtTextColor2(); ?>");
+        <?php endif; ?>
+        <?php if ($this->getMtHiColor()): ?>
+        so.addVariable("hicolor", "0x<?php echo $this->getMtHiColor(); ?>");
+        <?php endif; ?>
+        so.addVariable("tagcloud", "<?php echo $this->getMtTagsHtml(); ?>");
+        so.addParam("allowScriptAccess", "always");
+        so.addParam("quality", "high");
+        so.addParam("wmode", "transparent");
+        so.addVariable("tspeed", "100");
+        so.addVariable("distr", "true");
+        so.addVariable("mode", "tags");
+        so.write("tagcloudflash");
+
+        if (so.installedVer.major == 0){
+            $('tagcloudflash').removeClassName('tagcloud');
+        }
+    </script>
+    <?php endif; ?>
+</div>
+<?php endif; ?>

@@ -1,0 +1,11 @@
+--- app/code/core/Mage/Core/Model/Resource/Session.php
++++ app/code/core/Mage/Core/Model/Resource/Session.php
+@@ -215,7 +215,7 @@
+ 
+         $data = $this->_read->fetchOne($select, $bind);
+ 
+-        return $data;
++        return (string)$data;
+     }
+ 
+     /**

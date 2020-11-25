@@ -1,0 +1,45 @@
+<?php
+/**
+* MagPleasure Ltd.
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the EULA
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://www.magpleasure.com/LICENSE.txt
+*
+* @category   Magpleasure
+* @package    Magpleasure_Blog
+* @copyright  Copyright (c) 2012-2013 MagPleasure Ltd. (http://www.magpleasure.com)
+* @license    http://www.magpleasure.com/LICENSE.txt
+*/
+?>
+<?php if ($this->getButtonsCount()): ?>
+<div class="mpblog-social-container" id="social">
+    <div class="mp-caption">
+        <strong><?php echo $this->__("Share and Enjoy"); ?></strong>
+    </div>
+    <div class="mp-buttons">
+        <ul>
+        <?php foreach($this->getButtons() as $button): ?>
+
+            <?php if ($this->getHasImage($button)): ?>
+            <li>
+                <?php if ($button->getIsTemplate()): ?>
+                    <?php echo $this->getButtonHtml($button); ?>
+                <?php else: ?>
+                <div class="mp-share-button" style="<?php echo $button->getStyle(); ?>">
+                    <a target="_blank" href="<?php echo $this->getButtonUrl($button); ?>" title="<?php echo $button->getLabel(); ?>">
+                        <img class="" width="16px" height="16px" src="<?php echo $this->getSkinUrl('mpblog/images/button-fill.gif'); ?>"  alt="<?php echo $button->getLabel(); ?>"/>
+                    </a>
+                </div>
+                <?php endif; ?>
+            </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        </ul>
+        <div class="fixed"></div>
+    </div>
+</div>
+<?php endif; ?>

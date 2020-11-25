@@ -1,0 +1,14 @@
+--- app/code/core/Mage/Install/etc/install.xml
++++ app/code/core/Mage/Install/etc/install.xml
+@@ -80,10 +80,7 @@
+                 <spl/>
+                 <dom/>
+                 <simplexml/>
+-                <mcrypt>
+-                    <openssl/>
+-                    <mcrypt/>
+-                </mcrypt>
++                <mcrypt/>
+                 <hash/>
+                 <curl/>
+                 <iconv/>

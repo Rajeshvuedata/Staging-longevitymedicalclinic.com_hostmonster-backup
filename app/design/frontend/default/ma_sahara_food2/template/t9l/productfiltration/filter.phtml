@@ -1,0 +1,124 @@
+<?php
+$dropval=Mage::getStoreConfig('tab1/general/generaldropdown');
+$drpval=explode(',',$dropval);
+$product_type=Mage::getStoreConfig('tab1/general/product');
+$mvorder=Mage::getStoreConfig('tab1/mostviewed/mostviewedorder');
+$brorder=Mage::getStoreConfig('tab1/bestreviewed/bestreviewedorder');
+$fdorder=Mage::getStoreConfig('tab1/featured/featuredorder');
+$bsorder=Mage::getStoreConfig('tab1/bestseller/bestsellerorder');
+$ltorder=Mage::getStoreConfig('tab1/latest/latestorder');
+$order_arr=array();
+foreach($drpval as $key=>$val){
+if($val== "mostviewed"){
+$order_arr +=[$mvorder."_mv"=>Mage::getStoreConfig('tab1/mostviewed/mostviewedtitle')."_mostviewed"];
+}
+if($val== "bestreviewed"){
+$order_arr += [$brorder."_br"=>Mage::getStoreConfig('tab1/bestreviewed/bestreviewedtitle')."_bestreviewed"];
+}
+if($val== "featured"){
+$order_arr += [$fdorder."_fd"=>Mage::getStoreConfig('tab1/featured/featuredtitle')."_featured"];
+}
+if($val== "bestseller"){
+$order_arr += [$bsorder."_bs"=>Mage::getStoreConfig('tab1/bestseller/bestsellertitle')."_bestseller"];
+}
+if($val== "latest"){
+$order_arr += [$ltorder."_lt"=>Mage::getStoreConfig('tab1/latest/latesttitle')."_latest"];
+}
+
+}//end of foreach
+ksort($order_arr);
+if(Mage::getStoreConfig('tab1/settings/settingenable')){
+if(Mage::getStoreConfig('tab1/general/enable')){ ?>
+<div class="product-form">
+<form onsubmit="return false" action="<?php echo $this->getUrl()?>/store" method="post" id="myform">
+<select id="product_type" name="selecteddata">
+<?php
+foreach($order_arr as $key=>$value){
+$pro_val=explode('_',$value);
+echo $pro_val[1];
+if(in_array($product_type,$drpval)){
+$ptype =$product_type;
+$default_type=$product_type;
+
+}
+else{
+$ptype=$drpval[0];
+$default_type=$drpval[0];
+}
+if($ptype==$pro_val[1]){
+$sel="selected";}
+?>
+<option value="<?php echo $pro_val[1]; ?>" <?php echo $sel;?>><?php echo $pro_val[0]; ?></option>
+<?php $sel=""; }//end of foreach?>
+</select>
+</form>
+</div>
+<?php }//end of enable if
+else {
+$default_type=$product_type;
+}
+
+?>
+<input type="hidden" id="val" value="<?php echo $default_type;?>"/>
+
+<div id="productfilter_container">
+<div id="product_area"> </div>
+ 
+<div id="overlay">
+<img src="http://test2.longevitymemory.com/media/wysiwyg/ajax-loaderGrayClock.gif" />
+</div>
+</div>
+<?php }//end of setting enable if?>
+
+
+<script>
+
+jQuery(document).ready(function(){
+
+var url = "<?php echo $this->getUrl()?>t9l-productfiltration/index/filter";
+
+function callevent(type){
+jQuery('#overlay').show();
+	jQuery.ajax({
+            url: url,
+            type: 'POST',
+            data: {type: type},
+            success: function(data) {
+	   // console.log(data);
+		
+		jQuery('#product_area').html(data);
+		jQuery('#overlay').hide();
+             // window.location.reload();
+ deleteCartInSidebar();
+    //delete product out of cart in checkout page
+    deleteCartInCheckoutPage();
+    //compare link
+    addProductCompare();
+    removeCompareProductLink();
+      
+    //wishlist link 
+    addToWishlistCompareOnProductView();
+    addProductWishlist();
+    //addProductToCartFromWishlist();
+    removeWislishProductLink();
+    //hideMiniAjaxCart();
+    //add product to cart on list product 
+  AddToCartOnListProduct();
+    //Add to cart in product view page
+    AddToCartOnProductView();
+
+
+
+   
+				}//end of success
+		});//end of jquery ajax
+			}//end of function
+    jQuery('#product_type').change(function() {
+	callevent(jQuery('#product_type').val());
+
+    });
+callevent(jQuery('#val').val());
+});
+
+</script>
+

@@ -1,0 +1,54 @@
+<?php
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE-CE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE-CE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * MagPleasure does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Magpleasure does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   MagPleasure
+ * @package    Magpleasure_Blog
+ * @version    1.2.3
+ * @copyright  Copyright (c) 2012-2013 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE-CE.txt
+ */
+?>
+<div class="mpblog-notifications<?php if ($this->isOldStyle()): ?> old-style<?php endif; ?>">
+    <div class="icon"></div>
+    <a class="mpblog-follow" id="mpblog-follow-button" href="#" onclick="return false;" >
+        <span><i class="<?php echo $this->getColorClass(); ?> glyphicons share"></i><?php echo $this->__("Follow"); ?><i class="<?php echo $this->getColorClass(); ?> glyphicons expand"></i></span>
+    </a>
+    <div class="mpblog-dialog" id="mpblog-dialog" style="display: none;">
+        <strong class="email-notification"><i class="<?php echo $this->getColorClass(); ?> glyphicons envelope"></i><?php echo $this->__("Notify me by Email:"); ?></strong>
+        <?php foreach ($this->getSubscriptionTypes() as $value => $label): ?>
+        <div class="option">
+            <input type="radio" name="subscription_type" id="subscription_type_<?php echo $value; ?>"<?php if ($this->getSubscriptionType() == $value): ?> checked="true"<?php endif; ?> value="<?php echo $value; ?>" />
+            <label for="subscription_type_<?php echo $value; ?>"><?php echo $this->escapeHtml($label); ?></label>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+<script type="text/javascript">
+    new MpBlogCommonSelectDialog({
+        button_id: 'mpblog-follow-button',
+        dropdown_id: 'mpblog-dialog',
+        element_selector: '#mpblog-dialog .option input, #mpblog-dialog .option label',
+        timeout: 1000,
+        appear_time: 0.3,
+        hide_time: 0.1,
+        expanded_class: 'expanded'
+    });
+</script>

@@ -1,0 +1,27 @@
+<?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('banner_left')->toHtml() ?>
+<?php 
+if(Mage::registry('current_category')){
+$cat_id = Mage::registry('current_category')->getId();
+if($cat_id == 7){
+echo $this->getLayout()->createBlock('cms/block')->setBlockId('supplement-banner-left')->toHtml();
+?>
+<div class="supplement-text">
+<h1>Supplement With Science</h1>
+<p>Taking supplements without considering the science is just plain silly That’s why we custom formulate our supplement line with the latest findings discovered in science studies. </p>
+<p>Because new findings are revealed almost daily, we’re constantly fine-tuning and introducing new products. So you can feel confident that your supplementation is always of the highest quality and value.</p>
+<p>For your added convenience and benefit, we also provide leading-edge products for water distillation and air filtration, as well as books and other supplies Browse through our catalog to see more.</p>
+</div>
+<?php
+}
+elseif($cat_id == 16){
+echo $this->getLayout()->createBlock('cms/block')->setBlockId('labpanels-banner-left')->toHtml();
+}
+elseif($cat_id == 8){
+echo $this->getLayout()->createBlock('cms/block')->setBlockId('airwater-banner-left')->toHtml();
+}
+else{
+echo $this->getLayout()->createBlock('cms/block')->setBlockId('banner_left')->toHtml();
+}
+}
+ ?>
+

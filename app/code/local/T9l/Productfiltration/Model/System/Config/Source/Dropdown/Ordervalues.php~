@@ -1,0 +1,30 @@
+<?php
+ 
+class Inchoo_Hellodeveloper_Model_System_Config_Source_Dropdown_Ordervalues
+{
+    public function toOptionArray()
+    {
+        return array(
+            array(
+                'value' => 'first',
+                'label' => '1',
+            ),
+            array(
+                'value' => 'second',
+                'label' => '2',
+            ),
+	    array(
+                'value' => 'third',
+                'label' => '3',
+            ),
+	    array(
+                'value' => 'fourth',
+                'label' => '4',
+            ),
+	   array(
+                'value' => 'fifth',
+                'label' => '5',
+            ),
+        );
+    }
+}

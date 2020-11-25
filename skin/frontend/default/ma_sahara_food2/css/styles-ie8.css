@@ -1,0 +1,7 @@
+button.btn-cart span,.link-wishlist,.link-compare,.banner-box .text,.banner-left .banner-left-text { background:url("../images/link.png") repeat;}
+button.btn-cart:hover span,.link-wishlist:hover,.link-compare:hover,.banner-box:hover .text,.banner-left:hover .banner-left-text  { background:url("../images/hover-link.png") repeat;}
+.register-login .register a,.register-login .login a { padding:6px !important;}
+.block-footer .col2 h2 { font-size:15px !important;}
+#search_price { margin: 10px 0 0 !important;}
+.block-footer .f-icon span { display:none !important;}
+.twitter-pic img { width: 42px !important; height: 42px !important;}

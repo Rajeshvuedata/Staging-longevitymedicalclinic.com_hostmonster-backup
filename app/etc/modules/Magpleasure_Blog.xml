@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Magpleasure_Blog>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Magpleasure_Common/>
+                <Magpleasure_Searchcore/>
+            </depends>
+        </Magpleasure_Blog>
+    </modules>
+</config>

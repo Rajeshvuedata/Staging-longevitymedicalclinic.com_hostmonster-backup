@@ -1,0 +1,63 @@
+<?php
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE-CE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE-CE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * MagPleasure does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Magpleasure does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   MagPleasure
+ * @package    Magpleasure_Blog
+ * @version    1.2.3
+ * @copyright  Copyright (c) 2012-2013 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE-CE.txt
+ */
+
+/** @var Magpleasure_Blog_Model_Mysql4_Comment_Collection $collection  */
+$collection = $this->getCollection();
+?>
+
+<div class="comments-header">
+    <span class="leave-a-comment<?php if ($this->isOldStyle()): ?> old-style<?php endif; ?>"><i class="<?php echo $this->getColorClass(); ?> glyphicons chat"></i><a href="#form" onclick="blogComments.getForm('form', 0); return false;"><?php echo $this->__("Leave a comment"); ?></a></span>
+    <?php if ($this->showRss()): ?>
+        <span class="rss-comments<?php if ($this->isOldStyle()): ?> old-style<?php endif; ?>"><i class="<?php echo $this->getColorClass(); ?> glyphicons rss"></i><a href="<?php echo $this->getRssCommentFeedUrl(); ?>"><?php echo $this->__("Comments feed"); ?></a></span>
+    <?php endif; ?>
+    <div id="comments_counter" class="mpblog-comments-counter"><?php echo $this->getCommentsCount() ? $this->__("%s comments", $this->getCommentsCount()) : $this->__("No comments"); ?></div>
+    <div class="fixed"></div>
+</div>
+<div class="mpblog-comments-livestream" id="livestream">
+    <?php if ($collection->getSize()): ?>
+        <?php foreach ($collection as $message): ?>
+            <?php echo $this->getMessageHtml($message); ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+    <div class="mp-comment-form" id="form" style="display: none;"></div>
+</div>
+<div id="mpblog_loader_container" style="display: none;">
+    <div class="mp-blog-loader"></div>
+</div>
+<script type="text/javascript">
+    var blogComments = new MpBlogComments({
+        form_selector: '.mp-comment-form',
+        loader_container: 'mpblog_loader_container',
+        form_url: '<?php echo $this->getFormUrl() ?>',
+        post_url: '<?php echo $this->getPostUrl() ?>',
+        post_id: '<?php echo $this->getPostId(); ?>',
+        session_id: '<?php echo $this->getSessionId(); ?>',
+        comments_counter: 'comments_counter'
+    });
+
+</script>

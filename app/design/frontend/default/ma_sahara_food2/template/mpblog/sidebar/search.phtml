@@ -1,0 +1,47 @@
+<?php
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE-CE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE-CE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * MagPleasure does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Magpleasure does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   MagPleasure
+ * @package    Magpleasure_Blog
+ * @version    1.2.3
+ * @copyright  Copyright (c) 2012-2013 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE-CE.txt
+ */
+
+?>
+<?php if ($this->getDisplay()): ?>
+<div class="block mpblog-search">
+    <div class="block-title">
+        <strong><span><?php echo $this->getBlockHeader(); ?></span></strong>
+    </div>
+    <div class="block-content">
+        <form id="mp_blog_search" action="<?php echo $this->getSearchUrl(); ?>" method="get">
+            <div class="input-box">
+                <input type="text" class="input-text required-entry" title="<?php echo $this->getBlockHeader(); ?>" id="search-blog" name="query" value="<?php echo $this->getQuery(); ?>" />
+            </div>
+            <button class="button" title="<?php echo $this->__("Search"); ?>" type="submit"><span><span><?php echo $this->__("Search"); ?></span></span></button>
+        </form>
+        <script type="text/javascript">
+            new VarienForm('mp_blog_search');
+        </script>
+    </div>
+</div>
+<?php endif; ?>

@@ -1,0 +1,11 @@
+--- app/code/core/Mage/Customer/Model/Resource/Address/Attribute/Source/Country.php
++++ app/code/core/Mage/Customer/Model/Resource/Address/Attribute/Source/Country.php
+@@ -39,7 +39,7 @@
+      *
+      * @return array
+      */
+-    public function getAllOptions()
++    public function getAllOptions($withEmpty = true, $defaultValues = false)
+     {
+         if (!$this->_options) {
+             $this->_options = Mage::getResourceModel('directory/country_collection')

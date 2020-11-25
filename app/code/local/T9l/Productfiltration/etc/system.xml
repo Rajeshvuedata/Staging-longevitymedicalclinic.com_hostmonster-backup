@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <t9lconfig translate="label">
+            <label>Product Filtration Extension</label>
+            <sort_order>150</sort_order>
+        </t9lconfig>
+    </tabs>
+    <sections >
+        <tab1 translate="label" module="productfiltration">
+            <label>Product Filtration</label>
+            <tab>t9lconfig</tab>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+		<settings>
+                    <label>Setting</label>
+		     <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    
+                    <fields>
+                        
+                        <settingenable translate="label comment"  module="productfiltration" >
+                            <label>Product Filtration Extension</label>
+                            
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </settingenable>
+                       
+                    </fields>
+                </settings>
+		<latest>
+                    <label>Latest Tab Setting</label>
+		     <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    
+                    <fields>
+			
+			
+                        <latestorder translate="label comment"  module="productfiltration" >
+                            <label>Order</label>
+			    <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </latestorder>
+                        <latesttitle translate="label comment"  module="productfiltration" >
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </latesttitle>
+		 </fields>
+               </latest>
+	       <bestseller>
+                    <label>Best Seller Tab Setting</label>
+		     <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    
+                    <fields>
+			
+                        <bestsellerorder translate="label comment"  module="productfiltration" >
+                            <label>Order</label>
+			    <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </bestsellerorder>
+                        <bestsellertitle translate="label comment"  module="productfiltration" >
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </bestsellertitle>
+			</fields>
+                </bestseller>
+		<featured>
+                    <label>Featured Tab Setting</label>
+		    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+			  
+			 <featuredorder translate="label comment"  module="productfiltration" >
+                            <label>Order</label>
+			    <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </featuredorder>
+                        <featuredtitle translate="label comment"  module="productfiltration" >
+                            <label>Title</label>
+                          <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </featuredtitle>
+                    </fields>
+                </featured>
+		<bestreviewed>
+                    <label>Best Reviewed Tab Setting</label>
+		     <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                  <fields>
+						
+                        <bestreviewedorder translate="label comment"  module="productfiltration" >
+                            <label>Order</label>
+			    <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </bestreviewedorder>
+                        <bestreviewedtitle translate="label comment"  module="productfiltration" >
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </bestreviewedtitle>
+                      </fields>
+                </bestreviewed>	
+		<general>
+                    <label>General</label>
+		     <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+              <fields>
+                   <enable translate="label comment"  module="productfiltration" >
+                            <label>Display DropDown at home page</label>
+                            <comment>Boolean with website scope and will display dropdown when enable is selected.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable>
+                        <product translate="label comment"  module="productfiltration" >
+                            <label>Default Product Type</label>
+                            <comment>Choose any product type,which you want to show on homepage.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>t9l_productfiltration/system_config_source_dropdown_values</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </product>
+			<generalproducts translate="label comment"  module="productfiltration" >
+                            <label>Products</label>
+			    <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </generalproducts>
+			<generaldropdown translate="label comment"  module="productfiltration" >
+                            <label>Select to show on frontend</label>
+			    <frontend_type>multiselect</frontend_type>
+                            <source_model>t9l_productfiltration/system_config_source_dropdown_productvalues</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </generaldropdown>
+                    </fields>
+                </general>
+		<mostviewed>
+                    <label>Most Viewed Tab Setting</label>
+		    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                 <fields>
+				
+                        <mostviewedorder translate="label comment"  module="productfiltration" >
+                            <label>Order</label>
+			    <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </mostviewedorder>
+                        <mostviewedtitle translate="label comment"  module="productfiltration" >
+                            <label>Title</label>
+                            
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </mostviewedtitle>
+			
+                       
+                    </fields>
+                </mostviewed>
+            </groups>
+        </tab1>
+    </sections>
+</config>

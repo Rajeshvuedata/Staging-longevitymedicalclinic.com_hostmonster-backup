@@ -1,0 +1,58 @@
+<?php
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE-CE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE-CE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * MagPleasure does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Magpleasure does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   MagPleasure
+ * @package    Magpleasure_Blog
+ * @version    1.2.3
+ * @copyright  Copyright (c) 2012-2013 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE-CE.txt
+ */
+
+/** @var Magpleasure_Blog_Model_Mysql4_Comment_Collection $collection  */
+$collection = $this->getCollection();
+?>
+<?php if ($this->getDisplay() && $collection->getSize()): ?>
+<div class="block mpblog-recentcomments">
+    <div class="block-title">
+        <strong><span><?php echo $this->getBlockHeader(); ?></span></strong>
+    </div>
+    <div class="block-content">
+        <ul class="mplog-recent-comments">
+        <?php foreach ($collection as $comment): ?>
+            <li class="mpblog-recent-comment mpblog-recent-comment-<?php echo $comment->getId(); ?>">
+                <i class="<?php echo $this->getColorClass(); ?> glyphicons ok_2"></i>
+                <a href="<?php echo $comment->getCommentUrl(); ?>"><?php echo $this->escapeHtml($comment->getPostTitle()); ?></a>
+                <?php if ($this->showDate()): ?>
+                <div class="mp-recentcomment-date">
+                    <?php echo $this->renderDate($comment->getCreatedAt()); ?>
+                </div>
+                <?php endif; ?>
+                <?php if ($this->showThesis()): ?>
+                <div class="mp-comment-thesis">
+                    <?php echo $this->getStrippedConent($comment->getMessage()); ?>
+                </div>
+                <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+        </ul>
+    </div>
+</div>
+<?php endif; ?>

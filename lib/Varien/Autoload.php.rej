@@ -1,0 +1,11 @@
+--- lib/Varien/Autoload.php
++++ lib/Varien/Autoload.php
+@@ -91,7 +91,7 @@
+         }
+         $classFile.= '.php';
+         //echo $classFile;die();
+-        return @include $classFile;
++        return include $classFile;
+     }
+ 
+     /**

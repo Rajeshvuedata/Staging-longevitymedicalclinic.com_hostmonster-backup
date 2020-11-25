@@ -1,0 +1,168 @@
+ 2017 tasks
+ 
+1)  to check custom options by default of type checkbox for the first li custom options
+copy core block file into local pool
+/app/code/local/Mage/Catalog/Block/Product/View/Options/Type
+
+added code
+if($count == 2){
+					$checked = 'checked';
+				}
+on line 30
+
+
+
+
+================  6-6-2017 ==================
+
+
+For MP image field
+
+/beta/app/code/local/Magpleasure/Blog/Block/Adminhtml/Post/Edit/Tab/General.php
+/beta/app/code/local/Magpleasure/Blog/controllers/Adminhtml/postcontroller.php
+
+Added following code at line no 137
+
+		/*********************************************** save image code*************************************/
+				if(isset($_FILES['postimage']['name'])) {
+
+					try {
+						 $uploader = new Varien_File_Uploader('postimage');
+						$uploader->setAllowedExtensions(array('jpg','jpeg','gif','png')); // or pdf or anything
+					  
+						$uploader->setAllowRenameFiles(false);
+						$uploader->setFilesDispersion(false);
+						
+						$path = Mage::getBaseDir('media').'/blogpost/image/' . DS ;
+									
+						$uploader->save($path, $_FILES['postimage']['name']);
+					  
+						$data['postimage'] = trim(addslashes($_FILES['postimage']['name']));
+						
+						$filename = preg_replace('/[^-_a-z0-9.]+/i', '_',  $data['postimage']);
+						$requestPost['postimage'] = '/'.$filename;
+						
+					}catch(Exception $e) {
+
+						//print_r($e);
+
+					}
+
+				}
+				
+/*********************************************** save image code*************************************/
+
+
+added field postimage in DB table of mp_blog_post
+
+created directory /beta/media/blogpost/image to save images
+
+called image in list.phtml under mpblog and related change like add podcasts_cate css in body, different div load on podcast category 
+
+/beta/app/design/frontend/default/ma_sahara_food2/template/mpblog
+
+<?php echo $this->getLayout()->createBlock('mpblog/sidebar_search')->setTemplate('mpblog/sidebar/search.phtml')->tohtml(); ?>
+created block for mpblog/sidebar_search
+
+made check in 2column-right.phtml for banner show on blog page only
+/beta/app/design/frontend/default/ma_sahara_food2/template/page
+
+========================================================
+added field featuredpost in DB table of mp_blog_post
+
+
+Addition featured Post field
+Added in /beta/app/code/local/Magpleasure/Blog/Block/Adminhtml/Post/Edit/Tab/Additional.php
+
+		/* ********* Added Custom Featured Post Field  */
+		$selectField = $fieldset->addField('featuredpost', 'select', array(
+            'label' => 'Featured Post',
+            'name' => 'featuredpost',           
+            'values' => array(
+                array(
+                    'value' => 1,
+                    'label' => 'Yes',
+                ),
+                array(
+                    'value' => 0,
+                    'label' => 'NO',
+                ),
+            ),
+            'onChange'  => 'showHideField()',
+        ));
+		
+		$selectField->setAfterElementHtml('
+                        <script>
+                        function showHideField() {                                              
+                            $("field_to_hide").toggle()
+                        }
+                        </script>
+                    ');
+		/* ********* Added Custom Featured Post Field  */
+
+		
+Removed echo "<pre>" at line no- 134 and commented //print_r($e); at line no. - 158 in /beta/app/code/local/Magpleasure/Blog/controllers/Adminhtml/PostController.php
+
+/beta/app/code/local/Magpleasure/Blog/Block/Adminhtml/Category/Edit/Tab/General.php
+
+==============================================================================
+
+Recent Post change to Featured Post in /beta/app/code/local/Magpleasure/Blog/Block/Sidebar/Recentpost.php at line no. - 79
+
+and add  <?php if($post->getFeaturedpost()==1): ?>  after foreach in /beta/app/design/frontend/default/ma_sahara_food2/template/mpblog/sidebar/recentpost.phtml
+================================================================================
+added field show_in_sidebar in DB table of mp_blog_categories
+
+
+Added following field code in  /beta/app/code/local/Magpleasure/Blog/Block/Adminhtml/Category/Edit/Tab/General.php
+
+		/* ********* Added Custom Featured Post Field  */
+		$selectField = $fieldset->addField('show_in_sidebar', 'select', array(
+            'label' => 'Title Show in Sidebar',
+            'name' => 'show_in_sidebar',           
+            'values' => array(
+                array(
+                    'value' => 1,
+                    'label' => 'Yes',
+                ),
+                array(
+                    'value' => 0,
+                    'label' => 'NO',
+                ),
+            ),
+            'onChange'  => 'showHideField()',
+        ));
+		
+		$selectField->setAfterElementHtml('
+                        <script>
+                        function showHideField() {                                              
+                            $("field_to_hide").toggle()
+                        }
+                        </script>
+                    ');
+		/* ********* Added Custom Featured Post Field  */
+		
+Category fetch
+
+Add <?php if($category->getShowInSidebar()=='1'):?>  after foreach in /beta/app/design/frontend/default/ma_sahara_food2/template/mpblog/sidebar/categories.phtml
+
+==============================================================================
+
+Navigation removed from my account by installing "IntegerNet_RemoveCustomerAccountLinks-2.0.0.2" extension
+
+change content at line no. 63 in 
+/beta/app/design/frontend/base/default/template/aw_sarp2/customer/profile/grid.phtml
+
+<p><?php echo $this->__('For questions regarding subscriptions or orders please email us at <a href="mailto:contactus@longevitymedicalclinic.com">contactus@longevitymedicalclinic.com</a> or call
+
+ Mon-Fri 8am to 5pm <a href="tel:8668696864">866-869-6864</a> option 1.'); ?></p>
+ 
+===========================================================
+/devtest/app/design/adminhtml/default/default/template/events/eventsbackend.phtml
+/app/code/local/Tech9logy/Events/controllers/Adminhtml/EventsBackendController.php 
+/app/code/local/Tech9logy/Events/Block/Adminhtml/Event/Edit/Tab/Form.php
+
+
+
+
+

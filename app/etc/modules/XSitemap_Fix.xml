@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <AW_Blog>
+            <active>true</active>
+        </AW_Blog>
+    </modules>
+</config> 

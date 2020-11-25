@@ -1,0 +1,57 @@
+<?php
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE-CE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE-CE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * MagPleasure does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Magpleasure does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   MagPleasure
+ * @package    Magpleasure_Blog
+ * @version    1.2.3
+ * @copyright  Copyright (c) 2012-2013 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE-CE.txt
+ */
+
+/** @var Magpleasure_Blog_Model_Mysql4_Category_Collection $collection  */
+$collection = $this->getCollection();
+?>
+
+<?php if ($this->getDisplay() && $collection->getSize()): ?>
+<div class="block mpblog-categories<?php if ($this->isOldStyle()): ?> old-style<?php endif; ?>">
+    <div class="block-title">
+        <strong><span><?php echo $this->getBlockHeader(); ?></span></strong>
+    </div>
+    <div class="block-content">
+        <ul class="mplog-categories">
+		<?php 
+		$i=0;
+		foreach ($collection as $category): ?>
+        <?php 
+			if($i<=200){
+			if($category->getShowInSidebar()=='1'):?>
+            <li class="mpblog-category<?php if ($category->getIsActive()): ?> active<?php endif; ?> mpblog-category-<?php echo $category->getId(); ?>">
+                <span> <i class="fa fa-caret-right" aria-hidden="true"></i></span>
+                <span>  <a href="<?php echo $category->getCategoryUrl(); ?>"><?php echo $this->escapeHtml($category->getName()); ?></a></span>
+            </li>
+			<?php endif; }
+			$i++;
+			?>
+        <?php endforeach; ?>
+        </ul>
+    </div>
+</div>
+<?php endif; ?>

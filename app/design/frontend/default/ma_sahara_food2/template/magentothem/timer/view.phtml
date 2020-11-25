@@ -1,0 +1,372 @@
+<?php
+/* Count for timer calculation declared here */
+$count = 1;
+$_product = $this->getProduct();
+$toDate = $_product->getSpecialTODate();
+$fromDate = $_product->getSpecialFromDate();
+
+/* Admin Controllers for timer are declared here */
+$timer_active = Mage::getStoreConfig('timer/general/activate_magentothem_timer');
+$timer_head_active = Mage::getStoreConfig('timer/general/activate_magentothem_heading');
+$timer_desc_active = Mage::getStoreConfig('timer/general/activate_magentothem_description');
+$desc_color = Mage::getStoreConfig('timer/magentothem_timer_color/description');
+$timer_color = Mage::getStoreConfig('timer/magentothem_timer_color/text');
+$head_color = Mage::getStoreConfig('timer/magentothem_timer_color/heading_text_color');
+$timer_head = Mage::getStoreConfig('timer/general/heading');
+?>
+
+<!--Condition for Timer Controllers goes here-->
+<?php if ($timer_active == 1) : ?>
+<?php if (($_product->getPrice() > $_product->getSpecialPrice() || Mage::getModel('catalog/product')->load($_product->getId())->getTypeID() == 'bundle') && Mage::getModel('catalog/product')->load($_product->getId())->getTimershow() == 1) : ?>
+<?php if ($_product->getSpecialPrice() != 0 || $_product->getSpecialPrice() != "") : ?>
+<?php if ($timer_head_active == 'showall' || $timer_head_active == 'viewpage' && $timer_head_active != 'hideall' && $timer_head != '') : ?>
+                        <div id="heading<?php echo $count; ?>"><?php echo $timer_head ?></div>
+<?php endif; ?>
+					<div class="box-timer">
+                        <div id="countbox_<?php echo $count; ?>" class="timer-view timer-grid"></div>
+<?php if ($timer_desc_active == 'showall' || $timer_desc_active == 'viewpage' && $timer_desc_active != 'hideall') : ?>
+                        <div class='clear'></div><div class='timerdate' id="caption<?php echo $count; ?>"><span class='hour'><?php echo $this->__('Days') ?></span><span class='hour'><?php echo $this->__('Hours') ?></span><span class='min'><?php echo $this->__('Minutes') ?></span><span class='sec' ><?php echo $this->__('Seconds') ?></span></div>
+					</div>
+						<?php
+						if(Mage::getModel('catalog/product')->load($_product->getId())->getTypeID() == 'bundle')
+						{
+							echo '<br/><h1 style="color:red">Discount up to '.(100 - Mage::getModel('catalog/product')->load($_product->getId())->getSpecialPrice()*1).'% </h1>';
+						}
+						?>
+<?php endif;endif;endif; ?>
+
+<?php if (($_product->getPrice() > $_product->getSpecialPrice() || Mage::getModel('catalog/product')->load($_product->getId())->getTypeID() == 'bundle') && Mage::getModel('catalog/product')->load($_product->getId())->getTimershow() == 1) : ?>
+<?php if ($_product->getSpecialPrice() != 0 || $_product->getSpecialPrice() != "") : ?>
+		<?php $_current_timer = time(); ?>
+        <script type="text/javascript">
+            var dthen<?php echo $count; ?> = new Date("<?php echo Date("m/d/y", strtotime($toDate)).' 11:59:00 PM'; ?>");
+            start = "<?php echo Date("m/d/y h:i:s A", $_current_timer); ?>";
+            start_date = Date.parse(start);
+            var dnow<?php echo $count; ?> = new Date(start_date);
+            if(CountStepper>0)
+                ddiff= new Date((dnow<?php echo $count; ?>)-(dthen<?php echo $count; ?>));
+            else
+                ddiff = new Date((dthen<?php echo $count; ?>)-(dnow<?php echo $count; ?>));
+            //gsecs<?php echo $count; ?> = Math.floor(ddiff.valueOf()/1000);
+			<?php if(strtotime($fromDate) <= $_current_timer){ ?>
+				gsecs<?php echo $count; ?> = Math.floor(ddiff.valueOf()/1000);
+			<?php }else{ ?>
+				gsecs<?php echo $count; ?> = -1;
+			<?php } ?>
+
+            var iid<?php echo $count; ?> = "countbox_<?php echo $count; ?>";
+            CountBack(gsecs<?php echo $count; ?>,"countbox_"+j, j);
+            j++;
+        </script>
+<?php $count = $count + 1; ?>
+<?php endif;endif;endif; ?>
+
+<!--Dynamic style changes goes here-->
+
+<?php $_product = $this->getProduct(); ?>
+<?php $buttonTitle = $this->__('Add to Cart'); ?>
+<?php if($_product->isSaleable()): ?>
+    <div class="add-to-cart">
+        <?php if(!$_product->isGrouped()): ?>
+        <label for="qty"><?php echo $this->__('Qty:') ?></label>
+        <div class="input-content">
+			<input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+			<input type="button"  onclick="var qty_el = document.getElementById('qty'); var qty = qty_el.value; if( !isNaN( qty )) qty_el.value++;return false;" class="qty-increase fa fa-caret-down">
+			<input type="button" onclick="var qty_el = document.getElementById('qty'); var qty = qty_el.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) qty_el.value--;return false;" class="qty-decrease">
+		</div>
+			<?php endif; ?>
+        <!-- custom added -->
+		<?php if ($_product->getData('has_options')){ ?>
+		<button type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" id="search-submit"><span><span><i class="fa fa-shopping-cart"></i><?php echo $buttonTitle ?></span></span></button>
+		<div id="lightbox"></div>
+			<div id="lb-content-refresh">
+				 <span id="lb-close">x</span>
+				 
+				 <div class="popup_block">
+					 <div class="popup_content_wrapper">
+					 	<div class="left_block"> 
+							<img src="<?php echo Mage::helper('catalog/image')->init($_product, 'image');  ?>" alt="<?php echo $_product->getName(); ?>"/> 
+						</div>
+						<div class="right_block">
+							<!-- <span class="title">
+							<?php echo "Would you like to save even more with automatic re-orders of ".Mage::helper('catalog/output')->productAttribute($_product, $_product->getName(), 'name')."?"; ?>
+							</span> -->
+							<span class="option"> 
+							<?php
+							$blockOption = Mage::app()->getLayout()->createBlock("Mage_Catalog_Block_Product_View_Options");
+							$blockOption->addOptionRenderer("select","catalog/product_view_options_type_select","catalog/product/view/options/type/select.phtml");
+							$blockOptionsHtml = null;
+			
+								if($_product->getTypeId()=="simple"||$_product->getTypeId()=="virtual"||$_product->getTypeId()=="configurable")
+								{  
+								$blockOption->setProduct($_product);
+								if($_product->getOptions())
+								{  
+									foreach ($_product->getOptions() as $o) 
+									{     
+										$blockOptionsHtml .= $blockOption->getOptionHtml($o); 
+									}    
+								}  
+								}
+							echo $blockOptionsHtml;					 
+								?>
+							</span>
+						</div>
+					</div>
+					<div class="bottom_sec">
+						<?php 
+							$productBlock = $this->getLayout()->createBlock('catalog/product_price');
+							echo $productBlock->getPriceHtml($_product);
+						?>
+					</div>
+					<?php $baseUrl =  Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB)  ;?>
+					<?php $currenUrl =  $currentUrl = Mage::app()->getRequest()->getServer('HTTP_REFERER'); ?>
+
+					<div class="popup_cta_wrapper">
+						<a id="shopping_added_to_cart" href="<?php echo $baseUrl . "onestepcheckout";?>" title="<?php echo "Go to shopping cart" ?>" class="button pop-btn btn-cart" onclick="productAddToCartForm.submit(this)">
+						<span><span><?php echo "CHECKOUT" ?></span></span>
+						</a>
+						<a id="shopping_added_to" href="<?php echo  $currenUrl;?>" title="<?php echo "Go to shopping cart" ?>" class="button pop-btn btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo "CONTINUE SHOPPING" ?></span></span></a>
+					</div>
+				 </div> <!-- end of popup block -->
+
+			</div>
+		<?php }else{ ?>
+		<button type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><i class="fa fa-shopping-cart"></i><?php echo $buttonTitle ?></span></span></button>
+		<?php } ?>
+			<!-- custom added -->
+        <?php echo $this->getChildHtml('', true, true) ?>
+    </div>
+<?php endif; ?>
+<?php if ($_product->getData('has_options')){
+	$currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
+	$currency_symbol = Mage::app()->getLocale()->currency( $currency_code )->getSymbol();
+	?>
+<script type="text/javascript">
+var lightBox = jQuery('#lightbox'),
+    lightBoxContent = jQuery('#lb-content-refresh');
+
+var positionLightbox = function() {
+    var viewWidth = jQuery(window).width(),
+        lbContentMargin = (viewWidth / 2),
+        lbContent = jQuery('#lb-content-refresh');
+
+    // lbContent.css({
+    //     'left' : lbContentMargin,
+    //     'top' : jQuery(window).scrollTop() + 50 + 'px'
+    // });
+};
+
+jQuery('#search-submit').click(function() {
+    lightBox.fadeIn(function() {
+        lightBoxContent.show();                               
+    });
+	positionLightbox();
+	jQuery('body').addClass('modal-open');
+});
+
+jQuery(lightBox).click(function() {
+    lightBox.hide();
+	lightBoxContent.hide();
+	jQuery('body').removeClass('modal-open');
+});
+
+jQuery('#lb-close').click(function() {
+    lightBox.hide();
+	lightBoxContent.hide();
+	jQuery('body').removeClass('modal-open');
+});
+jQuery('.pop-btn').click(function() {
+    lightBox.hide();
+	lightBoxContent.hide();
+	jQuery('body').removeClass('modal-open');
+});
+jQuery('.checkbox.product-custom-option').click(function() {
+	reloadpopupprice(this);
+});
+function reloadpopupprice(id){
+		var option_price = jQuery(id).attr("price");		 
+		var reg_price = '<?php echo $_product->getPrice() ?>';
+		var currency_symbol = '<?php echo $currency_symbol ?>';
+		var result = parseFloat(reg_price) + parseFloat(option_price);
+		
+		if(jQuery(id).attr("checked")){
+			var regular_price = parseFloat(result).toFixed(2);
+			var final_res = currency_symbol + regular_price;
+			jQuery('.bottom_sec .price-box .price').html(final_res);
+			
+		}else{
+			
+			var regular_price = parseFloat(reg_price).toFixed(2);
+			var final_res = currency_symbol + regular_price;
+			jQuery('.bottom_sec .price-box .price').html(final_res);
+		}
+}
+</script>
+
+<style>
+#lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.8;
+    text-align: center;
+    display: none;
+    z-index:1111;
+}  
+#lb-content-refresh {
+	display: none;
+	top: 5%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+	width: 80%;
+    max-width: 498px;
+    color: #222;
+    background-color: #fff;
+    position: fixed;
+    text-align: center;
+    padding: 30px 15px;
+    border-radius: 4px;
+    z-index:11111;
+}
+#lb-content-refresh p { color:#000;  }
+
+#lb-close {
+    cursor: pointer;
+	display: block;
+	position: absolute;
+    top: -15px;
+    right: -15px; 
+    height: 30px;
+    width: 30px;
+    color: #000;
+    text-align: center;   
+    border-radius: 50%;    
+	font-size: 22px;
+	background-color: #fff;
+    -webkit-box-shadow: -3px 4px 8px 1px rgba(0,0,0,0.38); 
+    box-shadow: -3px 4px 8px 1px rgba(0,0,0,0.38);
+}
+
+
+#lb-content-refresh .popup_block {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
+
+
+@media screen and (max-width: 600px) {
+    #lb-content-refresh .left_block {
+        display: none;
+    }
+}
+
+#lb-content-refresh .popup_content_wrapper {
+	width: 100%;
+}
+
+#lb-content-refresh .left_block {
+	width: 100%;
+	margin-bottom: 15px;
+}
+#lb-content-refresh .left_block img {
+    width: 30%;
+}
+
+#lb-content-refresh .right_block  {
+	width: 90%;
+	margin: 0 auto 25px auto;
+}
+
+#lb-content-refresh .right_block .options-list li{
+	display: flex;
+	align-items: flex-start;
+}
+
+#lb-content-refresh .right_block .options-list input{
+	margin: 0;
+	width: 30px;
+    height: 30px;
+    vertical-align: unset;
+}
+#lb-content-refresh .right_block .options-list .label {
+	display: inline-block;
+	margin: 0;
+    padding: 0 0 0 5px;
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 17px;
+    color: #000;
+    text-align: left;
+    white-space: normal;
+    vertical-align: unset;
+    border-radius: 0;
+}
+
+#lb-content-refresh .right_block .label label {
+	margin-right: 5px;
+	margin-left: 8px;
+    font-weight: normal;
+	font-size: 15px;
+	line-height: 18px;
+    color: #444444;
+    text-align: left;
+}
+
+
+#lb-content-refresh dt {
+    display: none;
+}
+
+#lb-content-refresh .popup_cta_wrapper {
+	display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+#lb-content-refresh .popup_cta_wrapper a {
+	background-color: #16386E;
+    padding: 11px;
+	color:#fff;
+}
+
+#lb-content-refresh .popup_cta_wrapper a + a {
+	margin-left: 35px;
+	margin-bottom: 5px;
+}
+
+@media screen and (max-width: 600px) { 
+	#lb-content-refresh .popup_cta_wrapper {
+		flex-flow: column;
+		justify-content: center;
+	}
+
+	#lb-content-refresh .popup_cta_wrapper a + a {
+		margin: 20px 0 0 0;
+	}
+}
+
+
+
+#shopping_added_to_cart{
+background-color: #16386E;
+    padding: 11px;
+	color:#fff;
+	float: left;
+}
+#shopping_added_to{
+    background-color: #16386E;
+    padding: 11px;
+	color:#fff;
+	
+	float: left !important;
+}
+</style>
+<?php } ?>

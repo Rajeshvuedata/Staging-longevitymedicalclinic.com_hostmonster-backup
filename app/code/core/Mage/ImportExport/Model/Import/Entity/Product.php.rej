@@ -1,0 +1,11 @@
+--- app/code/core/Mage/ImportExport/Model/Import/Entity/Product.php
++++ app/code/core/Mage/ImportExport/Model/Import/Entity/Product.php
+@@ -1641,7 +1641,7 @@
+     protected function _getUploader()
+     {
+         if (is_null($this->_fileUploader)) {
+-            $this->_fileUploader    = Mage::getModel("importexport/import_uploader", null);
++            $this->_fileUploader    = new Mage_ImportExport_Model_Import_Uploader();
+ 
+             $this->_fileUploader->init();
+ 

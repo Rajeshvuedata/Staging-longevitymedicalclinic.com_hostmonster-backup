@@ -1,0 +1,25 @@
+button.save.scheduled span {
+    background-image: url("../images/schedule_btn_icon.gif");
+}
+
+button.save.scheduled.disabled span {
+    background-image: url("../images/schedule_btn_icon_disabled.gif");
+}
+
+button.save.duplicate span {
+    background-image: url("../images/duplicate_btn_icon.gif");
+}
+
+select#mpblog_tags_presetted_colors {
+    width: 176px;
+    float: left;
+}
+
+#row_mpblog_tags_presetted_colors button.apply {
+    float: left;
+    margin-left: 5px;
+}
+
+div.fixed {
+    clear: both;
+}

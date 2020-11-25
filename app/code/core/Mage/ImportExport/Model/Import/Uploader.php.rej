@@ -1,0 +1,25 @@
+--- app/code/core/Mage/ImportExport/Model/Import/Uploader.php
++++ app/code/core/Mage/ImportExport/Model/Import/Uploader.php
+@@ -124,10 +124,12 @@
+     protected function _validateFile()
+     {
+         $filePath = $this->_file['tmp_name'];
+-        $this->_fileExists = false;
+         if (is_readable($filePath)) {
+             $this->_fileExists = true;
++        } else {
++            $this->_fileExists = false;
+         }
++
+         $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
+         if (!$this->checkAllowedExtension($fileExtension)) {
+             throw new Exception('Disallowed file type.');
+@@ -135,7 +137,7 @@
+         //run validate callbacks
+         foreach ($this->_validateCallbacks as $params) {
+             if (is_object($params['object']) && method_exists($params['object'], $params['method'])) {
+-                $params['object']->{$params['method']}($filePath);
++                $params['object']->$params['method']($filePath);
+             }
+         }
+     }

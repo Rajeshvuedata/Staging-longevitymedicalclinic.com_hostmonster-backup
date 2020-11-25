@@ -1,0 +1,47 @@
+/*===================================================================
+|                            CONFIGUARATION STYLE                    |
+====================================================================*/
+/*General*/
+#giant-onestepcheckout-container .button{
+background: #3398CC}
+/*Authentication*/
+
+#giant-onestepcheckout-container .onestep-title {
+background-color: #3398CC;
+}
+
+/*Billing Information*/
+
+#giant-onestepcheckout-container .customer-name .name-firstname {
+width: 50%;
+}
+
+#giant-onestepcheckout-container .customer-name .name-lastname {
+width: 50%;
+}
+#giant-onestepcheckout-container #giant-onestepcheckout-place-order .button{
+background: #FC9C1E}
+#giant-onestepcheckout-container .button-action{
+background-color: #3398CC}
+/*=======STATIC BLOCK========*/
+.static-right-content .sv-onstep > a:hover,
+.img-static-onstep .img-st-onstep > a:hover{
+border-color:#3398CC;
+}
+
+.happy-customer-onstep  .customer-info-onestep .name-customer a:hover{
+color:#3398CC;
+}
+/*Fix for version <1.9*/
+/*Fix for enterprise version*/
+/*===================================================================
+|                           END CONFIGUARATION STYLE                 |
+====================================================================*/
+
+
+/*===================================================================
+|                           Custom STYLE                             |
+====================================================================*/
+/*===================================================================
+|                           End Custom STYLE                         |
+====================================================================*/

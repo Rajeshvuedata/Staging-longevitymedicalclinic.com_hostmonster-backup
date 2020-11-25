@@ -1,0 +1,60 @@
+<?php
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE-CE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE-CE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * MagPleasure does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Magpleasure does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   MagPleasure
+ * @package    Magpleasure_Blog
+ * @version    1.2.3
+ * @copyright  Copyright (c) 2012-2013 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE-CE.txt
+ */
+
+/** @var Magpleasure_Blog_Helper_Data $helper  */
+$helper = $this->_helper();
+
+/** @var Magpleasure_Blog_Model_Post $post  */
+$post = $this->getPost();
+?>
+<?php if ($post->getPostedBy()): ?>
+    <span class="posted-by<?php if ($this->isOldStyle()): ?> old-style<?php endif; ?>"><i class="<?php echo $this->getColorClass(); ?> glyphicons user"></i><?php echo $this->__("By "); ?>
+    <?php if ($this->useGoogleProfile()): ?>
+        <a href="<?php echo $this->getGoogleProfileUrl(); ?>" target="_blank" title="<?php echo $this->escapeHtml($post->getPostedBy()); ?>">
+    <?php endif; ?>
+    <?php echo $this->escapeHtml($post->getPostedBy()); ?>
+    <?php if ($this->useGoogleProfile()): ?>
+        </a>
+    <?php endif; ?>
+    </span>
+<?php endif; ?>
+<?php if ($post->getCreatedAt()): ?>
+    <span class="date<?php if ($this->isOldStyle()): ?> old-style<?php endif; ?>"><i class="<?php echo $this->getColorClass(); ?> glyphicons calendar"></i><?php echo $this->renderDate($post->getCreatedAt()); ?></span>
+<?php endif; ?>
+<?php if ($helper->getDisplayViews()): ?>
+    <span class="views<?php if ($this->isOldStyle()): ?> old-style<?php endif; ?>"><i class="<?php echo $this->getColorClass(); ?> glyphicons eye_open"></i><?php echo $this->__("%s Views", $post->getViews()); ?></span>
+<?php endif; ?>
+<?php if ($post->getCommentsEnabled()): ?>
+    <?php if ($this->isPost()): ?>
+        <span class="leave-a-comment<?php if ($this->isOldStyle()): ?> old-style<?php endif; ?>"><i class="<?php echo $this->getColorClass(); ?> glyphicons chat"></i><a href="<?php echo $this->getLeaveCommentUrl(); ?>" onclick="blogComments.getForm('form', 0); return false;"><?php echo $this->__("Leave a comment"); ?></a></span>
+        <span class="go-to-comments<?php if ($this->isOldStyle()): ?> old-style<?php endif; ?>"><i class="<?php echo $this->getColorClass(); ?> glyphicons conversation"></i><a href="<?php echo $this->getCommentsUrl(); ?>" onclick="Effect.ScrollTo('comments'); return false;"><?php echo $this->__("Go to comments"); ?></a></span>
+    <?php else: ?>
+        <span class="comments<?php if ($this->isOldStyle()): ?> old-style<?php endif; ?>"><!--<i class="<?php echo $this->getColorClass(); ?> glyphicons conversation"></i>--><a href="<?php echo $this->getCommentsUrl(); ?>"><?php //echo $this->getCommentsCount() ? $this->__("%s comments", $this->getCommentsCount()) : $this->__("No comments"); ?></a></span>
+    <?php endif; ?>
+<?php endif; ?>
+<div class="fixed"></div>

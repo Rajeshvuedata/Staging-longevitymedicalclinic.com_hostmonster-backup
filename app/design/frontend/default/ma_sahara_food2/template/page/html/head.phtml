@@ -1,0 +1,99 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<meta http-equiv="Content-Type" content="<?php echo $this->getContentType();  ?>" />
+<title><?php echo $this->getTitle(); ?></title>
+<meta name="description" content="<?php echo htmlspecialchars($this->getDescription() ) ?>" />
+<meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords() ) ?>" />
+<meta name="robots" content="<?php echo htmlspecialchars($this->getRobots() ) ?>" />
+<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link media="all" href="<?php echo $this->getSkinUrl()?>css/styles.css3.php?url=<?php echo $this->getSkinUrl(); ?>" type="text/css" rel="stylesheet" />
+<!--[if lt IE 7]>
+<script type="text/javascript">
+//<![CDATA[
+    var BLANK_URL = '<?php echo $this->helper('core/js')->getJsUrl('blank.html') ?>';
+    var BLANK_IMG = '<?php echo $this->helper('core/js')->getJsUrl('spacer.gif') ?>';
+//]]>
+</script>
+
+<![endif]-->
+<?php echo $this->getCssJsHtml() ?>
+<?php echo $this->getChildHtml() ?>
+<?php echo $this->helper('core/js')->getTranslatorScript() ?>
+<?php echo $this->getIncludes() ?>
+
+
+<?php $_menu_style = Mage::getStoreConfig('themeoptions/themeoptions_config/menu_style'); ?>
+<?php $_main_color = Mage::getStoreConfig('themeoptions/themeoptions_config/main_color'); ?>
+<?php $_link_color = Mage::getStoreConfig('themeoptions/themeoptions_config/link_color'); ?>
+<?php $_body_background = Mage::getStoreConfig('themeoptions/themeoptions_config/body_background'); ?>
+
+<?php $_bg_pattern = Mage::getStoreConfig('themeoptions/themeoptions_config/bg_pattern'); ?>
+<?php $_font = Mage::getStoreConfig('themeoptions/themeoptions_config/font') ?>
+<?php if ($_font) : ?>
+
+<link href='http://fonts.googleapis.com/css?family=<?php echo str_replace(' ', '+', $_font); ?>:200,300,400,500,600,700,800' rel='stylesheet' type='text/css' />
+<?php endif; ?>
+
+<style type="text/css">
+
+    /*google font*/
+    <?php if ($_font) : ?>
+        { font-family: '<?php echo $_font; ?>';}
+    <?php endif; ?>
+    
+    <?php if($_main_color): ?>
+	
+        .block-footer1,.footer-static-container, .ma-footer-static { background-color:<?php echo $_main_color ?>; }
+        
+    <?php endif; ?>
+    
+    <?php if($_link_color): ?>
+
+         .products-list button.btn-cart span,.block-footer .f-icon a:hover,.product-view button.btn-cart span,.opc .step-title .number,.banner-static-contain .banner-box:hover .box-images a{ background-color:<?php echo $_link_color ?>; }
+
+         { background-color:<?php echo $_link_color ?> !important; }
+
+         .breadcrumbs li strong,.top-cart-wrapper .btn-edit:hover,.top-cart-wrapper .btn-remove:hover,.top-cart-wrapper .fa-trash-o,.top-cart-wrapper .fa-pencil-square-o,.currency-language li .fa-caret-down,.drop-lang .sub-lang li a:hover, .dropit-trigger a .fa-caret-down, .register-login .fa-sign-in,.register-login .fa-sign-out,.register-login a:hover,.register .fa-lock,.register-login .register a:hover,.dropit  .dropit-submenu li a:hover,.drop-currency .sub-currency li a:hover,.top-cart-wrapper .title-cart .fa-shopping-cart, .top-cart-content .top-subtotal .price, .top-cart-contain .product-details .price, .block-layered-nav dt,.block-tags .block-content .actions a:hover,.product-view .product-shop .availability span,.product-options-bottom .tier-prices .benefit,.block-footer1 .footer-static-content a:hover,.footer address a,.banner-static-contain .banner-box .box-title a:hover,.pt_custommenu div.pt_menu.act .itemMenu .itemMenuName:hover span,.pt_custommenu div.pt_menu.act .itemSubMenu .itemMenuName:hover span,.pt_custommenu div.pt_menu.act a span,.pt_custommenu div.pt_menu .parentMenu a:hover span,.pt_custommenu div.pt_menu .parentMenu span.block-title:hover,.pt_custommenu #pt_menu_link ul li a:hover span, .pt_custommenu div.pt_menu.active .parentMenu a span,.pt_custommenu .itemMenu h4.level1:hover span,.pt_custommenu .itemMenu a.level1:hover span,.pt_custommenu .itemSubMenu a.level2:hover,.pt_custommenu .itemMenu a.level1.nochild:hover,.pt_custommenu div.popup a.actParent,.bulkhead a,.tweetprofilelink a:hover, .tweet-time a:hover,.bx-wrapper .bx-controls-direction a .fa,.ma-timer-container  .bx-wrapper .bx-controls-direction a .fa { color:<?php echo $_link_color ?>; }
+
+        .pt_custommenu div.popup a.act { color:<?php echo $_link_color ?> !important; }
+
+        .product-tabs li.active .tab-top,.product-tabs li.active .tab-top:hover,.product-tabs li:hover .tab-top,.opc .step-title .number,.opc .active .step-title .number,.pt_custommenu div.popup,.pt_custommenu div.pt_menu.act a span,.pt_custommenu div.pt_menu .parentMenu a:hover span, .pt_custommenu div.pt_menu .parentMenu span.block-title:hover,.pt_custommenu #pt_menu_link ul li a:hover span,.pt_custommenu div.pt_menu.active .parentMenu a span { border-color: <?php echo $_link_color ?>; }
+    <?php endif; ?>
+
+    <?php if($_body_background): ?>
+        body { background-color: <?php echo $_body_background ?>;}
+    <?php endif; ?>
+    
+    <?php if($_bg_pattern): ?>
+        body { background-image: url(<?php echo $this->getSkinUrl('images/pattern/').$_bg_pattern.'.png' ?>) ; background-repeat: repeat; }
+    <?php endif; ?>   
+
+</style>
+
+<meta name="google-site-verification" content="hZkmUo7QxCWHEyBORNPRi29Xvi5J4xrA4daMnvOteKY" />

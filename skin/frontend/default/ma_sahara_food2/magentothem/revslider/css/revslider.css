@@ -1,0 +1,8 @@
+.tp-caption.des_banner { width: 445px; display: inline-block; text-align: center; white-space: inherit !important;}
+.bg-link { background: #f9c831; padding: 2px; }
+.tp-caption.des1_banner { letter-spacing:1px;}
+.tp-caption.des1_banner .fa-check-circle-o { font-size:14px; margin:0 6px 0 0;}
+.tp-caption.title_banner1 { background:rgba(0,0,0,0.5); padding:10px 22px 12px; }
+.tp-caption.title_banner1 .color-banner { color:#ff9d34;}
+.tp-caption.des_banner1 .fa-arrow-circle-right { font-size:14px; color:#ff9d34; margin:0 6px 0 0;}
+.tp-caption.title_banner2 span { color:#ff9d34;}

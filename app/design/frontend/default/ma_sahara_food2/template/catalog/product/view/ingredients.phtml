@@ -1,0 +1,116 @@
+<?php
+    $_helper = $this->helper('catalog/output');
+    $_product = $this->getProduct()
+?>
+<?php if($_additional = $this->getAdditionalData()): ?>
+    <h2><?php echo $this->__('Ingredients') ?></h2>
+    
+        <?php foreach ($_additional as $_data):
+				if(strToLower($_helper->productAttribute($_product, $_data['value'], $_data['code'])) !== 'no'){
+		?>
+            
+                <?php //echo $this->escapeHtml($this->__($_data['label'])) ?>
+                <?php echo $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?>
+           
+				<?php } endforeach; ?>
+       
+    <script type="text/javascript">decorateTable('product-attribute-specs-table')</script>
+<?php endif;?>
+<!--
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg th{color:#fff !important;}
+.tg td{color:#fff !important;font-family:Arial, sans-serif;font-size:14px;padding:3px 7px;border-bottom-style:solid;border-bottom-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:3px 7px;border-bottom-style:solid;border-bottom-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-lqy6{text-align:right;vertical-align:top}
+.tg .tg-yw4l{vertical-align:top}
+</style>
+<div style="background-color:#004b85;padding:10px;width:98%;">
+<table class="tg" style="background-color:#004b85;border:3px solid #fff; color:#fff;padding:5px; font-weight:bold;">
+  <tr style="border-bottom:5px solid;">
+    <th class="tg-yw4l" colspan="3" style="font-size:28px;font-weight:bold;">Supplement Facts<br/><span style="font-size:16px;font-weight:bold;"> Serving Size: 1 Packet (containing 2 capsules and 1 soft-gel)</span></th>
+  </tr>
+  <tr style="border-bottom:3px solid;">
+    <td class="tg-yw4l" colspan="3" style="font-weight:bold;font-size:16px;">1 soft-gel contains:</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l" colspan="2" style="font-weight:bold;font-size:16px;">Amount per serving</td>
+    <td class="tg-lqy6" style="font-weight:bold;">% Daily Value</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Calories</td>
+    <td class="tg-yw4l">15</td>
+    <td class="tg-lqy6"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Calories from fat</td>
+    <td class="tg-yw4l">15</td>
+    <td class="tg-lqy6"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Total fat</td>
+    <td class="tg-yw4l">1.5g</td>
+    <td class="tg-lqy6">2%</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Polyunsaturated fat</td>
+    <td class="tg-yw4l">1.5g</td>
+    <td class="tg-lqy6">**</td>
+  </tr>
+  <tr style="border-bottom:5px solid;">
+    <td class="tg-yw4l">Cholesterol</td>
+    <td class="tg-yw4l">5mg</td>
+    <td class="tg-lqy6">2%^</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Fish Oil</td>
+    <td class="tg-yw4l">1,400mg (1.4g)</td>
+    <td class="tg-lqy6">**</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l" style="width:70%;">Provides 980 mg of Total Omega-3 Fatty Acids, comprised of:</td>
+	<td style="width:15%;"></td>
+    <td class="tg-lqy6"style="width:15%;">**</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">EPA (Eicosapentaenoic Acid)</td>
+    <td class="tg-yw4l">647mg</td>
+    <td class="tg-lqy6">**</td>
+  </tr>
+  <tr style="border-bottom:3px solid;">
+    <td class="tg-yw4l">DHA (Docosahexaenoic Acid)</td>
+    <td class="tg-yw4l">253mg</td>
+    <td class="tg-lqy6">**</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l" colspan="3" style="font-weight:bold;font-size:16px;">2 capsules contain:</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Epimedium (Aerial)<br>(Standardized to 20% Icariin)</td>
+    <td class="tg-yw4l">200mg</td>
+    <td class="tg-lqy6">**</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Tumeric (Rhizome) (Curcumin longa L.) Phospholipid<br>(Standardized to 18% curcuminoids)</td>
+    <td class="tg-yw4l">667mg</td>
+    <td class="tg-lqy6">**</td>
+  </tr>
+  <tr style="border-bottom:3px solid;">
+    <td class="tg-yw4l">Japanese Fleeceflower (Root)<br>(Standardized to 96% Resveratrol)</td>
+    <td class="tg-yw4l">70mg</td>
+    <td class="tg-lqy6">**</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l" colspan="3">Percent Daily Values are based on a 2,000 calorie diet,<br>** Dialy Value not established. As Ethyl Esters.</td>
+  </tr>
+</table>
+<div style="padding-top:15px;">
+<p style="color:#fff;font-weight:bold;">Herbal Blend Other Ingredients: Cellulose (capsule), Cellulose Powder, Stearic Acid 
+(vegetable source), and Silica. </p>
+<p style="color:#fff;font-weight:bold;">Omega 3 Other Ingredients: Soft-gel Capsule (gelatin, glycerin, water, enteric coating)
+and Vitamin E (as natural d-alpha tocopherol). Contains fish (sardines, anchovies,
+mackerel). Vitamin E from soy. </p>
+<p style="color:#fff; font-weight:bold; font-size:16px;">People with sensitive stomachs may prefer to take this product with food. </p>
+</div>
+</div>
+-->

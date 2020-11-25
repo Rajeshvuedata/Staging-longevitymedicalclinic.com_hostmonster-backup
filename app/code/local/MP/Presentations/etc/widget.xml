@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<widgets>
+	<MP_Presentations_Topical type="mp_presentations/topical">
+		<name>Topical Presentations</name>
+		<description type="desc">Lists the topical presentations in a paginated window</description>
+	</MP_Presentations_Topical>
+</widgets>
